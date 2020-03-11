@@ -1,0 +1,441 @@
+<site-header></site-header>
+<form (ngSubmit)="loginForm.form.valid" #loginForm="ngForm">
+  <section class="book-area">
+          <div class="container">
+              <div class="row">
+                  <div class="col-md-9">
+                      <div class="ticket-del">
+                          <div class="tic-title" id="pack-title">
+                              <div class="t-h">
+                                  <span class="circle">
+                                 <img src="assets/images/review.png">
+                             </span>
+  
+                                  <span class="head-txt">
+                                 Booking Review
+                             </span>
+  
+                              </div>
+                          </div>
+  
+                          <div class="row hotel-review" *ngIf="HolidaInfo">                                
+                              <div class="col-md-4">
+                                  <span *ngIf="HolidaInfo.Images[0]!=null">
+                                      <img src="http://zapcms.mageinfotech.com/Images/ImageGallery/{{HolidaInfo.Images[0].BigImage}}" class="img-fluid">
+                                  </span>
+                                  <span *ngIf="HolidaInfo.Images[0]==null">
+                                          <img class="img-fluid" src="/assets/images/img-not-fnd.jpg">
+                                  </span>
+                              </div>
+                              <div class="col-md-8">
+                                  <h3>{{HolidaInfo.PackageName}}</h3>
+                                  <span class="addrs">{{HolidaInfo.Remarks}}</span>
+  
+                                  <div class="row">
+                                      <!-- <div class="col-md-3">
+                                          <div class="check-in-box">
+                                              <div class="cal-block">
+                                                  <div class="cb-top">
+                                                      <span class="checkin-text">Check-In</span>
+                                                      <span class="bold bkg-date ng-binding">{{chekindate}}</span>
+                                                  </div>
+                                                  <div class="cb-footer ng-binding">
+                                                      {{checkinMonth}} &nbsp;&nbsp;|&nbsp;&nbsp; 1:00 PM
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div> -->
+                                      <div class="col-md-3">
+                                          <div class="check-in-box">
+                                              <div class="cal-block">
+                                                  <div class="cb-top">
+                                                      <span class="checkin-text">Departure date</span>
+                                                      <span class="bold bkg-date">{{departureDate}}</span>
+                                                  </div>
+                                                  <div class="cb-footer ng-binding">
+                                                    
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="col-md-6">
+                                          <p class="night-del">{{HolidaInfo.Remarks}}</p>
+  
+                                          <span class="room-del">{{HolidaInfo.AdultCount}} Adults</span>
+                                      </div>
+                                  </div>
+  
+                                  <!-- <div class="inclusions">
+                                      <p>Inclusions</p>
+                                      <li>
+                                          Breakfast
+                                      </li>
+                                      <li>
+                                          Early Check-in / Late Check-out (Subject to Availability)
+                                      </li>
+                                  </div> -->
+                              </div>
+                          </div>
+                          
+  
+                      </div>
+  
+                      <div class="passenger-del">
+                          <div class="tic-title" id="pack-title">
+                              <div class="t-h">
+                                  <span class="circle">
+                                 <img src="assets/images/traveler-with-a-suitcase.png">
+                             </span>    
+                                  <span class="head-txt">
+                                Enter Traveller Details
+                             </span>    
+                              </div>
+                          </div>    
+                          <div class="row booking-form" *ngFor="let word2 of words2; let in=index">
+                              <div class="col-md-2">
+                                  <div class="form-group">
+                                      <label for="sel1">Title <span style="color: #ed1300">*</span></label>
+                                      <select class="form-control" id="Title"  [(ngModel)]="words2[in].Title" name="Title" #Title="ngModel">
+                                          <option value="Mr">Mr.</option>
+                                          <option value="Mrs">Mrs.</option>
+                                          <option value="Ms">Ms.</option>   
+                                          <option value="Master">Master.</option>                                     
+                                   </select>
+                                  </div>
+                              </div>    
+                              <div class="col-md-5">
+                                  <div class="form-group" [class.has-error]="FirstName.invalid && FirstName.touched">
+                                      <label for="usr">First Name <span style="color: #ed1300">*</span></label>
+                                      <input type="text" class="form-control" id="FirstName" required
+                                       [(ngModel)]="words2[in].FirstName" name="FirstName" placeholder="First Name" 
+                                       pattern="[a-zA-Z][a-zA-Z ]+"
+                                      #FirstName="ngModel">
+                                      <div class="help-block" *ngIf="FirstName.invalid && FirstName.touched">First Name is required</div>
+
+                                  </div>
+
+                              </div>
+                              <div class="col-md-5">
+                                  <div class="form-group" [class.has-error]="LastName.invalid && LastName.touched">
+                                      <label for="usr">Last name<span style="color: #ed1300">*</span></label>
+                                      <input type="text" class="form-control" id="LastName" required
+                                      pattern="[a-zA-Z][a-zA-Z ]+"
+                                      [(ngModel)]="words2[in].LastName" name="LastName" placeholder="Last Name" 
+                                      #LastName="ngModel">
+                                      <div class="help-block" *ngIf="LastName.invalid && LastName.touched">Last Name is required</div>
+
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-7">
+                                  <div class="form-group" [class.has-error]="Email.invalid && Email.touched">
+                                      <label for="usr">Email<span style="color: #ed1300">*</span></label>
+                                      <input type="text" class="form-control" id="emailaddress"
+                                      required placeholder="Enter Email ID" email
+                                      [(ngModel)]="Adultdtl.Email" name="Email"
+                                      pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" 
+                                      #Email="ngModel">
+                                      <div class="help-block" *ngIf="Email.invalid && Email.touched">Email is required</div>
+
+                                  </div>
+                              </div>
+                              <div class="col-md-5">
+                                  <div class="form-group" [class.has-error]="MobileNo.invalid && MobileNo.touched">
+                                      <label for="usr">Mobile No.<span style="color: #ed1300">*</span></label>
+                                      <input type="text" class="form-control" id="MobileNo"
+                                      required placeholder="Mobile No"
+                                      [(ngModel)]="Adultdtl.MobileNo" name="MobileNo"
+                                      pattern="[0-9]*"
+                                      minlength="10"
+                                      maxlength="10" 
+                                      #MobileNo="ngModel">
+                                      <div class="help-block" *ngIf="MobileNo.invalid && MobileNo.touched">MobileNo is required</div>
+
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+  
+                     
+                  </div>
+                  <div class="col-md-3">
+                      <div class="total_fare">
+                          <div class="tic-title" id="pack-title">
+                              <div class="t-h">
+                                  <span class="circle">
+                                 <img src="assets/images/money.png">
+                             </span>
+  
+                                  <span class="head-txt">
+                                 Tariff Details
+                             </span>
+  
+                              </div>
+  
+                              <div class="check_details">
+  
+                                  <div class="chk-detais-row">
+                                      <div class="chk-line" *ngIf="HolidaInfo.AdultCount>0">
+                                          <span class="chk-l">Twin Charges:</span>
+                                          <span class="chk-r">{{HolidaInfo.Twin | round}}</span>
+                                          <div class="clear"></div>
+                                      </div>
+                                      <!-- <div class="chk-line" *ngIf="HolidaInfo.AdultCount>0">
+                                          <span class="chk-l">Singlge :</span>
+                                          <span class="chk-r">{{HolidaInfo.SGL}}</span>
+                                          <div class="clear"></div>
+                                      </div> -->
+                                      <!-- <div class="chk-line" *ngIf="HolidaInfo.Triple>0">
+                                          <span class="chk-l">Triple</span>
+                                          <span class="chk-r">{{HolidaInfo.Triple}}</span>
+                                          <div class="clear"></div>
+                                      </div> -->
+                                      <div class="chk-line" *ngIf="HolidaInfo.ChildWCount>0">
+                                          <span class="chk-l">Child with Bed</span>
+                                          <span class="chk-r">{{HolidaInfo.CWB | round}}</span>
+                                          <div class="clear"></div>
+                                      </div>
+                                      <div class="chk-line" *ngIf="HolidaInfo.Childwoutbed>0">
+                                          <span class="chk-l">Child Not Bed</span>
+                                          <span class="chk-r">{{HolidaInfo.CNB | round}}</span>
+                                          <div class="clear"></div>
+                                      </div>
+  
+                                  </div>
+                                  <div class="chk-total" id="pk-tole">
+                                      <div class="chk-total-l">Total Price</div>
+                                      <div class="chk-total-r">
+                                          <i class="fa fa-inr" *ngIf="HolidaInfo.Currency=='INR'">&nbsp;{{HolidaInfo.Costing | round}}</i>
+                                          <i class="fa fa-usd" *ngIf="HolidaInfo.Currency=='USD'">&nbsp;{{HolidaInfo.Costing | round}}</i>
+                                      </div>
+                                      <div class="clear"></div>
+                                  </div>
+                                  <div class="chk-line">
+                                          <div class="chk-total-l">
+                                                  <input type="radio" name="BookingType" 
+                                                  [(ngModel)]="Adultdtl.BookingType" (click)="squery('SendQuery')"  value="SendQuery"  checked> Send Query
+                                             </div>
+                                             <div class="chk-total-2">
+                                              
+                                                      <input type="radio" name="BookingType" 
+                                                      [(ngModel)]="Adultdtl.BookingType"   value="Online" id="onlinequer" (click)="squery('Online')"> Book Now
+                                              
+                                          </div>
+                                          <div class="clear"></div>
+                                      </div>
+                                      <button class="booking-complete-btn" *ngIf="sendquery"  (click)="HolidayBooking()">Send Query</button>
+
+                                  <button class="booking-complete-btn" *ngIf="onlinequery"  (click)="HolidayBooking()">Proceed to Payment</button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
+  
+      </form>
+
+      <!-- online_query Popup -->
+
+    <div class="modal fade query_modal" id="online_query" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Online Query</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+           <div class="query_inner">
+                  <p class="tab-head">Fill in your details.</p>
+                      <div class="row">
+                          <div class="col-md-3">
+                              <span class="dp-city">
+                                  <i class="fa fa-building" aria-hidden="true"></i>
+                                  &nbsp; Select Departure City</span>
+                          </div>
+                          <div class="col-md-4">
+                              <div class="form-group">
+                                  <label>Starting From</label>
+                                  <select class="form-control" [(ngModel)]="PriceCal.departureCity" name="DepartureCity"  >
+                                      <option *ngFor="let city of HolidaInfo.CityJurny">{{city.City}}</option>
+                                      
+                                  </select>
+                              </div>
+                          </div>
+                          <div class="col-md-4">
+                              <div class="form-group">
+                                  <label>Tour Type</label>
+                                  <select class="form-control">
+                                      <option>Standard</option>
+
+                                  </select>
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="row">
+
+                          <div class="col-md-3">
+                              <p class="slt-trv">
+                                  <i class="fa fa-user" aria-hidden="true"></i>
+                                  &nbsp; Select Traveller</p>
+                              <span class="room-spn">Room 1</span>
+                          </div>
+                          <div class="col-md-8">
+                              <div class="row">
+                                  <div class="col-md-3" *ngIf="HolidaInfo.SGL>0">
+                                      <div class="form-group">
+                                          <label>Adult</label>
+                                          <select class="form-control" [(ngModel)]="PriceCal.AdultCount" name="AdultCount">
+
+                                              <option>1</option>
+                                              <option>2</option>
+                                              <option>3</option>
+                                              <option>4</option>
+                                          </select>
+                                      </div>
+                                  </div>
+
+                                  <div class="col-md-3" *ngIf="HolidaInfo.CWB>0">
+                                      <div class="form-group">
+                                          <label>Child(With bed)</label>
+                                          <select class="form-control"  [(ngModel)]="PriceCal.ChildWCount" name="ChildWCount"  placeholder="Select Child with Bed">
+                                              <option>Select Child with Bed</option>    
+                                              <option>1</option>
+                                              <option>2</option>
+                                              <option>3</option>
+                                              <option>4</option>
+                                          </select>
+                                      </div>
+                                  </div>
+
+                                  <div class="col-md-3" *ngIf="HolidaInfo.CNB>0">
+                                      <div class="form-group">
+                                          <label>Child(Without bed)</label>
+                                          <select class="form-control" [(ngModel)]="PriceCal.Childwoutbed" name="Childwoutbed" placeholder="Select Child with out Bed">
+                                                  <option>Select Child with out Bed</option> 
+                                              <option>1</option>
+                                              <option>2</option>
+                                              <option>3</option>
+                                              <option>4</option>
+                                          </select>
+                                      </div>
+                                  </div>
+
+                                  <div class="col-md-3" *ngIf="HolidaInfo.Infant>0">
+                                      <div class="form-group">
+                                          <label>Infant</label>
+                                          <select class="form-control" [(ngModel)]="PriceCal.Infant" name="Infant" placeholder="Select Infant">
+                                              <option>Select Infant</option> 
+                                              <option>1</option>
+                                              <option>2</option>
+                                              <option>3</option>
+                                              <option>4</option>
+                                          </select>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="row">
+                          <div class="col-md-3">
+                              <span class="dp-city-2">
+                                  <i class="fa fa-calendar" aria-hidden="true"></i>
+
+                                  &nbsp; Date of travel</span>
+                          </div>
+                          <div class="col-md-3">
+                              <div class="form-group">
+
+                                  <select class="form-control"    [(ngModel)]="PriceCal.SelectdYear" name="SelectdYear" (change)="onChange($event.target.value)" placeholder="--Select Year--" >
+
+                                      <option *ngFor="let yr of travelYear">{{yr}}</option>
+                                  </select>
+
+                                 
+
+                                  
+                              </div>
+                          </div>
+                          <div class="col-md-3">
+                                  <div class="form-group">
+                                          <select class="form-control"  [(ngModel)]="PriceCal.selectdMonth" name="selectdMonth" (change)="onChangeM($event.target.value)">
+
+                                              <option *ngFor="let m of travelMonth">{{m}}</option>                                      
+                                          </select>
+                                      </div>
+
+                          </div>
+
+                          <div class="col-md-2">
+                                  <div class="form-group">
+                                          <select class="form-control"  [(ngModel)]="PriceCal.selectedDay" name="selectedDay">
+
+                                              <option *ngFor="let day of travelDay">{{day}}</option>
+                                                 
+                                              </select>
+                                      </div>
+
+                          </div>
+
+
+                      </div>
+
+                      <div class="row">
+                          <div class="col-md-3">
+                              <span class="dp-city-2">
+                                  <i class="fa fa-phone" aria-hidden="true"></i>
+
+
+                                  &nbsp; Contact Details</span>
+                          </div>
+                          <div class="col-md-3">
+                              <div class="form-group">
+
+                                  <input type="text" class="form-control" placeholder="Mobile" name="mobile">
+                              </div>
+                          </div>
+                          <div class="col-md-3">
+                              <div class="form-group">
+
+                                  <input type="text" class="form-control" placeholder="Email" name="email">
+                              </div>
+                          </div>
+
+                      </div>
+
+                      <div class="row down-cal">
+                          <div class="col-md-2">
+
+                          </div>
+                          <div class="col-md-9">
+                              <p class="sent-p">Your booking details will be sent on these contact details.</p>
+                              <div class="form-check">
+                                  <label class="form-check-label">
+                                      <input type="checkbox" name="condition" class="form-check-input" value="">I accept the Privacy Policy & Terms & Conditions
+                                  </label>
+                              </div>
+
+                              <button type="button" class="btn btn-primary" (click)="calculatePrice()">Calculate Package Price</button>
+                          </div>
+                      </div>
+
+
+           </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="rediochecked()">Close</button>
+            <button type="button" class="btn btn-primary">Proceed</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-----end------>
+
+ 

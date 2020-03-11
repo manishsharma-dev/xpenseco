@@ -1,0 +1,1491 @@
+<site-header></site-header>
+<div class="menu-bottom"></div>
+<section class="thankyou">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12" *ngIf="IsHotel">
+                <div class="back-white">
+                    <div class="row">
+                        <h3 class="text-center gener_head">Booking Confirmation</h3>
+                    </div>
+                    <div class="row booking_na_n">
+                        <div class="col-md-6">
+                            <p>Dear Mr.{{bookingResponse.OccupancyList.Occupancy[0].Adults[0].Adult[0].FirstName}}</p>
+                            <span>Thankyou For Booking With us</span>
+                        </div>
+                        <div class="col-md-6" *ngIf="bookingResponse.PackageId">
+                            <p>Dear Mr.{{bookingResponse.OccupancyList.FirstName}}</p>
+                            <span>Thankyou For Booking With us</span>
+                        </div>
+                        <div class="col-md-6">
+                            <p>Your Booking No.</p>
+                            <span class="book_no">{{bookingResponse.Master.BookingRefNo}}</span>
+                        </div>
+                    </div>
+
+                    <div class="row bok_info">
+                        <table class="table table-bordered">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Hotel</th>
+                                    <th scope="col">Check in</th>
+                                    <th scope="col">Check Out</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Passanger Name</th>
+                                    <!-- <th scope="col">Seat</th> -->
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <th>{{bookingResponse.Hotel.HName}}
+                                        <span class="hotel-name-add">{{bookingResponse.Hotel.Add}}</span>
+                                    </th>
+                                    <td>{{bookingResponse.Master.ChkInDate}}
+                                    </td>
+                                    <td>{{bookingResponse.Master.ChkOutDate}}
+                                    </td>
+                                    <td>{{bookingResponse.Hotel.Rooms.Room[0].Currency}}-{{bookingResponse.Hotel.Rooms.Room[0].Gross_Price}}</td>
+                                    <td>{{bookingResponse.OccupancyList.Occupancy[0].Adults[0].Adult[0].FirstName}} {{bookingResponse.OccupancyList.Occupancy[0].Adults[0].Adult[0].LastName}}
+                                        </td>
+                                    <!-- <td>E10, E12</td> -->
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="row manage-booking">
+                        <div class="col-md-4">
+                            <a routerLink="/AgentProfile">Manage My Booking</a>
+                        </div>
+                        <div class="col-md-4">
+                            <a (click)="printTicket()" class="ticket" style="cursor:pointer">
+                                Voucher
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a (click)="ViewMail()" class="ticket" style="cursor:pointer">
+                                Email voucher
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a (click)="Invoice()" class="ticket" style="cursor:pointer">
+                                Invoice
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12" *ngIf="IsPackage">
+                <div class="back-white">
+                    <div class="row">
+
+                        <h3 class="text-center gener_head">Booking Confirmation</h3>
+
+                        <!-- <h2 class="text-center thankyou-head">Thankyou Your Booking Has Been Confirmed</h2> -->
+
+                    </div>
+
+                    <div class="row booking_na_n">
+
+                        <div class="col-md-6">
+                            <p>Dear Mr.{{bookingResponse.OccupancyList.FirstName}}</p>
+                            <span>Thankyou For Booking With us</span>
+                        </div>
+                        <div class="col-md-6">
+                            <p>Your Booking No.</p>
+                            <span class="book_no">{{bookingResponse.BookingRefNo}}</span>
+
+                        </div>
+                    </div>
+
+                    <div class="row bok_info">
+                        <table class="table table-bordered">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Package Name</th>
+                                    <th scope="col">Hotel Name</th>
+                                    <th scope="col">Departure Date</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Passanger Name</th>
+                                    <!-- <th scope="col">Seat</th> -->
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <th>{{bookingResponse.PackageName}}
+                                        <span></span>
+                                    </th>
+                                    <td>{{bookingResponse.hotel[0].Hotelname}}
+                                    </td>
+                                    <td>{{bookingResponse.departureDate}}
+                                    </td>
+                                    <td>{{bookingResponse.Costing}}</td>
+                                    <td>{{bookingResponse.OccupancyList.FirstName}} {{bookingResponse.OccupancyList.LastName}}
+                                        </td>
+                                    <!-- <td>E10, E12</td> -->
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="row manage-booking">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4">
+                            <a routerLink="/AgentProfile" style="cursor:pointer">Manage My Booking</a>
+                        </div>
+                        <div class="col-md-4">
+                            <a (click)="ViewMail()" class="ticket" style="cursor:pointer">
+                                View And Print Ticket
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="invoice" id="print-Ticket" style="display: none;" *ngIf="IsHotel">
+    <div class="row header-info">
+        <div class="col-md-6">
+            <p>{{DateTime}} </p>
+        </div>
+        <div class="col-md-6">
+            <p class="float-right">Customer Support - Mage Infotech - India's No.1 Travel Company</p>
+        </div>
+    </div>
+
+    <div class="table-back">
+
+        <table class="table table-bordered">
+            <tr>
+                <td colspan="2" align="center">
+                    <img src="assets/images/rbs-logo.png" class="img-fluid">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="border:none; width: 100%;border-collapse:collapse;">
+                    <table style="border:none; width: 100%;border-collapse:collapse;">
+                        <tr>
+                            <td>Booking Number</td>
+                            <td>{{bookingResponse.Master.BookingRefNo}}</td>
+                        </tr>
+                        <tr>
+                            <td>Pincode</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td>{{bookingResponse.OccupancyList.Occupancy[0].Adults[0].Adult[0].Email}}</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">Hotel Information</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="border:none; width: 100%;border-collapse:collapse;">
+                    <table style="border:none; width: 100%;border-collapse:collapse;">
+                        <tr>
+                            <td>Hotel Name</td>
+                            <td>{{bookingResponse.Hotel.HName}}</td>
+                        </tr>
+
+                        <tr>
+                            <td>Address</td>
+                            <td>{{bookingResponse.Hotel.Add}}</td>
+                        </tr>
+                        <!-- <tr>
+                                                    <td>Check-In</td>
+                                                    <td>{{bookingResponse.Master.ChkInDate}}</td> 
+                                            </tr>
+                                            <tr>
+                                                    <td>Check-Out</td>
+                                                    <td>{{bookingResponse.Master.ChkOutDate}}</td> 
+                                            </tr> -->
+                    </table>
+
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" align="center">Booking Information</td>
+            </tr>
+
+
+            <tr>
+                <td colspan="2" style="border:none; width: 100%;border-collapse:collapse;">
+                    <table style="border:none; width: 100%;border-collapse:collapse;">
+                        <tr>
+                            <td>Your Reservation</td>
+                            <td>{{duration}} nights {{bookingResponse.Master.NoOfRooms}} Rooms</td>
+                        </tr>
+
+                        <tr>
+                            <td>Address</td>
+                            <td>{{bookingResponse.Hotel.Add}}</td>
+                        </tr>
+                        <tr>
+                            <td>Check-In</td>
+                            <td>{{bookingResponse.Master.ChkInDate}}</td>
+                        </tr>
+                        <tr>
+                            <td>Check-Out</td>
+                            <td>{{bookingResponse.Master.ChkOutDate}}</td>
+                        </tr>
+                    </table>
+
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" align="center">Pricing</td>
+            </tr>
+
+
+            <tr>
+                <td colspan="2" style="border:none; width: 100%;border-collapse:collapse;">
+                    <table style="border:none; width: 100%;border-collapse:collapse;">
+                        <tr>
+                            <td>{{bookingResponse.Hotel.Rooms.Room[0].RDes}}-{{bookingResponse.Hotel.Rooms.Room[0].Meal_Des}}</td>
+                            <td>{{bookingResponse.Hotel.Rooms.Room[0].Currency}}-{{bookingResponse.Hotel.Rooms.Room[0].Gross_Price}}</td>
+                        </tr>
+
+
+                        <tr>
+                            <td>Total Price</td>
+                            <td>{{bookingResponse.Hotel.Rooms.Room[0].Currency}}-{{bookingResponse.Hotel.Rooms.Room[0].Gross_Price}}</td>
+                        </tr>
+
+                    </table>
+
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">Please Note: Additional suppliments (e.g. extra bed) not added to the total</td>
+            </tr>
+            <!-- <tr>
+                        <td>Adult </td>
+                        <td>After departure</td>
+                        <td colspan="3" class="text-center">Non-Refundable</td>
+        
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>2 hrs - 4 hrs </td>
+                        <td colspan="3" class="text-center">Non-Refundable</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>4 hrs - 365 days</td>
+                        <td>{{TEXItinerary[0].AdtMrp -300}}</td>
+                        <td>300.0
+                        </td>
+                    </tr> -->
+        </table>
+
+
+        <!-- <div class="row top_head">
+            <div class="col-md-6">
+                <h3>TICKET- Confirmed</h3>
+
+            </div>
+            <div class="col-md-6">
+                <img src="assets/images/logo-botm.png" class="img-fluid">
+            </div>
+
+        </div>
+
+        <div class="row confi">
+            <div class="col-md-8">
+                <p>Booking ID: {{bookingResponse.Master.BookingRefNo}}</p>
+                <p>Check-In : {{bookingResponse.Master.ChkInDate}}</p>
+                <p>Check-Out: {{bookingResponse.Master.ChkOutDate}}</p>
+                <p>Hotel Name: {{bookingResponse.Hotel.HName}}</p> -->
+        <!-- <p>Address: {{TEXItinerary[0].AirlineCode}}- {{TEXItinerary[0].AirlineNo}}</p>  -->
+        <!-- </div>
+            <div class="col-md-4">
+                <p>Address: {{bookingResponse.Hotel.Add}} </p>
+            </div>
+        </div> -->
+
+        <!-- <div class="row confi-del">
+            <div class="col-md-4">
+                <p class="big">{{TEXItinerary[0].OriginCode}}</p>
+                <p>{{departure[0].city}}
+                </p>
+                <p class="b-td">{{TEXItinerarySegment[0].DepTime.substring(0,2)}}:{{TEXItinerarySegment[0].DepTime.substring(3,4)}} hrs, {{TEXItinerarySegment[0].DepDate}}
+                </p>
+                <p>{{departure[0].name}}</p>
+            </div>
+            <div class="col-md-4 text-center i-c">
+                <i class="fa fa-arrow-right"></i>
+                <p>{{TEXItinerarySegment[0].Duration.substring(0,2)}}hrs{{TEXItinerarySegment[0].Duration.substring(3,4)}}min</p>
+            </div>
+            <div class="col-md-4">
+                <p class="big">{{TEXItinerary[0].DestiCode}}</p>
+                <p>{{arrival[0].name}}</p>
+                <p class="b-td">{{TEXItinerarySegment[0].ArTime.substring(0,2)}}:{{TEXItinerarySegment[0].ArTime.substring(3,4)}} hrs, {{TEXItinerarySegment[0].ArDate}}</p>
+            </div>
+        </div>
+
+        <p>Economy</p>
+
+        <div class="row p-name">
+            <div class="col-md-8" *ngFor="let tpm of TEXPassengerMaster">
+                <p class="d-b">PASSENGER(S) </p>
+                <p><b>{{tpm.FirstName}} -{{tpm.LastName}},</b> {{tpm.PassengerType}}</p>
+            </div>
+            <div class="col-md-4">
+                <p class="d-b">PNR</p>
+                <p>{{TEXItinerarySegment[0].AirlinePnr}}</p>
+            </div>
+        </div>
+
+        <p class="imp-info">IMPORTANT INFORMATION</p>
+        <li><b>Check-in Time</b> : Check-in desks will close 1 hour before departure.
+        </li>
+        <li>
+            <b>Valid ID proof needed </b>: Carry a valid photo identification proof (Driver Licence, Aadhar Card, Pan Card or any other Government recognised photo identification)
+
+        </li>
+        <li>
+            <b>Web Check-in</b> (opens 48 hrs. before departure): GO AIR - Use PNR and last name only
+        </li>
+
+        <p class="imp-info">BAGGAGE INFORMATION
+        </p>
+
+        <table class="table table-bordered">
+            <tr>
+                <th>Type</th>
+                <th>Sector</th>
+                <th>Cabin</th>
+                <th>Check-in
+                </th>
+            </tr>
+
+            <tr>
+                <td>Adult</td>
+                <td>{{TEXItinerary[0].OriginCode}}-{{TEXItinerary[0].DestiCode}} </td>
+                <td>7 Kgs</td>
+                <td>15 Kgs</td>
+            </tr>
+        </table>
+
+        <p class="imp-info">PAYMENT INFORMATION
+
+        </p>
+
+        <p>You have Paid <b>INR {{TEXItinerary[0].AdtMrp}}</b> | For Fare Breakup <a href="#">Get Invoice</a>
+        </p>
+
+        <p class="imp-info">MANAGE BOOKING
+
+        </p>
+
+        <p>To manage your booking like cancellation , date change etc. , Access this booking online </p>
+
+        <button type="button" class="btn btn-outline-primary">
+       Modify
+   </button>
+        <button type="button" class="btn btn-outline-primary">
+       Download
+   </button>
+
+        <p class="imp-info">CANCELLATION AND DATE CHANGE CHARGES
+
+        </p>
+
+        <p>All charges below are per Pax and per Segment in INR</p>
+
+        <table class="table table-bordered">
+            <tr>
+                <td><b>{{TEXItinerary[0].OriginCode}}-{{TEXItinerary[0].DestiCode}}</b></td>
+                <td align="right"><b>Cancellation Charges</b></td>
+            </tr>
+        </table>
+        <table class="table table-bordered">
+            <tr>
+                <td>Type</td>
+                <td>Condition</td>
+                <td>Airline</td>
+                <td>Air aspire
+                </td>
+            </tr>
+            <tr>
+                <td>Adult </td>
+                <td>After departure</td>
+                <td colspan="3" class="text-center">Non-Refundable</td>
+
+            </tr>
+            <tr>
+                <td></td>
+                <td>2 hrs - 4 hrs </td>
+                <td colspan="3" class="text-center">Non-Refundable</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>4 hrs - 365 days</td>
+                <td>{{TEXItinerary[0].AdtMrp -300}}</td>
+                <td>300.0
+                </td>
+            </tr>
+        </table>
+
+        <table class="table table-bordered">
+            <tr>
+                <td><b>{{TEXItinerary[0].OriginCode}}-{{TEXItinerary[0].DestiCode}}</b></td>
+                <td align="right"><b>Date Change Charges</b></td>
+            </tr>
+        </table>
+        <table class="table table-bordered">
+            <tr>
+                <td>Type</td>
+                <td>Condition</td>
+                <td>Airline</td>
+                <td>Air aspire
+                </td>
+            </tr>
+            <tr>
+                <td>Adult </td>
+                <td>After departure</td>
+                <td colspan="3" class="text-center">Non-Refundable</td>
+
+            </tr>
+            <tr>
+                <td></td>
+                <td>2 hrs - 4 hrs </td>
+                <td colspan="3" class="text-center">Non-Refundable</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>4 hrs - 365 days</td>
+                <td>{{TEXItinerary[0].AdtMrp -300}}</td>
+                <td>300.0
+                </td>
+            </tr>
+        </table>
+
+
+        <p class="imp-info">24x7 CUSTOMER SUPPORT
+
+        </p>
+
+       <table class="table table-bordered">
+            <tr>
+                <td>Tel</td>
+                <td>18001028747 (toll free) 01244628747
+                </td>
+            </tr>
+
+            <tr>
+                <td>Web </td>
+                <td>www.mageinfotech.com</td>
+            </tr>
+
+            <tr>
+                <td>FAQs</td>
+                <td>supportr@mageinfotech.com</td>
+            </tr>
+     
+</table>
+   
+   <p>Note: Please do not reply to this mail. It has been sent from an email account that is not monitored. To receive communication from
+    airaspire.com, please add noreply@mageinfotech.com to your contact list and address book.</p>-->
+    </div>
+
+
+</section>
+<section class="invoice" id="print-Ticket" style="display: none;">
+    <div class="row header-info">
+        <div class="col-md-6">
+            <!-- <p>{{DateTime}} </p> -->
+        </div>
+        <div class="col-md-6">
+            <p class="float-right">Customer Support - Mage Infotech - India's No.1 Travel Company</p>
+        </div>
+    </div>
+
+    <div class="table-back">
+
+        <table class="table table-bordered">
+            <tr>
+                <td colspan="2" align="center">
+                    <img src="assets/images/rbs-logo.png" class="img-fluid">
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" style="border:none; width: 100%;border-collapse:collapse;">
+                    <table style="border:none; width: 100%;border-collapse:collapse;">
+                        <tr>
+                            <td>Booking Number</td>
+                            <td>{{bookingResponse.BookingRefNo}}</td>
+                        </tr>
+                        <tr>
+                            <td>Pincode</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td>{{bookingResponse.OccupancyList.Occupancy[0].Adults[0].Adult[0].Email}}</td>
+                        </tr>
+                    </table>
+
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">Hotel Information</td>
+            </tr>
+
+
+            <tr>
+                <td colspan="2" style="border:none; width: 100%;border-collapse:collapse;">
+                    <table style="border:none; width: 100%;border-collapse:collapse;">
+                        <tr>
+                            <td>Hotel Name</td>
+                            <td>{{bookingResponse.Hotel.HName}}</td>
+                        </tr>
+
+                        <tr>
+                            <td>Address</td>
+                            <td>{{bookingResponse.Hotel.Add}}</td>
+                        </tr>
+                        <!-- <tr>
+                                                    <td>Check-In</td>
+                                                    <td>{{bookingResponse.Master.ChkInDate}}</td> 
+                                            </tr>
+                                            <tr>
+                                                    <td>Check-Out</td>
+                                                    <td>{{bookingResponse.Master.ChkOutDate}}</td> 
+                                            </tr> -->
+                    </table>
+
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" align="center">Booking Information</td>
+            </tr>
+
+
+            <tr>
+                <td colspan="2" style="border:none; width: 100%;border-collapse:collapse;">
+                    <table style="border:none; width: 100%;border-collapse:collapse;">
+                        <tr>
+                            <td>Your Reservation</td>
+                            <td>{{duration}} nights {{bookingResponse.Master.NoOfRooms}} Rooms</td>
+                        </tr>
+
+                        <tr>
+                            <td>Address</td>
+                            <td>{{bookingResponse.Hotel.Add}}</td>
+                        </tr>
+                        <tr>
+                            <td>Check-In</td>
+                            <td>{{bookingResponse.Master.ChkInDate}}</td>
+                        </tr>
+                        <tr>
+                            <td>Check-Out</td>
+                            <td>{{bookingResponse.Master.ChkOutDate}}</td>
+                        </tr>
+                    </table>
+
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" align="center">Pricing</td>
+            </tr>
+
+
+            <tr>
+                <td colspan="2" style="border:none; width: 100%;border-collapse:collapse;">
+                    <table style="border:none; width: 100%;border-collapse:collapse;">
+                        <tr>
+                            <td>{{bookingResponse.Hotel.Rooms.Room[0].RDes}}-{{bookingResponse.Hotel.Rooms.Room[0].Meal_Des}}</td>
+                            <td>{{bookingResponse.Hotel.Rooms.Room[0].Currency}}-{{bookingResponse.Hotel.Rooms.Room[0].Gross_Price}}</td>
+                        </tr>
+
+
+                        <tr>
+                            <td>Total Price</td>
+                            <td>{{bookingResponse.Hotel.Rooms.Room[0].Currency}}-{{bookingResponse.Hotel.Rooms.Room[0].Gross_Price}}</td>
+                        </tr>
+
+                    </table>
+
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">Please Note: Additional suppliments (e.g. extra bed) not added to the total</td>
+            </tr>
+            <!-- <tr>
+                        <td>Adult </td>
+                        <td>After departure</td>
+                        <td colspan="3" class="text-center">Non-Refundable</td>
+        
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>2 hrs - 4 hrs </td>
+                        <td colspan="3" class="text-center">Non-Refundable</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>4 hrs - 365 days</td>
+                        <td>{{TEXItinerary[0].AdtMrp -300}}</td>
+                        <td>300.0
+                        </td>
+                    </tr> -->
+        </table>
+
+
+        <!-- <div class="row top_head">
+            <div class="col-md-6">
+                <h3>TICKET- Confirmed</h3>
+
+            </div>
+            <div class="col-md-6">
+                <img src="assets/images/logo-botm.png" class="img-fluid">
+            </div>
+
+        </div>
+
+        <div class="row confi">
+            <div class="col-md-8">
+                <p>Booking ID: {{bookingResponse.Master.BookingRefNo}}</p>
+                <p>Check-In : {{bookingResponse.Master.ChkInDate}}</p>
+                <p>Check-Out: {{bookingResponse.Master.ChkOutDate}}</p>
+                <p>Hotel Name: {{bookingResponse.Hotel.HName}}</p> -->
+        <!-- <p>Address: {{TEXItinerary[0].AirlineCode}}- {{TEXItinerary[0].AirlineNo}}</p>  -->
+        <!-- </div>
+            <div class="col-md-4">
+                <p>Address: {{bookingResponse.Hotel.Add}} </p>
+            </div>
+        </div> -->
+
+        <!-- <div class="row confi-del">
+            <div class="col-md-4">
+                <p class="big">{{TEXItinerary[0].OriginCode}}</p>
+                <p>{{departure[0].city}}
+                </p>
+                <p class="b-td">{{TEXItinerarySegment[0].DepTime.substring(0,2)}}:{{TEXItinerarySegment[0].DepTime.substring(3,4)}} hrs, {{TEXItinerarySegment[0].DepDate}}
+                </p>
+                <p>{{departure[0].name}}</p>
+            </div>
+            <div class="col-md-4 text-center i-c">
+                <i class="fa fa-arrow-right"></i>
+                <p>{{TEXItinerarySegment[0].Duration.substring(0,2)}}hrs{{TEXItinerarySegment[0].Duration.substring(3,4)}}min</p>
+            </div>
+            <div class="col-md-4">
+                <p class="big">{{TEXItinerary[0].DestiCode}}</p>
+                <p>{{arrival[0].name}}</p>
+                <p class="b-td">{{TEXItinerarySegment[0].ArTime.substring(0,2)}}:{{TEXItinerarySegment[0].ArTime.substring(3,4)}} hrs, {{TEXItinerarySegment[0].ArDate}}</p>
+            </div>
+        </div>
+
+        <p>Economy</p>
+
+        <div class="row p-name">
+            <div class="col-md-8" *ngFor="let tpm of TEXPassengerMaster">
+                <p class="d-b">PASSENGER(S) </p>
+                <p><b>{{tpm.FirstName}} -{{tpm.LastName}},</b> {{tpm.PassengerType}}</p>
+            </div>
+            <div class="col-md-4">
+                <p class="d-b">PNR</p>
+                <p>{{TEXItinerarySegment[0].AirlinePnr}}</p>
+            </div>
+        </div>
+
+        <p class="imp-info">IMPORTANT INFORMATION</p>
+        <li><b>Check-in Time</b> : Check-in desks will close 1 hour before departure.
+        </li>
+        <li>
+            <b>Valid ID proof needed </b>: Carry a valid photo identification proof (Driver Licence, Aadhar Card, Pan Card or any other Government recognised photo identification)
+
+        </li>
+        <li>
+            <b>Web Check-in</b> (opens 48 hrs. before departure): GO AIR - Use PNR and last name only
+        </li>
+
+        <p class="imp-info">BAGGAGE INFORMATION
+        </p>
+
+        <table class="table table-bordered">
+            <tr>
+                <th>Type</th>
+                <th>Sector</th>
+                <th>Cabin</th>
+                <th>Check-in
+                </th>
+            </tr>
+
+            <tr>
+                <td>Adult</td>
+                <td>{{TEXItinerary[0].OriginCode}}-{{TEXItinerary[0].DestiCode}} </td>
+                <td>7 Kgs</td>
+                <td>15 Kgs</td>
+            </tr>
+        </table>
+
+        <p class="imp-info">PAYMENT INFORMATION
+
+        </p>
+
+        <p>You have Paid <b>INR {{TEXItinerary[0].AdtMrp}}</b> | For Fare Breakup <a href="#">Get Invoice</a>
+        </p>
+
+        <p class="imp-info">MANAGE BOOKING
+
+        </p>
+
+        <p>To manage your booking like cancellation , date change etc. , Access this booking online </p>
+
+        <button type="button" class="btn btn-outline-primary">
+       Modify
+   </button>
+        <button type="button" class="btn btn-outline-primary">
+       Download
+   </button>
+
+        <p class="imp-info">CANCELLATION AND DATE CHANGE CHARGES
+
+        </p>
+
+        <p>All charges below are per Pax and per Segment in INR</p>
+
+        <table class="table table-bordered">
+            <tr>
+                <td><b>{{TEXItinerary[0].OriginCode}}-{{TEXItinerary[0].DestiCode}}</b></td>
+                <td align="right"><b>Cancellation Charges</b></td>
+            </tr>
+        </table>
+        <table class="table table-bordered">
+            <tr>
+                <td>Type</td>
+                <td>Condition</td>
+                <td>Airline</td>
+                <td>Air aspire
+                </td>
+            </tr>
+            <tr>
+                <td>Adult </td>
+                <td>After departure</td>
+                <td colspan="3" class="text-center">Non-Refundable</td>
+
+            </tr>
+            <tr>
+                <td></td>
+                <td>2 hrs - 4 hrs </td>
+                <td colspan="3" class="text-center">Non-Refundable</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>4 hrs - 365 days</td>
+                <td>{{TEXItinerary[0].AdtMrp -300}}</td>
+                <td>300.0
+                </td>
+            </tr>
+        </table>
+
+        <table class="table table-bordered">
+            <tr>
+                <td><b>{{TEXItinerary[0].OriginCode}}-{{TEXItinerary[0].DestiCode}}</b></td>
+                <td align="right"><b>Date Change Charges</b></td>
+            </tr>
+        </table>
+        <table class="table table-bordered">
+            <tr>
+                <td>Type</td>
+                <td>Condition</td>
+                <td>Airline</td>
+                <td>Air aspire
+                </td>
+            </tr>
+            <tr>
+                <td>Adult </td>
+                <td>After departure</td>
+                <td colspan="3" class="text-center">Non-Refundable</td>
+
+            </tr>
+            <tr>
+                <td></td>
+                <td>2 hrs - 4 hrs </td>
+                <td colspan="3" class="text-center">Non-Refundable</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>4 hrs - 365 days</td>
+                <td>{{TEXItinerary[0].AdtMrp -300}}</td>
+                <td>300.0
+                </td>
+            </tr>
+        </table>
+
+
+        <p class="imp-info">24x7 CUSTOMER SUPPORT
+
+        </p>
+
+       <table class="table table-bordered">
+            <tr>
+                <td>Tel</td>
+                <td>18001028747 (toll free) 01244628747
+                </td>
+            </tr>
+
+            <tr>
+                <td>Web </td>
+                <td>www.mageinfotech.com</td>
+            </tr>
+
+            <tr>
+                <td>FAQs</td>
+                <td>supportr@mageinfotech.com</td>
+            </tr>
+     
+</table>
+   
+   <p>Note: Please do not reply to this mail. It has been sent from an email account that is not monitored. To receive communication from
+    airaspire.com, please add noreply@mageinfotech.com to your contact list and address book.</p>-->
+    </div>
+
+
+</section>
+<div id="Ticket-Invoice" style="display: none;" *ngIf="IsHotel">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://localhost:4200/assets/hcss/style.css">
+
+    <section class="invoice">
+        <div class="row header-info">
+            <div class="col-md-6">
+                <p>{{DateTime}} </p>
+            </div>
+            <div class="col-md-6">
+                <p class="float-right">Customer Support - Sky Safar - India's No.1 Travel Company</p>
+            </div>
+        </div>
+
+        <div class="table-back">
+            <div class="row top_head">
+                <div class="col-md-6">
+                    <h3>Tax Invoice</h3>
+                </div>
+                <div class="col-md-6">
+                    <img src="http://localhost:4200/assets/images/rbs-logo.png" class="img-fluid">
+                </div>
+            </div>
+
+            <div class="row inv_del">
+                <div class="col-md-8">
+                    <p>
+                        <b>Invoice Details</b>
+                    </p>
+                    <p>Invoice No. : 1000000007286605</p>
+                    <p>Invoice Date : 2017-09-30
+                    </p>
+                    <p>PAN No. : AADCM5146R
+                    </p>
+                    <p>GSTIN No. : 06AADCM5146R1ZZ</p>
+                    <p>Service Category : Reservation services for Hotel transportation.
+                    </p>
+                    <p>SAC Code : 998551</p>
+                </div>
+                <div class="col-md-4">
+                    <p>
+                        <b>Customer Details</b>
+                    </p>
+                    <p>Place of Supply: Haryana</p>
+                </div>
+            </div>
+
+            <div class="book-info">
+                <table class="table table-bordered left">
+
+                    <tr>
+                        <td>Booked by</td>
+                        <td>Mr. {{bookingResponse.OccupancyList.Occupancy[0].Adults[0].Adult[0].FirstName}} {{bookingResponse.OccupancyList.Occupancy[0].Adults[0].Adult[0].LastName}}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Email
+                        </td>
+                        <td>{{bookingResponse.OccupancyList.Occupancy[0].Adults[0].Adult[0].Email}}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Booking Date
+                        </td>
+                        <td>{{DateTime}}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Booking Id</b>
+                        </td>
+                        <td>{{bookingResponse.Master.BookingRefNo}}</td>
+                    </tr>
+
+
+                </table>
+
+
+
+            </div>
+
+            <div class="fli_del">
+                <table class="table table-bordered left">
+                    <tr>
+                        <td colspan="2">Hotel Detail</td>
+                    </tr>
+                    <tr>
+                        <td>Hotel Name</td>
+                        <td>{{bookingResponse.Hotel.HName}}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Address
+                        </td>
+                        <td>{{bookingResponse.Hotel.Add}}</td>
+                    </tr>
+
+
+                </table>
+
+
+
+            </div>
+
+
+            <div class="fli_del">
+                <table class="table table-bordered left">
+                    <tr>
+                        <td colspan="2">
+                            <b>Passengers</b>
+                        </td>
+                    </tr>
+
+                    <tr *ngFor="let Occupency of bookingResponse.OccupancyList.Occupancy[0].Adults[0].Adult">
+                        <td>1.</td>
+                        <td>{{Occupency.FirstName}} {{Occupency.LastName}}</td>
+                    </tr>
+
+
+                </table>
+
+
+                <h3>
+                </h3>
+            </div>
+
+
+
+            <table class="table table-bordered left">
+                <tr>
+                    <td colspan="2">
+                        <b>Passengers:
+                        </b>
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <td>
+                        <b>Fare/Charges
+                        </b>
+                    </td>
+                    <td align="right">
+                        <b>Passenger 01
+                        </b>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Base Fare</td>
+                    <td>{{bookingResponse.Hotel.Rooms.Room[0].Net_Price}}</td>
+                </tr>
+                <tr>
+                    <td>
+                        Tax and Other Charges:
+                    </td>
+                    <td>{{bookingResponse.Hotel.Rooms.Room[0].AgentCommission}}</td>
+                </tr>
+
+
+
+                <tr>
+                    <td>
+                        <b>*Total Fare (All Passenger):
+                        </b>
+                    </td>
+                    <td>
+                        <b>{{bookingResponse.Hotel.Rooms.Room[0].Currency}} {{bookingResponse.Hotel.Rooms.Room[0].Gross_Price}}</b>
+                    </td>
+                </tr>
+
+
+
+                <tr>
+                    <td class="tot">
+                        <b>Grand Total:
+                        </b>
+                    </td>
+                    <td class="tot">
+                        <b>{{bookingResponse.Hotel.Rooms.Room[0].Currency}} {{bookingResponse.Hotel.Rooms.Room[0].Gross_Price}}
+
+                        </b>
+                    </td>
+                </tr>
+
+            </table>
+
+            <p>*The credit, for GST charged by the Hotel and included in the Hotel fare, would be available against a separate
+                GST invoice/e-ticket issued by the Hotel.
+            </p>
+
+            <table class="table table-bordered">
+                <tr>
+                    <td colspan="10">
+                        <p>Support Details
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>
+                            <b>Travel RBS Address</b>
+                        </p>
+                        <p>
+                            UNIT NUMBER :22, DMCC BUSINESS CENTER LEVEL 5 JEWELLERY & GEMPLEX 2, DUBAI - UNITED ARAB EMIRATES</p>
+                    </td>
+                    <td>
+                        <p>+971 509845251</p>
+                        <p>dubaidmc@hotelrbs.com</p>
+                    </td>
+                </tr>
+            </table>
+
+            <p>Note: This is a computer generated invoice and does not require a signature/stamp. Please do not reply to this
+                email. It has been sent from an email account that is not monitored</p>
+
+            <table class="table table-bordered">
+                <tr>
+                    <td>
+                        <b>Name</b>
+                    </td>
+                    <td>Travel RBS
+                        <br/> DMC FOR DUBAI & UAE
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Registered Office</b>
+                    </td>
+                    <td>
+                        UNIT NUMBER :22, DMCC BUSINESS CENTER LEVEL 5 JEWELLERY & GEMPLEX 2, DUBAI - UNITED ARAB EMIRATES
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Tel No.</b>
+                    </td>
+                    <td>
+                        +971 509845251
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Fax No.</b>
+                    </td>
+                    <td>
+                        00000000
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Corporate Identity No.(CIN)</b>
+                    </td>
+                    <td>
+                        U63040DL2000PTC105210
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Website Address </b>
+                    </td>
+                    <td>
+                        www.travelrbs.com
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+
+
+    </section>
+</div>
+
+<div class="ticket-box" style="margin: 0 auto;width: 820px;box-shadow: 0px 2px 8px 0px #ccc;
+background: rgb(82, 10, 10);overflow: hidden;margin-bottom: 70px;" *ngIf="IsPackagetrue">
+    <div class="row" style="display: flex;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            margin-right: -15px;
+            margin-left: -15px;">
+    </div>
+    <div class="row" style="display: flex;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            margin-right: -15px;
+            margin-left: -15px;">
+        <div class="heading-bar" style="position: relative;
+              padding: 22px;
+              background-color: #faa61a;
+              width: 100%;
+              margin: 10px 0;">
+            <div class="heading" style="position: absolute;
+                right: 115px;
+                top: 0px;
+                background-color: white;
+                padding: 3px 24px;">
+                <h3 style="color: #5c5c5c;
+                  font-weight: 600;
+                  font-size: 31px;
+                  text-transform: uppercase;">Customer Invoice Details
+                </h3>
+            </div>
+        </div>
+    </div>
+    <div class="inner-area" style="padding: 5px 30px;">
+        <div class="row" style="display: flex;
+              -ms-flex-wrap: wrap;
+              flex-wrap: wrap;
+              margin-right: -15px;
+              margin-left: -15px;">
+            <div class="col-md-5" style="-webkit-box-flex: 0;
+                -ms-flex: 0 0 41.666667%;
+                flex: 0 0 41.666667%;
+                max-width: 41.666667%;
+                position: relative;
+          width: 100%;
+          min-height: 1px;
+          padding-right: 15px;
+          padding-left: 15px;">
+                <table style="width: 100%;
+          max-width: 100%;
+          margin-bottom: 1rem;
+          background-color: transparent;
+          
+          margin: 10px 10px;
+          border-collapse: collapse;
+          font-size: 14px;">
+                    <tr>
+                        <td style="vertical-align: middle; padding: .25rem;">
+                            <strong>Guest Name:</strong>
+                        </td>
+                        <td>{{this.bookingResponse.OccupancyList.Title}} {{this.bookingResponse.OccupancyList.FirstName}} {{this.bookingResponse.OccupancyList.LastName}}</td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align: middle; padding: .25rem;">
+                            <strong>Contact No: :</strong>
+                        </td>
+                        <td>{{this.bookingResponse.OccupancyList.MobileNo}}</td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align: middle; padding: .25rem;">
+                            <strong>Booking Reference:</strong>
+                        </td>
+                        <td>{{this.bookingResponse.BookingRefNo}}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-7" style="-webkit-box-flex: 0;
+                -ms-flex: 0 0 58.333333%;
+                flex: 0 0 58.333333%;
+                max-width: 58.333333%;
+                position: relative;
+                width: 100%;
+                min-height: 1px;
+                padding-right: 15px;
+                padding-left: 15px;">
+                <div class="address-area">
+                    <div style="padding-top: 13px;
+          font-size: 14px;
+            line-height: 27px;
+            text-align: right;">
+                        Sky Safar ,
+                        <br> C-162, Sarita Vihar,
+                        <br> New Delhi-110076 (INDIA)
+                        <br> ph:+91-9654100201
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="display: flex;
+              -ms-flex-wrap: wrap;
+              flex-wrap: wrap;
+              margin-right: -15px;
+              margin-left: -15px;">
+            <table style="width: 100%;
+                max-width: 100%;
+                margin-bottom: 1rem;
+                background-color: transparent;
+                border: 2px solid #777;
+                margin: 10px 10px;
+                border-collapse: collapse;
+                font-size: 14px;">
+                <thead class="dark-row">
+                    <tr style="background-color: #545252;
+                    color: white;">
+                        <th style="vertical-align: middle; padding: .75rem;">
+                            PackageName: </th>
+                        <!-- <th style="vertical-align: middle; padding: .75rem;width: 13%;"> Departure Date:</th> -->
+                        <th style="vertical-align: middle; padding: .75rem;">Booking_Status: </th>
+                        <!-- <th style="vertical-align: middle; padding: .75rem;width: 14%;">Duration:</th> -->
+                        <th style="vertical-align: middle; padding: .75rem;">Gross Amount:</th>
+                        <th style="vertical-align: middle; padding: .75rem;"> Currency:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="vertical-align: middle; padding: .75rem;">{{this.bookingResponse.PackageName}} </td>
+                        <!-- <td style="vertical-align: middle; padding: .75rem;"></td> -->
+                        <td style="vertical-align: middle; padding: .75rem;">Confirm</td>
+                        <!-- <td style="vertical-align: middle; padding: .75rem;"></td> -->
+                        <td style="vertical-align: middle; padding: .75rem;">{{this.bookingResponse.Costing}}</td>
+                        <td style="vertical-align: middle; padding: .75rem;">Rupees</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row" style="display: flex;
+              -ms-flex-wrap: wrap;
+              flex-wrap: wrap;
+              margin-right: -15px;
+              margin-left: -15px;">
+            <h4 style="font-family: inherit;
+                font-weight: 600;
+                line-height: 1.2;
+                color: inherit;
+                font-size: 18px;
+                padding-left: 10px;
+                margin: 10px 0;">Terms and Conditions:</h4>
+            <div class="under"></div>
+            <ul style="line-height: 27px;
+                text-align: justify;
+                margin-left: 20px;
+                font-size: 14px;list-style-type: square;">
+                <li>
+                    Carriage and other services provided by the carrier are subject to conditions of carriage and may be obtained from the issuing
+                    carrier.
+                </li>
+                <li>Changes/Cancellations to booking will be as per the procedures advised by the concerned Airline/s / Vendor/s
+                    from time to time.</li>
+                <li>If you have booked tickets with your credit card, please carry a photocopy (both front and back by striking
+                    off the CVV portion) of your credit card while travelling or a valid authorization letter in case a third
+                    party credit card is used Adherence to the check-in reporting time, ideally two hours prior departure,
+                    &amp; carrying a valid identification proof will be in your best interest.</li>
+                <li>If departure within 24hours it is suggested to cancel the itinerary with the respective airlines - G8 9223222111
+                    or 020-25662111 / SG 9654003333 or 9871803333 / 6E 9910383838 or 1246613838 / 9W 1800225522 or 011-39893333
+                    / AI 1800227722 or 0124-2877777 / UK 18601089999 / IC 18001801407 / LB 180042500666 or 09908600400 /
+                    I5 18605008000
+                </li>
+                <li>Do not hesitate to contact your ticketing Agent for further clarifications, if any.</li>
+            </ul>
+        </div>
+
+        <p style="text-align: center;
+              margin: 26px 0;
+              font-weight: 600;
+              padding: 20px 0 0 0;
+              border-top: 3px solid #faa61a;">Thanks For choosing us as your ticket provider. Wish you a happy journey</p>
+
+
+    </div>
+
+</div>
+
+<div class="ticket-box" style="margin: 0 auto;width: 820px;box-shadow: 0px 2px 8px 0px #ccc;
+background: white;overflow: hidden;margin-bottom: 70px;display:none" id="itinaryhtmlforemailPkg">
+    <div class="row" style="display: flex;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            margin-right: -15px;
+            margin-left: -15px;">
+    </div>
+    <div class="row" style="display: flex;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            margin-right: -15px;
+            margin-left: -15px;">
+        <div class="heading-bar" style="position: relative;
+              padding: 22px;
+              background-color: #faa61a;
+              width: 100%;
+              margin: 10px 0;">
+            <div class="heading" style="position: absolute;
+                right: 115px;
+                top: 0px;
+                background-color: white;
+                padding: 3px 24px;">
+                <h3 style="color: #5c5c5c;
+                  font-weight: 600;
+                  font-size: 31px;
+                  text-transform: uppercase;">Customer Invoice Details
+                </h3>
+            </div>
+        </div>
+    </div>
+    <div class="inner-area" style="padding: 5px 30px;">
+        <div class="row" style="display: flex;
+              -ms-flex-wrap: wrap;
+              flex-wrap: wrap;
+              margin-right: -15px;
+              margin-left: -15px;">
+            <div class="col-md-5" style="-webkit-box-flex: 0;
+                -ms-flex: 0 0 41.666667%;
+                flex: 0 0 41.666667%;
+                max-width: 41.666667%;
+                position: relative;
+          width: 100%;
+          min-height: 1px;
+          padding-right: 15px;
+          padding-left: 15px;">
+                <table style="width: 100%;
+          max-width: 100%;
+          margin-bottom: 1rem;
+          background-color: transparent;
+          
+          margin: 10px 10px;
+          border-collapse: collapse;
+          font-size: 14px;">
+                    <tr>
+                        <td style="vertical-align: middle; padding: .25rem;">
+                            <strong>Guest Name:</strong>
+                        </td>
+                        <td>{{this.bookingResponse.OccupancyList.Title}} {{this.bookingResponse.OccupancyList.FirstName}} {{this.bookingResponse.OccupancyList.LastName}}</td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align: middle; padding: .25rem;">
+                            <strong>Contact No: :</strong>
+                        </td>
+                        <td>{{this.bookingResponse.OccupancyList.MobileNo}}</td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align: middle; padding: .25rem;">
+                            <strong>Booking Reference:</strong>
+                        </td>
+                        <td>{{this.bookingResponse.BookingRefNo}}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-7" style="-webkit-box-flex: 0;
+                -ms-flex: 0 0 58.333333%;
+                flex: 0 0 58.333333%;
+                max-width: 58.333333%;
+                position: relative;
+                width: 100%;
+                min-height: 1px;
+                padding-right: 15px;
+                padding-left: 15px;">
+                <div class="address-area">
+                    <div style="padding-top: 13px;
+          font-size: 14px;
+            line-height: 27px;
+            text-align: right;">
+                        Sky Safar ,
+                        <br> C-162, Sarita Vihar,
+                        <br> New Delhi-110076 (INDIA)
+                        <br> ph:+91-9654100201
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="display: flex;
+              -ms-flex-wrap: wrap;
+              flex-wrap: wrap;
+              margin-right: -15px;
+              margin-left: -15px;">
+            <table style="width: 98%;
+                max-width: 100%;
+                margin-bottom: 1rem;
+                background-color: transparent;
+                border: 2px solid #777;
+                margin: 10px 10px;
+                border-collapse: collapse;
+                font-size: 14px;">
+                <thead class="dark-row">
+                    <tr style="background-color: #545252;
+                    color: white;">
+                        <th style="vertical-align: middle; padding: .75rem;width: 16%;">
+                            PackageName: </th>
+                        <!-- <th style="vertical-align: middle; padding: .75rem;width: 13%;"> Departure Date:</th> -->
+                        <th style="vertical-align: middle; padding: .75rem;width: 13%;">Booking_Status: </th>
+                        <!-- <th style="vertical-align: middle; padding: .75rem;width: 14%;">Duration:</th> -->
+                        <th style="vertical-align: middle; padding: .75rem;width: 17%;">Gross Amount:</th>
+                        <th style="vertical-align: middle; padding: .75rem;width: 0%;"> Currency:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="vertical-align: middle; padding: .75rem;">{{this.bookingResponse.PackageName}} </td>
+                        <!-- <td style="vertical-align: middle; padding: .75rem;"></td> -->
+                        <td style="vertical-align: middle; padding: .75rem;">Confirm</td>
+                        <!-- <td style="vertical-align: middle; padding: .75rem;"></td> -->
+                        <td style="vertical-align: middle; padding: .75rem;">{{this.bookingResponse.Costing}}</td>
+                        <td style="vertical-align: middle; padding: .75rem;">Rupees</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row" style="display: flex;
+              -ms-flex-wrap: wrap;
+              flex-wrap: wrap;
+              margin-right: -15px;
+              margin-left: -15px;">
+            <h4 style="font-family: inherit;
+                font-weight: 600;
+                line-height: 1.2;
+                color: inherit;
+                font-size: 18px;
+                padding-left: 10px;
+                margin: 10px 0;">Terms and Conditions:</h4>
+            <div class="under"></div>
+            <ul style="line-height: 27px;
+                text-align: justify;
+                margin-left: 20px;
+                font-size: 14px;list-style-type: square;">
+                <li>
+                    Carriage and other services provided by the carrier are subject to conditions of carriage and may be obtained from the issuing
+                    carrier.
+                </li>
+                <li>Changes/Cancellations to booking will be as per the procedures advised by the concerned Airline/s / Vendor/s
+                    from time to time.</li>
+                <li>If you have booked tickets with your credit card, please carry a photocopy (both front and back by striking
+                    off the CVV portion) of your credit card while travelling or a valid authorization letter in case a third
+                    party credit card is used Adherence to the check-in reporting time, ideally two hours prior departure,
+                    &amp; carrying a valid identification proof will be in your best interest.</li>
+                <li>If departure within 24hours it is suggested to cancel the itinerary with the respective airlines - G8 9223222111
+                    or 020-25662111 / SG 9654003333 or 9871803333 / 6E 9910383838 or 1246613838 / 9W 1800225522 or 011-39893333
+                    / AI 1800227722 or 0124-2877777 / UK 18601089999 / IC 18001801407 / LB 180042500666 or 09908600400 /
+                    I5 18605008000
+                </li>
+                <li>Do not hesitate to contact your ticketing Agent for further clarifications, if any.</li>
+            </ul>
+        </div>
+
+        <p style="text-align: center;
+              margin: 26px 0;
+              font-weight: 600;
+              padding: 20px 0 0 0;
+              border-top: 3px solid #faa61a;">Thanks For choosing us as your ticket provider. Wish you a happy journey</p>
+
+
+    </div>
+
+</div>

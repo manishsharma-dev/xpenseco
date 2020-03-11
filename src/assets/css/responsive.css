@@ -1,0 +1,1303 @@
+@media only screen and (max-width:1400px) {
+  .plane-home img {
+    width: 76%;
+  }
+
+  .search-main {
+    padding: 144px 0;
+  }
+
+  .offer-inner-h2 {
+    text-align: center;
+    font-size: 18px;
+  }
+
+  .offer-inner .content_wrapper h5.title {
+    font-size: 14px;
+  }
+
+  .offer-inner .content_wrapper p.description {
+    font-size: 13px;
+  }
+
+  .fli-offer h2 {
+    font-size: 17px;
+  }
+
+  .right-bar-offer h2 {
+    font-size: 17px;
+  }
+
+  .footer-title h4 {
+    font-size: 16px;
+  }
+
+  .footer-list li a {
+    font-size: 13px;
+  }
+
+  .right-bar-offer h2 {
+    font-size: 17px;
+  }
+}
+
+@media only screen and (max-width:1280px) {
+  .search-loading {
+    top: 34%;
+  }
+
+  .hotel-modify-inner .dropdown-content {
+
+    left: -37px;
+  }
+
+  .search-main {
+    padding: 200px 0 145px 0px;
+}
+
+}
+
+@media only screen and (max-width:992px) {
+
+  .header-top-one .top-left {
+    padding: 8px 0px 8px 0;
+  }
+
+  .right-boxx {
+    width: 79%;
+  }
+
+  .f-s {
+    font-size: 8px;
+    color: #a9a9a9;
+    line-height: 13px;
+    margin-top: 5px;
+  }
+
+  .search-loading h4 {
+    color: #494848;
+    font-size: 15px;
+  }
+
+  .insurance_details li {
+
+    width: 31%;
+  }
+
+  .btn-box-2 a i {
+    font-size: 12px;
+  }
+
+  .btn-box a i {
+    font-size: 12px;
+  }
+
+  .hotel-sub-btn {
+    width: 56px;
+  }
+
+  .hotel-sub-btn i {
+    left: 0px;
+  }
+
+  .title1 {
+
+    font-size: 18px;
+  }
+
+  .navbar-light .navbar-brand img{
+    width: 75%;
+  }
+
+  .navbar-light .navbar-brand {
+    display: block;
+    padding: 18px 19px 18px;
+  }
+
+  .search-main {
+    padding: 140px 0 145px 0px;
+}
+
+.head-title h2 {
+  font-size: 20px;
+}
+
+.flight-info h3 .flight-destination {
+  font-size: 19px;
+}
+
+.flight-info h3 .flight-type {
+  font-size: 13px;
+}
+
+.hotel-content h4 {
+  font-size: 16px;
+}
+
+.total-price {
+  font-size: 20px;
+}
+
+}
+
+@media only screen and (max-width:768px) {
+
+  .navigation-bar {
+    padding-bottom: 0;
+  }
+
+  
+  .search-inner .col-md-2 {
+    padding: 0;
+
+    max-width: 33%;
+    flex: 0 0 33%;
+  }
+
+  footer .widget .title-widget {
+    font-size: 14px;
+  }
+
+  .footer-bottom span {
+    font-size: 12px;
+}
+
+  .markup-box{
+    margin-top: 20px;
+  }
+
+  .support-area{
+    margin-top: 0;
+  }
+
+  .support-area h4{
+    font-size: 15px;
+  }
+
+
+  .register-area {
+    margin-top: 0;
+  }
+
+  .search-page-modify {
+    margin-top: 0;
+  }
+
+  .flight-booking {
+    margin-top: 0;
+}
+
+.tm-rv {
+    font-size: 21px;
+}
+
+.chk-total-r {
+    float: right;
+    font-size: 14px;
+}
+
+.chk-total-l {
+    font-size: 11px;
+    margin-top: 3px;
+}
+
+.reviw-head {
+    font-size: 14px;
+}
+
+.tic-title {
+    font-size: 14px;
+}
+
+  .title h2 {
+
+    font-size: 20px;
+  }
+
+  .title span {
+    font-size: 20px;
+  }
+
+  .pkg-img h5 {
+
+    font-size: 17px;
+  }
+
+  .navbar-light .navbar-nav .nav-link {
+    padding: 12px 11px;
+    text-align: left;
+    border-bottom: 1px dotted grey;
+  }
+
+
+
+  .navbar-light .navbar-nav .nav-link img {
+    display: none;
+  }
+
+  .timing a {
+
+    line-height: 15px;
+    height: 100%;
+  }
+
+  .navbar-light .navbar-toggler {
+    color: rgb(255, 255, 255);
+    border-color: rgba(0, 0, 0, .1);
+    background-color: #062d55;
+    border-radius: 0;
+  }
+
+  .search-main {
+    padding: 54px 0 54px 0;
+  }
+
+  .footer-down {
+
+    display: none;
+  }
+
+  .book-btn .bk-btn {
+
+    font-size: 13px;
+    padding: 3px 17px;
+  }
+
+  .price-txt {
+    font-size: 12px;
+  }
+
+  .dept-txt {
+    font-size: 13px;
+  }
+
+  .dept-txt-down {
+
+    font-size: 9px;
+  }
+
+  .arr-txt {
+    font-size: 13px;
+  }
+
+  .arr-txt-down {
+    font-size: 9px;
+  }
+
+  .duration-txt {
+    font-size: 13px;
+  }
+
+  .duration-txt-down {
+    font-size: 9px;
+  }
+
+  .stops-img img {
+    width: 86px;
+    float: left;
+    position: relative;
+    left: -25px;
+  }
+
+  .book-btn .fare {
+
+    font-size: 9px;
+  }
+
+  .top_bar-sort a {
+    font-size: 9px;
+  }
+
+  .fare-box li {
+
+    font-size: 9px;
+  }
+
+  .fare-box li a {
+    font-size: 10px;
+  }
+
+  .airline-remrk {
+
+    margin-left: 12px;
+  }
+
+  .stop-txt {
+    font-size: 15px;
+  }
+
+  .load-back {
+
+    height: 60vh;
+  }
+
+  .insurance_details li {
+
+    width: 33%;
+  }
+
+  .btn-box-2 {
+    display: none;
+  }
+
+  .btn-box {
+    display: none;
+  }
+
+  .hotel-sub-btn {
+    width: 40px;
+  }
+
+  .hotel-sub-btn i {
+    font-size: 14px;
+    left: -5px;
+  }
+
+  .hotel-inner .dropdown-content {
+
+    left: -173px;
+  }
+
+  .title-2 {
+    text-align: left;
+    font-size: 13px;
+  }
+
+  .navbar-light .navbar-brand {
+    display: block;
+    padding: auto;
+    position: relative;
+    position: relative;
+    top: auto;
+    z-index: auto;
+  }
+
+  .plane-home {
+    display: none;
+  }
+
+  .navigation-bar {
+    position: relative;
+    width: 100%;
+    top: auto;
+    z-index: 999;
+  }
+
+  .tdy-deal label {
+    font-size: 13px;
+  }
+
+  .htD-details h2 {
+    font-size: 19px;
+  }
+
+  .price-area-2 p {
+    font-size: 24px;
+  }
+
+  .review-box h3 {
+    font-size: 22px;
+  }
+
+
+}
+
+
+@media only screen and (max-width:576px) {
+
+  .int-result .col-md-3{
+    width: 25%;
+    overflow: hidden;
+  }
+
+  .int-result .col-md-2{
+    width: 25%;
+    overflow: hidden;
+    padding-left: 30px;
+  }
+
+  .inter-det{
+    display: none;
+  }
+
+  .int-result .departure-txt {
+    font-size: 13px;
+  }
+
+  .cl-8 {
+    display: none;
+  }
+
+  .flg-img {
+    top: -38px;
+    right: 10px;
+  }
+  .img-wrapper img{
+    width: 100%;
+  }
+
+  .power {
+    float: none;
+}
+
+footer .col-md-3{
+  width: 50%;
+}
+
+  .pagination{
+    overflow: hidden;
+  }
+
+  .top-hotel-row .nav {
+    display: none;
+  }
+
+  .left-boxx {
+    display: none;
+  }
+
+  .right-boxx {
+    width: 100%;
+    float: left;
+    padding-left: 0px;
+  }
+
+  .all-hotel-row {
+
+    flex-wrap: wrap;
+  }
+
+  .all-hotel-row .col-md-2,
+  .all-hotel-row .col-md-3 {
+    width: 33%;
+  }
+
+
+  .tourz-hom-ser ul li {
+
+    width: 25%;
+    margin-bottom: 8px;
+  }
+
+  .footer-bottom {
+
+    text-align: center;
+  }
+
+  .footer-bottom .float {
+    float: none;
+  }
+
+  .footer-bottom p {
+
+    margin-top: 0;
+    font-size: 13px;
+    margin-bottom: 0;
+    padding: 3px;
+  }
+
+  .header-top-one .top-right ul li {
+
+    margin-left: 10px;
+  }
+
+  .header-top-one .top-right ul li a {
+    padding-left: 24px;
+    font-size: 12px;
+  }
+
+  .search-inner .col-md-2 {
+    padding: 0;
+    max-width: 100%;
+    flex: auto;
+  }
+
+  .dropdown-content {
+
+    min-width: 100%;
+  }
+
+  .search-inner select.form-control:not([size]):not([multiple]) {
+    height: calc(2.25rem + 2px);
+    margin-top: 14px;
+  }
+
+  .f-offer img {
+
+    margin-bottom: 10px;
+  }
+
+  .search-page-modify {
+    display: none;
+  }
+
+  .fltr-dn {
+    display: none;
+  }
+
+  .top_bar-sort {
+    display: none;
+  }
+
+  .srch-box-col .col-md-2 {
+    width: 20%;
+  }
+
+  .airline-remrk {
+    display: none;
+  }
+
+  .price-txt-down {
+
+    display: none;
+  }
+
+  .fare-box li {
+    width: 17%;
+
+  }
+
+  .padd-right {
+    padding-left: 6px;
+    width: 50%;
+  }
+
+  .padd-left {
+    padding-right: 6px;
+    width: 50%;
+  }
+
+  .srch-box-col .col-md-3 {
+    width: 26%;
+  }
+
+  .srch-box-col .col-md-4 {
+    width: 20%;
+  }
+
+  .return-box li {
+    width: 33%;
+  }
+
+  .bk-flg-price {
+    display: none;
+  }
+
+  .dpp-time {
+    display: none;
+  }
+
+  .arrTime {
+    display: none;
+  }
+
+  .grd-txt {
+    width: 100%;
+  }
+
+  .bk-btn {
+
+
+    padding: 7px 18px;
+
+    font-size: 13px;
+
+    margin-top: 3px;
+
+  }
+
+  .air-name {
+    font-weight: 400;
+    font-size: 13px;
+  }
+
+  .inf-flg {
+    display: none;
+  }
+
+  .fir-1 {
+    width: 20%;
+  }
+
+  .fir-2 {
+    width: 80%;
+  }
+
+  .Route-del .col-md-3,
+  .Route-del .col-md-6 {
+    width: 30%;
+  }
+
+  .review-btn {
+
+    width: 28%;
+  }
+
+  .tot-fare {
+    margin-bottom: 30px;
+  }
+
+  .flight-booking {
+    padding: 30px 0 0 0;
+  }
+
+  .search-loading {
+
+    top: 10%;
+  }
+
+  .load-details .col-md-2,
+  .load-details .col-md-3 {
+    width: 30%;
+  }
+
+  .load-back {
+    height: 45vh;
+    background-position: left;
+  }
+
+  .air-remrk {
+    display: none;
+  }
+
+  .fare li {
+
+    width: 20%;
+    margin-top: 5px;
+  }
+
+  .fli-new-del .col-md-2,
+  .fli-new-del .col-md-3 {
+    width: 20%;
+  }
+
+  .return_fly_n .col-md-2,
+  .return_fly_n .col-md-3,
+  .return_fly_n .col-md-4 {
+    width: 25%;
+  }
+
+  .time-line-2 {
+    display: none;
+  }
+
+  .dbl-radio {
+    left: -10px;
+  }
+
+  .total_price {
+    font-size: 14px;
+
+    padding-top: 0px;
+  }
+
+  .total_price i {
+    display: none;
+  }
+
+  .Fli_del {
+    display: none !important;
+  }
+
+  .insurance_details li {
+
+    width: 47%;
+  }
+
+  .c-bkng-2 a {
+    display: none;
+  }
+
+  .hotel-header {
+
+    padding: 29px 0 37px 0;
+  }
+
+  .room figure img {
+    margin-bottom: 10px;
+  }
+
+  .spl-box img {
+    width: 100%;
+  }
+
+  .hotel-inner-row .col-hotel {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+
+  .hotel-inner {
+
+    padding: 11px 20px 0 20px;
+  }
+
+  .hotel-header .autocompleted-results {
+
+    width: 94%;
+  }
+
+  .hotel-sub-btn {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 14px;
+    margin-top: 15px;
+  }
+
+  .hotel-inner .dropdown-content {
+    left: 0px;
+  }
+
+  .psngr-form {
+    margin: 0;
+
+    left: 22px;
+  }
+
+  .hotel-modify {
+    display: none;
+  }
+
+  .filter-hotel {
+    display: none;
+  }
+
+  .top_bar_hotel {
+    display: none;
+  }
+
+  .hotel-content {
+    padding: 0 15px;
+  }
+
+  .total-price {
+
+    margin-top: 14px;
+  }
+
+  .review-box {
+    border-bottom: 1px solid #0000002b;
+    position: relative;
+    left: 0;
+  }
+
+  .header-top-one {
+    font-size: 12px;
+  }
+
+  .search-inner .autocompleted-results {
+    background-color: #fff;
+    overflow: hidden;
+  }
+
+
+
+
+  .offr-img {
+    display: none;
+  }
+
+  .offer-inner .content_wrapper h5.title {
+    font-size: 13px;
+  }
+
+  .offer-inner-h2 {
+    text-align: center;
+    font-size: 13px;
+  }
+
+  .tdy-deal .col-md-2 {
+    width: 20%;
+  }
+
+  .tdy-deal .col-md-6 {
+    width: 50%;
+  }
+
+  .tdy-deal .col-md-4 {
+    width: 30%;
+  }
+
+  .right-bar-offer {
+    margin-top: 15px;
+  }
+
+  .price-area-2 {
+    text-align: left;
+}
+
+.slider-area .carousel {
+  padding: 12px 12px 0 12px;
+}
+
+.room-type {
+  padding: 15px;
+}
+
+.result-area-2 h5 {
+  font-size: 16px;
+}
+
+
+
+}
+
+@media only screen and (max-width:380px) {
+
+  .agent-login {
+    width: auto;
+  }
+
+  .agent-main-box {
+    min-height: auto;
+    padding: 60px 25px;
+  }
+
+  .agent-login {
+    width: auto;
+    padding: 30px 30px 30px 30px;
+  }
+
+  .login100-form-title {
+    font-size: 20px;
+}
+
+.form-in .form-control {
+  font-size: 13px;
+}
+
+.forget a {
+  color: #FFF;
+  font-size: 13px;
+}
+
+.regis-btn {
+  padding-top: 30px;
+}
+
+  .register-area {
+    padding: 15px;
+  }
+
+  .register-area h3 {
+    font-size: 15px;
+  }
+
+  .regist {
+    padding: 20px!important;
+  }
+
+  .pagination{
+    overflow: hidden;
+  }
+
+  .trvl-info li {
+    width: 39%;
+  }
+
+  .login100-form-title {
+    font-size: 18px;
+  }
+
+  .all-hotel-row .col-md-2,
+  .all-hotel-row .col-md-3 {
+    width: 50%;
+  }
+
+  .agent-login {
+    margin-top: 7px;
+  }
+
+  .tourz-hom-ser ul {
+    display: none;
+  }
+
+  .box-footer {
+    margin-right: 0;
+    display: inline-block;
+    vertical-align: top;
+    width: 50%;
+    float: left;
+  }
+
+  .footer-box {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .dm-none {
+    display: none;
+  }
+
+  .footer {
+
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .footer-down {
+    padding: 0;
+  }
+
+  .header-top-one .top-right ul li:last-child a {
+
+    line-height: 17px;
+  }
+
+  .header-top-one .top-right ul li img {
+
+    top: 0px;
+  }
+
+  .navbar-light .navbar-brand .img-fluid {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .srch-box-col .col-md-2 {
+    width: 33%;
+  }
+
+  .duration-txt {
+
+    text-align: center;
+  }
+
+  .duration-txt-down {
+    text-align: center;
+  }
+
+  .fare-box li {
+    width: 25%;
+  }
+
+  .book-btn .bk-btn {
+
+    margin-top: 0px;
+  }
+
+ 
+
+  .header-top-one .top-right ul li:nth-child(2) {
+    display: none;
+  }
+
+  .box-footer ul .head {
+    font-size: 13px;
+  }
+
+  .return-box {
+    display: none;
+  }
+
+  .srch-box-col .col-md-3 {
+    width: 41%;
+  }
+
+  .bk-panel-1 {
+    width: 50%;
+  }
+
+  .bk-panel-2 {
+    width: 50%;
+  }
+
+  .bk-panel-3 {
+
+    width: 70%;
+  }
+
+  .grd-txt {
+    width: 100%;
+    display: inline-flex;
+  }
+
+  .gd-txt {
+    width: 50%;
+    float: left;
+  }
+
+  .flg-dp {
+    font-size: 13px;
+  }
+
+  .img-bkflg {
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 50px;
+  }
+
+  .tm-rv {
+    font-size: 19px;
+  }
+
+  .reviw-head {
+    font-size: 13px;
+  }
+
+  .num-circle {
+    font-size: 12px;
+  }
+
+  .fir-1 {
+    width: 20%;
+    overflow: hidden;
+  }
+
+  .name-head h3 {
+    font-size: 14px;
+  }
+
+  .review-btn {
+    width: 46%;
+  }
+
+  .tip {
+
+    font-size: 11px;
+  }
+
+  .header-top-one .top-right ul li {
+
+    line-height: 17px;
+  }
+
+  .search-inner .autocompleted-results {
+
+    background-color: #fff;
+  }
+
+
+
+  .load-back {
+
+    padding: 20px;
+    padding: 63px 20px 35px 20px;
+  }
+
+  .search-loading {
+    position: relative;
+    top: 0;
+    left: 0%;
+    width: 100%;
+  }
+
+  .m-hid {
+    display: none;
+  }
+
+  .fli-new-del .col-md-2,
+  .fli-new-del .col-md-3 {
+    width: 33%;
+  }
+
+  .return_fly_n .col-md-2,
+  .return_fly_n .col-md-3,
+  .return_fly_n .col-md-4 {
+    width: 34%;
+  }
+
+  .fare li {
+    width: 23%;
+  }
+
+
+  .insurance_details li {
+
+    width: 100%;
+    border-right: none;
+    padding-left: 40px;
+  }
+
+  .btn-box {
+    display: none;
+  }
+
+  .btn-box-2 {
+    display: none;
+  }
+
+  .hotel-inner .dropdown-content {
+
+    min-width: 100%;
+  }
+
+  .psngr-form li label {
+
+    left: 0px !important;
+  }
+
+  .psngr-form {
+    margin: 0;
+    left: 6px;
+  }
+
+  .row-up-txt {
+
+    left: 0px;
+  }
+
+  .hotel-sub-btn i {
+
+    position: absolute;
+    right: 0;
+    text-align: center;
+  }
+
+  .title1 {
+    font-size: 15px;
+  }
+
+  .hotel-deals {
+    padding: 40px 30px;
+  }
+
+  .room {
+
+    box-shadow: none;
+  }
+
+  .special-offer {
+    padding: 40px 30px;
+  }
+
+  .subtext {
+
+    font-size: 12px;
+  }
+
+  .info .btn-primary {
+    font-size: 13px;
+  }
+
+  .loader-hotel img {
+    width: 50%;
+  }
+
+  .header-top-one {
+    background-color: #062d55;
+    line-height: 1.5;
+    position: relative;
+    display: none;
+  }
+
+  .header-top-one .top-right ul li{
+      color: #fff;
+  }
+
+  .auto-container {
+    padding: 0 10px;
+  }
+
+  .flg-img {
+    top: -37px;
+    right: 9px;
+}
+
+.offer-inner {
+    padding: 11px 0px;
+}
+
+.offer-inner-h2 {
+    text-align: center;
+    font-size: 15px;
+}
+
+.right-bar-offer h2 {
+    font-size: 15px;
+}
+
+
+.about {
+  padding: 25px 10px;
+}
+
+.tours{
+  padding: 25px 10px;
+}
+
+.flight-deals{
+  padding: 25px 10px;
+}
+
+#newsletter-2 h2 {
+  font-size: 16px;
+  margin-bottom: 0px;
+  margin-top: 11px;
+}
+
+#newsletter-2 form input, #newsletter-2 form .input-group-btn .btn {
+  font-size: 12px;
+}
+
+.hide-on-mobile{
+  display: none;
+}
+
+.container-full h3 {
+  font-size: 16px;
+}
+
+.fli-details span {
+  font-size: 11px;
+}
+
+.Route-del span {
+  font-size: 11px;
+}
+
+.form-check-label {
+  font-size: 13px;
+}
+
+.gst-txt{
+  font-size: 13px;
+}
+
+.navbar-light .navbar-brand {
+  width: 50%;
+}
+
+.private-btn {
+  right: 0px;
+  top: 0px;
+  font-size: 13px;
+}
+
+.name-head h3 {
+  padding: 10px 0px;
+}
+
+.fill-path a {
+  right: 0px;
+  top: 8px;
+  font-size: 13px;
+}
+
+.review-btn {
+  font-size: 13px;
+}
+
+.departure-txt-3 {
+  right: 10px!important;
+}
+
+.int-result .red {
+  font-size: 14px;
+  padding: 9px;
+}
+
+.result-area-2 .breadcrumb {
+  display: none;
+}
+
+.htD-details h2 {
+  font-size: 18px;
+}
+
+.carousel-item img {
+  height: 215px;
+}
+
+
+
+}

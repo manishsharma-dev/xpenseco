@@ -1,0 +1,272 @@
+<site-header2></site-header2>
+<div class="search-main">
+
+  <script>
+    function Oneway() {
+      document.getElementById('<%=txtToDate.ClientID%>').disabled = 'false';
+    }
+
+    function Returnway() {
+      document.getElementById('<%=txtToDate.ClientID%>').disabled = 'true';
+    }
+  </script>
+  <div class="container">
+
+
+
+    <div id="boxes">
+      <div style="display: none;" id="dialog" class="window">
+        <div id="san">
+          <a class="close agree"><img src="assets/images/close-icon.png"></a>
+          <img src="assets/images/pop-up-offer.png" width="100%">
+        </div>
+      </div>
+      <div style="width: 2478px; font-size: 32pt; color:white; height: 1202px; display: none; opacity: 0.8;" id="mask">
+      </div>
+    </div>
+    <div class="search-inner">
+      <div class="row radio-btn">
+        <div class="custom-control custom-radio custom-control-inline" (click)="oneway()">
+          <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input" checked>
+          <label class="custom-control-label" for="customRadioInline1">Oneway</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline" (click)="Rturn()">
+          <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
+          <label class="custom-control-label" for="customRadioInline2">Return</label>
+        </div>
+        <div class="private-btn" (click)="EnablePRVT()">
+          <input type="checkbox" id="private-trip">
+          <span class="checkmark"></span>
+          <label for="private-trip">Private Trip</label>
+        </div>
+        
+      </div>
+      <div class="row flight-main-search">
+        <div class="col-md-2">
+          <div class="form-group">
+            <div class="autocomplete-wrapper" *ngIf="flag">
+              <input class="form-control" *ngIf="flag" type="text" id="qSource" disabled="false" placeholder="Enter Source" [(ngModel)]="ClientName" 
+              (click)="searchClient(ClientName)" (keyup)="searchClient(ClientName)"
+              />
+              <input class="form-control" id="dest" type="hidden" />
+              <input type="hidden" id="arcode">
+              <input type="hidden" id="arname">
+              <input class="form-control" id="souCountry" type="hidden" />
+              <input class="form-control" id="souCity" type="hidden" />
+              <div class="autocompleted-results" id="ar1" >
+                <ul style="list-style-type: none;">
+                  <li *ngFor="let r of clients| slice:0:7">
+                    <a (click)="onselectClient(r)">
+                      <div class="autocompleted-result">
+                        <div class="autocompleted-location">
+                          <div class="row">
+                            <div class="col-md-9">
+                              <span class="city-name">{{r.CityName }}
+                                <span>{{ r.AirportCode }}</span>
+                              </span>
+                              <span class="air-code">{{r.AirportName}}</span>
+                            </div>
+                            <div class="col-md-3">
+                              <ul class="flg-img">
+                                <li> {{r.Countryname}}</li>
+                                <li>
+                                  <img src="/assets/CountryImage/{{r.Countryname|lowercase}}.svg"> </li>
+                              </ul>
+
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group">
+            <div class="autocomplete-wrapper" *ngIf="flag1">
+              <input class="form-control" *ngIf="flag1" type="text" id="qDestination" disabled="false" placeholder="Enter Destination" [(ngModel)]="ClientName1" 
+              (click)="searchClientd(ClientName1)" (keyup)="searchClientd(ClientName1)" 
+              />
+              <input class="form-control" id="desti" type="hidden" />
+              <input class="form-control" id="desCountry" type="hidden" />
+              <input class="form-control" id="desCity" type="hidden" />
+              <div class="autocompleted-results" id="ar2">
+                <ul style="list-style-type: none;">
+                  <li *ngFor="let r of clients1| slice:0:7">
+                    <a (click)="onselectClientd(r)">
+                      <div class="autocompleted-result">
+                        <div class="autocompleted-location">
+                          <div class="row">
+                            <div class="col-md-9">
+                              <span class="city-name">{{r.CityName }}
+                                <span>{{ r.AirportCode }}</span>
+                              </span>
+                              <span class="air-code">{{r.AirportName}}</span>
+                            </div>
+                            <div class="col-md-3">
+                              <ul class="flg-img">
+                                <li> {{r.Countryname}}</li>
+                                <li>
+                                  <img src="/assets/CountryImage/{{r.Countryname|lowercase}}.svg"> </li>
+                              </ul>
+
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group">
+                <!-- <input type="text"  name="DepartureDate" style="cursor:pointer;" class="form-control"
+                placeholder="Select Date" [bsConfig]="datepickerconfig" id="FromDate" [(bsValue)]="newVar"
+                value="{{ newVar | date:'yyyy-MM-dd' }}" aria-disabled="true" autocomplete="off" bsDatepicker>
+                  <i class="fa fa-calendar" aria-hidden="true"></i> -->
+                <input class="form-control" [(bsValue)]="newVar"  disabled="false" 
+                placeholder="Departure Date" name="DepartureDate"
+                ngModel value="{{ newVar | date:'yyyy-MM-dd' }}"
+                bsDatepicker autocomplete="off" [bsConfig]="datepickerconfig"
+                [minDate]="minDate" id="FromDate"
+                [maxDate]="maxDate">
+            </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group">
+                <!-- <input type="text" name="ReturnDate1" class="form-control" id="ToDate"
+                placeholder="Select Date" [bsConfig]="datepickerconfigto" [(bsValue)]="returnVar"
+                value="{{ returnVar | date:'yyyy-MM-dd' }}" aria-disabled="true" autocomplete="off" bsDatepicker 
+                (click)="setToDate();" style="background-color: none">
+                  <i class="fa fa-calendar" aria-hidden="true"></i> -->
+                <input class="form-control"
+                placeholder="Return Date" [(bsValue)]="returnVar"
+               ngModel  value="{{ returnVar | date:'yyyy-MM-dd' }}"
+               bsDatepicker id="ToDate" [bsConfig]="datepickerconfigto"
+                [minDate]="minDate" autocomplete="off" (click)="setToDate();"
+                [maxDate]="maxDate">                                                     
+              
+            </div>
+        </div>
+        <div class="col-md-2 traveller-home" >
+          <!---<div class="form-group">
+                                                <input type="text" class="form-control" placeholder="Traveller(S)">
+                                                <img src="images/friends.png">
+                                            </div>-->
+
+          <div class="dropdown" >
+            <button  class="dropbtn" id="travelerHome"   > Traveller(S)</button>
+            <div class="dropdown-content">
+
+              <div class="row">
+                <div class="col-md-12 inner-traveller">
+
+                  <div class="row">
+                    <div class="col-md-5">
+                      <h3>Adult</h3>
+                      <span>12+ Years</span>
+                    </div>
+                    <div class="col-md-7">
+                      <div class="form-group">
+                        <select class="form-control" (change)="totpassenger()" [(ngModel)]="name.Request.AdultCount"
+                          name="AdultCount" disabled="false"  id="DivtravelerHomeA">
+                          <option>1</option>
+                          <option>2</option>
+                          <option>3</option>
+                          <option>4</option>
+                          <option>5</option>
+                          <option>6</option>
+                          <option>7</option>
+                          <option>8</option>
+                          <option>9</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-5">
+                      <h3>Childeren</h3>
+                      <span>2-12 Years</span>
+
+                    </div>
+                    <div class="col-md-7">
+                      <div class="form-group">
+
+                        <select class="form-control" (change)="totpassenger()" [(ngModel)]="name.Request.ChildCount"
+                          name="ChildCount" disabled="false" id="DivtravelerHomeC">
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                          <option>3</option>
+                          <option>4</option>
+                          <option>5</option>
+                          <option>6</option>
+                          <option>7</option>
+                          <option>8</option>
+                          <option>9</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-5">
+                      <h3>Infant</h3>
+                      <span>0-23 months</span>
+                    </div>
+                    <div class="col-md-7">
+                      <div class="form-group">
+
+                        <select class="form-control" (change)="totpassenger()" [(ngModel)]="name.Request.InfantCount"
+                          name="InfantCount" disabled="false" id="DivtravelerHomeI">
+                          <option>0</option>
+                          <option>1</option>
+                          <option>2</option>
+                          <option>3</option>
+                          <option>4</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-md-2">
+          <a>
+              <button type="button" (click)='SearchFlight(name)' id="btnclick" class="search-button">
+                Search
+              </button>
+            </a>
+        </div>
+      </div>
+
+     
+      <div class="all_querys" *ngIf="query" id="divQuery" >
+        <button type="button" class="btn btn-list" id="ref-list">Refresh</button>
+        
+        <ul>
+        <li *ngFor="let q of allqueris">
+         <input type="radio" name="RequestNumber" (click)="filldata(q.reqnumber)">{{q.reqnumber}}<span>{{q.Status}}</span> 
+        </li> 
+        </ul>
+        </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+<site-footer></site-footer>

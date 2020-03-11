@@ -1,0 +1,245 @@
+<style>
+  .help-block {
+      color: red
+  }
+
+  .regist {
+      width: 100%;
+      max-width: 100%;
+      padding: 3em 3em 3em 3em;
+      margin: 0em auto;
+      background-color: #fff;
+      border-radius: 0px 0px 5px 5px;
+      box-shadow: 0px 3px 10px -2px rgba(0, 0, 0, 0.2);
+  }
+</style>
+<site-header></site-header>
+<div class="autocompleted-result">
+    <div class="autocompleted-location">
+      <div class="row">
+        <div class="col-md-9">
+          <span class="city-name">{{r.CityName }}
+            <span>{{ r.AirportCode }}</span>
+          </span>
+          <span class="air-code">{{r.AirportName}}</span>
+        </div>
+        <div class="col-md-3">
+          <ul class="flg-img">
+            <li> {{r.Countryname}}</li>
+            <li>
+              <img src="/assets/CountryImage/{{r.Countryname|lowercase}}.svg"> </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="register-area">
+  <div class="container">
+      <div class="row">
+          <div class="col-lg-6">
+              <h3>Your Payment Option:</h3>
+          </div>
+          <div class="col-lg-6">
+              <h3>Bank Details:</h3>
+          </div>
+      </div>
+      <br>
+      <form name="form" (ngSubmit)="f.form.valid && makepayment()" #f="ngForm" novalidate>
+          <div class="regist">
+              <div class="row">
+                  <div class="col-md-7">
+                      <div class="row">
+                          <div class="col-lg-3">
+                              <label for="">Payment Mode</label>
+                          </div>
+                          <div class="col-lg-9">
+                              <div class="form-group">
+                                  <select class="form-control" id="payMode" (change)="drop()" name="paymentMode" [(ngModel)]="model.paymentMode" #paymentMode="ngModel">
+                                      <option>Cheque</option>
+                                      <option>Cash Deposit</option>
+                                      <option>Online Transfer</option>
+                                      <option>UPI</option>
+                                  </select>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row" *ngIf="checkdd">
+                          <div class="col-lg-3">
+                              <label for="">Cheque/DD No.</label>
+                          </div>
+                          <div class="col-lg-9">
+                              <div class="form-group">
+                                  <input type="text" id="cdd" class="form-control" placeholder="Enter Cheque/DD No" name="Cheque" [(ngModel)]="model.chequeDDNumber"
+                                      #chequeDDNumber="ngModel" required/>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-lg-3">
+                              <label for="">Deposited Bank</label>
+                          </div>
+                          <div class="col-lg-9">
+                              <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !depositedBank.valid }">
+                                  <input type="text" class="form-control" placeholder="Enter Deposited Bank" name="Bank" [(ngModel)]="model.depositedBank"
+                                      #depositedBank="ngModel" required/>
+                                      <div *ngIf="f.submitted && !depositedBank.valid" class="help-block">Bank Name is required</div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-lg-3">
+                              <label for="">Deposited Branch</label>
+                          </div>
+                          <div class="col-lg-9">
+                              <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !depositedBranch.valid }">
+                                  <input type="text" class="form-control" placeholder="Enter Deposited Branch" name="Branch" [(ngModel)]="model.depositedBranch"
+                                      #depositedBranch="ngModel" required/>
+                                      <div *ngIf="f.submitted && !depositedBranch.valid" class="help-block">Branch Name is required</div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-lg-3">
+                              <label for="">Deposit Amount</label>
+                          </div>
+                          <div class="col-lg-9">
+                              <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !depositedAmount.valid }">
+                                  <input type="number" class="form-control" placeholder="Enter Deposit Amount" name="depositedAmount" [(ngModel)]="model.depositedAmount"
+                                      #depositedAmount="ngModel" required/>
+                                      <div *ngIf="f.submitted && !depositedAmount.valid" class="help-block">Deposit Amount is required</div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-lg-3">
+                              <label for="">Deposit Date</label>
+                          </div>
+                          <div class="col-lg-9">
+                              <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !depositedDate.valid }">
+                                  <input type="date" class="form-control" placeholder="Enter Deposit Date" name="Date" [(ngModel)]="model.depositedDate" #depositedDate="ngModel"
+                                      required/>
+                                      <div *ngIf="f.submitted && !depositedDate.valid" class="help-block">Deposite Date is required</div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-lg-3">
+                              <label for="">Remarks/Requests</label>
+                          </div>
+                          <div class="col-lg-9">
+                              <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !remarks.valid }">
+                                  <textarea class="form-control" rows="5" placeholder="Enter Remarks/Requests" name="remarks" [(ngModel)]="model.remarks" #remarks="ngModel"
+                                      required></textarea>
+                                      <div *ngIf="f.submitted && !remarks.valid" class="help-block">Remarks is required</div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-lg-3">
+                              <label for="">Our Bank Accounts</label>
+                          </div>
+                          <div class="col-lg-9">
+                              <div class="form-group">
+                                  <select class="form-control" name="bankAccount" [(ngModel)]="model.bankAccount" #bankAccount="ngModel" required>
+                                      <option>Cash Deposit</option>
+                                      <option>INDB-700000001664</option>
+                                      <option>ICIC-135705001562</option>
+                                      <option>HDFC-04807630000033</option>
+                                  </select>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-lg-12">
+                              <div class="form-group">
+                                  <button type="submit" class="button button-block btn btn-primary">Submit</button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-md-5">
+                      <div class="row">
+                          <div class="col-lg-12" style="border:1px solid grey;padding:20px">
+                              <div class="row">
+                                  <div class="col-lg-6">
+
+                                      <label for="">BenificiaryName </label>
+
+                                  </div>
+                                  <div class="col-lg-6">
+
+                                      <label for="">Sourcemytrip Pvt Ltd</label>
+
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-lg-6">
+
+                                      <label for="">Bank Name</label>
+
+                                  </div>
+                                  <div class="col-lg-6">
+
+                                      <label for=""> : ICICI Bank</label>
+
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-lg-6">
+
+                                      <label for="">Branch</label>
+
+                                  </div>
+                                  <div class="col-lg-6">
+
+                                      <label for=""> : Kms</label>
+
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-lg-6">
+
+                                      <label for="">City</label>
+
+                                  </div>
+                                  <div class="col-lg-6">
+
+                                      <label for=""> : New Delhi</label>
+
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-lg-6">
+
+                                      <label for="">A/c Number </label>
+
+                                  </div>
+                                  <div class="col-lg-6">
+
+                                      <label for=""> : xxxxxxxxxxxx</label>
+
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-lg-6">
+
+                                      <label for="">IFSC CODE </label>
+
+                                  </div>
+                                  <div class="col-lg-6">
+
+                                      <label for=""> : xxxxxxxxxxx</label>
+
+                                  </div>
+                              </div>
+                          </div>
+                         
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </form>
+      <br>
+  </div>
+</div>

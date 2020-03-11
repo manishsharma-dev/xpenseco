@@ -1,0 +1,203 @@
+<style>
+  .help-block{color:red}
+  .regist {
+      width: 100%;
+      max-width: 100%;
+      padding: 3em 3em 3em 3em;
+      margin: 0em auto;
+      background-color: #fff;
+      border-radius: 0px 0px 5px 5px;
+      box-shadow: 0px 3px 10px -2px rgba(0, 0, 0, 0.2);
+  }
+</style>
+<site-header></site-header>
+<div class="register-area">
+      <div class="container">
+          <h3>Add Staff</h3>
+          <form name="form" (ngSubmit)="f.form.valid && addstaff()" #f="ngForm" novalidate>
+              <div class="regist">
+                  <div class="row">
+                      <div class="col-lg-6">
+                          <div class="form-group">
+                              <select class="form-control" placeHolder="Select Title"  name="Title" [(ngModel)]="model.Title" #Title="ngModel">
+                                  <option>Mr</option>
+                                  <option>Mrs</option>
+                                  <option>Ms</option>
+                                  <option>Miss</option>
+                                  <option>Dr</option>
+                              </select>
+                          </div>
+                      </div>
+                      <div class="col-lg-6">
+                          <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !FirstName.valid }">
+                              <input type="text" class="form-control" placeholder="Enter First Name" name="FirstName"  [(ngModel)]="model.FirstName" #FirstName="ngModel"
+                              required/>
+                              <div *ngIf="f.submitted && !FirstName.valid" class="help-block">First Name is required</div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-lg-6">
+                          <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !LastName.valid }">
+                              <input type="text" class="form-control" placeholder="Enter Last Name" name="LastName" [(ngModel)]="model.LastName" #LastName="ngModel"
+                              required/>
+                              <div *ngIf="f.submitted && !LastName.valid" class="help-block">Last Name is required</div>
+                          </div>
+                      </div>
+                      <div class="col-lg-6">
+                          <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !Age.valid }">
+                              <input type="text" class="form-control" maxlength="2" minlength="2" pattern="[0-9]*" placeholder="Enter Age" name="Age" [(ngModel)]="model.Age" #Age="ngModel"
+                              required/>
+                              <div *ngIf="f.submitted && !Age.valid" class="help-block">Age is invalid</div>
+                              <div *ngIf="Age.invalid && Age.touched" class="help-block">Age is invalid</div>
+
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-lg-6">
+                          <div class="form-group">
+                              <select class="form-control" name="Gender" [(ngModel)]="model.Gender" #Gender="ngModel">
+                                  <option>Male</option>
+                                  <option>Female</option>
+                              </select>
+                          </div>
+                      </div>
+                      <div class="col-lg-6">
+                          <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !Email.valid }">
+                              <input type="email" class="form-control" placeholder="Enter Email" name="Email" [(ngModel)]="model.Email" #Email="ngModel"
+                              required email/>
+                              <div *ngIf="f.submitted && !Email.valid" class="help-block">Email is invalid</div>
+                              <div class="help-block" *ngIf="Email.invalid && Email.touched">Email is invalid</div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-lg-6">
+                          <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !Company.valid }">
+                              <input type="text" class="form-control" placeholder="Enter Company" name="Company" [(ngModel)]="model.Company" #Company="ngModel"
+                              required/>
+                              <div *ngIf="f.submitted && !Company.valid" class="help-block">Company is required</div>
+                          </div>
+                      </div>
+                      <div class="col-lg-6">
+                          <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !PanNumber.valid }">
+                              <input type="text" class="form-control" placeholder="Enter Pan Number" name="PAN" [(ngModel)]="model.PanNumber" #PanNumber="ngModel"
+                              required/>
+                              <div *ngIf="f.submitted && !PanNumber.valid" class="help-block">Pan Number is required</div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-lg-6">
+                          <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !PanName.valid }">
+                              <input type="text" class="form-control" placeholder="Enter Name as on PAN Card" name="PanName" [(ngModel)]="model.PanName" #PanName="ngModel"
+                              required/>
+                              <div *ngIf="f.submitted && !PanName.valid" class="help-block">Pan Name is required</div>
+                          </div>
+                      </div>
+                      <div class="col-lg-6">
+                          <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !Address.valid }">
+                              <input type="text" class="form-control" placeholder="Enter Address" name="Address" [(ngModel)]="model.Address" #Address="ngModel"
+                              required/>
+                              <div *ngIf="f.submitted && !Address.valid" class="help-block">Address is required</div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-lg-6">
+                          <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !City.valid }">
+                              <input type="text" class="form-control" placeholder="Enter City" name="City" [(ngModel)]="model.City" #City="ngModel"
+                              required/>
+                              <div *ngIf="f.submitted && !City.valid" class="help-block">City is required</div>
+                          </div>
+                      </div>
+                      <div class="col-lg-6">
+                          <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !Country.valid }">
+                              <input type="text" class="form-control" placeholder="Enter Country" name="Country" [(ngModel)]="model.Country" #Country="ngModel"
+                              required/>
+                              <div *ngIf="f.submitted && !Country.valid" class="help-block">Country is required</div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-lg-6">
+                          <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !PinCode.valid }">
+                              <input type="text" maxlength="6" minlength="6" pattern="[0-9]*" class="form-control" placeholder="Enter Pin Code" name="Pin" [(ngModel)]="model.PinCode" #PinCode="ngModel"
+                              required/>
+                              <div *ngIf="f.submitted && !PinCode.valid" class="help-block">Pin Code is required</div>
+                              <div *ngIf="PinCode.invalid && PinCode.touched" class="help-block">Pin Code is invalid</div>
+
+                          </div>
+                      </div>
+                      <div class="col-lg-6">
+                          <div class="form-group">
+                              <select class="form-control" name="State" [(ngModel)]="model.State" #State="ngModel">
+                                  <option>Andhra Pradesh</option>
+                                  <option>Telangana</option>
+                                  <option>Karnataka</option>
+                                  <option> Uttar Pradesh</option>
+                                  <option> Maharashtra</option>
+                                  <option> Bihar</option>
+                                  <option>West Bengal</option>
+                                  <option> Tamil Nadu</option>
+                                  <option>  Madhya Pradesh</option>
+                                  <option>  Rajasthan</option>
+                                  <option> Gujarat</option>
+                                  <option>Orissa</option>
+                                  <option>Kerala</option>
+                                  <option> Jharkhand</option>
+                                  <option>  Assam</option>
+                                  <option>  Punjab</option>
+                                  <option> Haryana</option>
+                                  <option>Chhattisgarh</option>
+                                  <option> Delhi</option>
+                                  <option> Jammu and Kashmir</option>
+                                  <option>  Uttarakhand</option>
+                                  <option> Himachal Pradesh</option>
+                                  <option> Tripura</option>
+                                  <option>  Meghalaya</option>
+                                  <option>  Manipur</option>
+                                  <option>   Nagaland</option>
+                                  <option>  Goa</option>
+                                  <option> Arunachal Pradesh</option>
+                                  <option> Puducherry</option>
+                                  <option>  Chandigarh</option>
+                                  <option>   Mizoram</option>
+                                  <option>    Sikkim</option>
+                                  <option>   Andaman and Nicobar Islands</option>
+                                  <option>Dadra and Nagar Haveli</option>
+                                  <option>  Daman and Diu</option>
+                                  <option>   Lakshadweep</option>
+                              </select>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-lg-6">
+                          <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !Phone.valid }">
+                              <input type="number" class="form-control" placeholder="Enter Phone" name="phone" [(ngModel)]="model.Phone" #Phone="ngModel"
+                              required/>
+                              <div *ngIf="f.submitted && !Phone.valid" class="help-block">Phone is required</div>
+                          </div>
+                      </div>
+                      <div class="col-lg-6">
+                          <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !Mobile.valid }">
+                              <input type="text" minlength="10" maxlength="10" pattern="[0-9]*" appForbiddenName="bob" class="form-control" placeholder="Enter Mobile"
+                                  name="Mobile" [(ngModel)]="model.Mobile" #Mobile="ngModel" required/>
+                              <div *ngIf="f.submitted && !Mobile.valid" class="help-block">Mobile is required</div>
+                              <div class="help-block" *ngIf="Mobile.invalid && Mobile.touched">Mobile is invalid</div>                        
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-12" style="text-align: center">
+                          <button type="submit" class="btn btn-lg btn-primary">Submit</button>
+                      </div>
+                  </div>
+              </div>
+
+          </form>
+      </div>
+  </div>
+  

@@ -1,0 +1,62 @@
+<style>
+  .help-block {
+    color:#fff;
+  }
+</style>
+
+
+
+<section class="agent-main-box">
+  <div class="agent-login">
+
+    <div *ngIf="isLoginError">
+      <i class="material-icons">error</i>
+      <h5 style="color:red">Incorrect username or password</h5>
+    </div>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" autocomplete="off">
+        <div class="form-logo">
+            <img src="assets/images/travel-fare-img/ss-logo.png">
+        </div>
+        <span class="login100-form-title">
+          Employee Login
+            </span>
+      <div class="form-in">
+        <div class="form-group">
+         
+          <img src="assets/images/travel-fare-img/login-user.png">
+          <input type="text" class="form-control" formControlName="username" placeholder="Username"
+            [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+          <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+            <div *ngIf="f.username.errors.required">User Name is required</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-in">
+        <div class="form-group">
+         
+          <img src="assets/images/travel-fare-img/padlock.png">
+          <input type="password" class="form-control" formControlName="password" placeholder="Password"
+            [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+          <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+            <div *ngIf="f.password.errors.required">Password is required</div>
+          </div>
+        </div>
+      </div>
+      <div class="text-right p-t-8 p-b-31 forget">
+        <a href="#">
+          Forgot password?
+        </a>
+      </div>
+
+      <div class="form-btn-box">
+        <button [disabled]="loading" class="form-btn">Login</button>
+
+      </div>
+    </form>
+<!--     
+    <div class="text-center regis-btn">
+            <a href="/Agent-Registration" class="register-btn">Don’t have an account? Register Now</a>
+    </div> -->
+
+  </div>
+</section>

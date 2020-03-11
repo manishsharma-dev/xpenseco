@@ -1,0 +1,746 @@
+<site-header></site-header>
+
+<section class="book-area">
+    <form>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                        <div class="link-home">
+                                <a href="/hotel">Back To Hotel Search</a>
+                            </div>
+                    <div class="review-itn">
+                        <div class="reviw-head">
+                            <div class="num-circle">01</div>
+                            Booking Review
+                        </div>
+                        <div class="hotel-bk">
+                            <div class="row hotel-review" *ngIf="HotelInfo">
+
+
+                                <div class="col-md-4">
+                                    <img src="{{HotelInfo.Hotel.ImageList.Image[0].ImagePath}}" class="img-fluid img-one img-thumbnail">
+                                </div>
+                                <div class="col-md-8">
+                                    <h3>{{HotelInfo.Hotel.HName}}</h3>
+                                    <span class="star-2">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                    </span>
+                                    <span class="addrs">{{HotelInfo.Hotel.Add}}</span>
+
+                                    <div class="row ht-details">
+                                        <div class="col-md-3">
+                                            <div class="check-in-box">
+                                                <div class="cal-block">
+                                                    <div class="cb-top">
+                                                        <span class="checkin-text">Check-In</span>
+                                                        <span class="bold bkg-date ng-binding">{{chekindate}}</span>
+                                                    </div>
+                                                    <div class="cb-footer ng-binding">
+                                                        {{checkinMonth}} &nbsp;&nbsp;|&nbsp;&nbsp; 1:00 PM
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="check-in-box">
+                                                <div class="cal-block">
+                                                    <div class="cb-top">
+                                                        <span class="checkin-text">Check-Out</span>
+                                                        <span class="bold bkg-date ng-binding">{{chekoutdate}}</span>
+                                                    </div>
+                                                    <div class="cb-footer ng-binding">
+                                                        {{checkoutMonth}} &nbsp;&nbsp;|&nbsp;&nbsp; 11:00 AM
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p class="night-del">{{duration}} Days & {{duration-1}} Nights</p>
+
+                                            <span class="room-del">Room {{HotelInfo.Master.NoOfRooms}}:
+                                                {{HotelInfo.Master.NoOfAdult}} Adults</span>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="inclusions">
+                                        <p>Inclusions</p>
+                                   
+                                      
+                                        <li><i class="fa fa-check" aria-hidden="true"></i>Complimentary Wi-Fi Internet</li>
+                                        <li>
+                                            <i class="fa fa-check" aria-hidden="true"></i>Complimentary mineral water
+                                            bottles placed in room
+                                        </li>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tip">
+                                <b>Cancellation Policy:</b> Full refund if you cancel this booking by 16-Jan-19 12:00 PM IST. 
+
+                            </div>
+                        </div>
+                        <div *ngIf="cartitems!=null">
+                            <div class="row hotel-review" *ngFor="let r of cartitems ; let i = index">
+                                <span *ngIf="r.Hotel!=undefined" class="span-box">
+                                    <div class="col-md-4">
+                                        <img src="{{r.Hotel.ImageList.Image[0].ImagePath}}" class="img-fluid">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <h3>{{r.Hotel.HName}}</h3>
+                                        <div class="cart-dropdown">
+                                            <span><i class="fa" aria-hidden="true"></i>View Tarif</span>
+                                            <div class="dropdown-content">
+                                                <ul>
+                                                    <li class="col-md-8">
+                                                        <div class="check_details">
+
+                                                            <table class="table">
+                                                                <tr>
+                                                                    <td>Hotel Charges:</td>
+                                                                    <td>{{r.Hotel.Rooms.Room[0].Gross_Price}}</td>
+
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td>Hotel GST:</td>
+                                                                    <td>{{r.Hotel.Rooms.Room[0].ServiceTax}}</td>
+
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td>Fee & Taxes:</td>
+                                                                    <td>{{r.Hotel.Rooms.Room[0].Tax}}</td>
+
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td>Total Price:</td>
+                                                                    <td>{{r.Hotel.Rooms.Room[0].Gross_Price}}</td>
+
+                                                                </tr>
+                                                            </table>
+
+                                                            <!--- <div class="chk-detais-row">
+                                                                            <div class="chk-line">
+                                                                                <span class="chk-l">Hotel Charges:</span>
+                                                                                <span class="chk-r">{{r.Hotel.Rooms.Room[0].Gross_Price}}</span>
+                                                                                <div class="clear"></div>
+                                                                            </div>
+                                                                            <div class="chk-line">
+                                                                                <span class="chk-l">Hotel GST:</span>
+                                                                                <span class="chk-r">{{r.Hotel.Rooms.Room[0].ServiceTax}}</span>
+                                                                                <div class="clear"></div>
+                                                                            </div>
+                                                                            <div class="chk-line">
+                                                                                <span class="chk-l">Fee & Taxes</span>
+                                                                                <span class="chk-r">{{r.Hotel.Rooms.Room[0].Tax}}</span>
+                                                                                <div class="clear"></div>
+                                                                            </div>
+                                        
+                                                                        </div>
+                                                                        <div class="chk-total">
+                                                                            <div class="chk-total-l">Total Price</div>
+                                                                            <div class="chk-total-r"><i class="fa fa-inr"></i>{{r.Hotel.Rooms.Room[0].Gross_Price}}</div>
+                                                                            <div class="clear"></div>
+                                                                        </div>---->
+
+
+                                                        </div>
+                                                        <!-- <span class="Price"> Charges: {{r.Hotel.Rooms.Room[i].Net_Price}}</span> -->
+                                                    </li>
+
+                                                    <!-- <i class="fa fa-times" aria-hidden="true"></i> -->
+                                                </ul>
+
+                                                <!-- <div class="view_crt">
+                                                        <a href="/Cart" class="btn btn-primary float-right">View Cart</a>
+                                                       
+                                                    </div> -->
+
+                                            </div>
+                                        </div>
+
+                                        <!-- <h5><a href>View Tarif</a></h5> -->
+                                        <span class="addrs">{{r.Hotel.Add}}</span>
+
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="check-in-box">
+                                                    <div class="cal-block">
+                                                        <div class="cb-top">
+                                                            <span class="checkin-text">Check-In</span>
+                                                            <span class="bold bkg-date ng-binding"></span>
+                                                        </div>
+                                                        <div class="cb-footer ng-binding">
+                                                            {{r.Master.ChkInDate}} &nbsp;&nbsp;|&nbsp;&nbsp; 1:00 PM
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="check-in-box">
+                                                    <div class="cal-block">
+                                                        <div class="cb-top">
+                                                            <span class="checkin-text">Check-Out</span>
+                                                            <span class="bold bkg-date ng-binding"></span>
+                                                        </div>
+                                                        <div class="cb-footer ng-binding">
+                                                            {{r.Master.ChkOutDate}}&nbsp;&nbsp;|&nbsp;&nbsp; 11:00 AM
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p class="night-del">{{r.Master.Duration}} Days &
+                                                    {{r.Master.Duration-1}} Nights</p>
+
+                                                <span class="room-del">Room 1: 2 Adults</span>
+                                            </div>
+                                        </div>
+                                        <!--         
+                                        <div class="inclusions">
+                                            <p>Inclusions</p>
+                                            <li>
+                                                Breakfast
+                                            </li>
+                                            <li>
+                                                Early Check-in / Late Check-out (Subject to Availability)
+                                            </li>
+                                        </div> -->
+                                    </div>
+                                </span>
+                                <span *ngIf="r.PackageId!=undefined" class="span-box">
+                                    <div class="col-md-4">
+                                        <img src="{{r.ThubImage}}" class="img-fluid">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <h3>{{r.PackageName}}</h3>
+                                        <div class="cart-dropdown">
+                                            <span><i class="fa" aria-hidden="true"></i>View Tarif</span>
+                                            <div class="dropdown-content">
+                                                <ul>
+                                                    <li class="col-md-8">
+                                                        <div class="check_details">
+
+                                                            <table class="table">
+                                                                <tr>
+                                                                    <td>Package Charges:</td>
+                                                                    <td>{{r.Twin}}</td>
+
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td>Single:</td>
+                                                                    <td>{{r.SGL}}</td>
+
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td>Triple</td>
+                                                                    <td>{{r.Triple}}</td>
+
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td>Total Price:</td>
+                                                                    <td>{{r.Costing}}</td>
+
+                                                                </tr>
+                                                            </table>
+
+                                                            <!--- <div class="chk-detais-row">
+                                                                                    <div class="chk-line">
+                                                                                        <span class="chk-l">Hotel Charges:</span>
+                                                                                        <span class="chk-r">{{r.Hotel.Rooms.Room[0].Gross_Price}}</span>
+                                                                                        <div class="clear"></div>
+                                                                                    </div>
+                                                                                    <div class="chk-line">
+                                                                                        <span class="chk-l">Hotel GST:</span>
+                                                                                        <span class="chk-r">{{r.Hotel.Rooms.Room[0].ServiceTax}}</span>
+                                                                                        <div class="clear"></div>
+                                                                                    </div>
+                                                                                    <div class="chk-line">
+                                                                                        <span class="chk-l">Fee & Taxes</span>
+                                                                                        <span class="chk-r">{{r.Hotel.Rooms.Room[0].Tax}}</span>
+                                                                                        <div class="clear"></div>
+                                                                                    </div>
+                                                
+                                                                                </div>
+                                                                                <div class="chk-total">
+                                                                                    <div class="chk-total-l">Total Price</div>
+                                                                                    <div class="chk-total-r"><i class="fa fa-inr"></i>{{r.Hotel.Rooms.Room[0].Gross_Price}}</div>
+                                                                                    <div class="clear"></div>
+                                                                                </div>---->
+
+
+                                                        </div>
+                                                        <!-- <span class="Price"> Charges: {{r.Hotel.Rooms.Room[i].Net_Price}}</span> -->
+                                                    </li>
+
+                                                    <!-- <i class="fa fa-times" aria-hidden="true"></i> -->
+                                                </ul>
+
+                                                <!-- <div class="view_crt">
+                                                                <a href="/Cart" class="btn btn-primary float-right">View Cart</a>
+                                                               
+                                                            </div> -->
+
+                                            </div>
+                                        </div>
+
+                                        <!-- <h5><a href>View Tarif</a></h5> -->
+                                        <span class="addrs">{{r.Remarks}}</span>
+
+                                        <!-- <div class="row">
+                                                    <div class="col-md-3">
+                                                        <div class="check-in-box">
+                                                            <div class="cal-block">
+                                                                <div class="cb-top">
+                                                                    <span class="checkin-text">Check-In</span>
+                                                                    <span class="bold bkg-date ng-binding"></span>
+                                                                </div>
+                                                                <div class="cb-footer ng-binding">
+                                                                   {{r.Master.ChkInDate}}  &nbsp;&nbsp;|&nbsp;&nbsp; 1:00 PM
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="check-in-box">
+                                                            <div class="cal-block">
+                                                                <div class="cb-top">
+                                                                    <span class="checkin-text">Check-Out</span>
+                                                                    <span class="bold bkg-date ng-binding"></span>
+                                                                </div>
+                                                                <div class="cb-footer ng-binding">
+                                                                    {{r.Master.ChkOutDate}}&nbsp;&nbsp;|&nbsp;&nbsp; 11:00 AM
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <p class="night-del">{{r.Master.Duration}} Days & {{r.Master.Duration-1}} Nights</p>
+                
+                                                        <span class="room-del">Room 1: 2 Adults</span>
+                                                    </div>
+                                                </div> -->
+
+                                        <div class="inclusions">
+                                            <p>Inclusions</p>
+                                            <li>
+                                                Breakfast
+                                            </li>
+                                            <li>
+                                                Early Check-in / Late Check-out (Subject to Availability)
+                                            </li>
+                                        </div>
+                                    </div>
+                                </span>
+                                <span *ngIf="r.SightSeeingId!=undefined" class="span-box">
+                                    <div class="col-md-4">
+                                        <img src="{{r.Bigimage}}" class="img-fluid">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <h3>{{r.SightSeeingName}}</h3>
+                                        <div class="cart-dropdown">
+                                            <span><i class="fa" aria-hidden="true"></i>View Tarif</span>
+                                            <div class="dropdown-content">
+                                                <ul>
+                                                    <li class="col-md-8">
+                                                        <div class="check_details">
+
+                                                            <table class="table">
+                                                                <tr>
+                                                                    <td>Adult Fare:</td>
+                                                                    <td>{{r.AdultFare}}</td>
+
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td>Child Charge:</td>
+                                                                    <td>{{r.ChildFare}}</td>
+
+                                                                </tr>
+
+
+                                                            </table>
+
+                                                            <!--- <div class="chk-detais-row">
+                                                                                <div class="chk-line">
+                                                                                    <span class="chk-l">Hotel Charges:</span>
+                                                                                    <span class="chk-r">{{r.Hotel.Rooms.Room[0].Gross_Price}}</span>
+                                                                                    <div class="clear"></div>
+                                                                                </div>
+                                                                                <div class="chk-line">
+                                                                                    <span class="chk-l">Hotel GST:</span>
+                                                                                    <span class="chk-r">{{r.Hotel.Rooms.Room[0].ServiceTax}}</span>
+                                                                                    <div class="clear"></div>
+                                                                                </div>
+                                                                                <div class="chk-line">
+                                                                                    <span class="chk-l">Fee & Taxes</span>
+                                                                                    <span class="chk-r">{{r.Hotel.Rooms.Room[0].Tax}}</span>
+                                                                                    <div class="clear"></div>
+                                                                                </div>
+                                            
+                                                                            </div>
+                                                                            <div class="chk-total">
+                                                                                <div class="chk-total-l">Total Price</div>
+                                                                                <div class="chk-total-r"><i class="fa fa-inr"></i>{{r.Hotel.Rooms.Room[0].Gross_Price}}</div>
+                                                                                <div class="clear"></div>
+                                                                            </div>---->
+
+
+                                                        </div>
+                                                        <!-- <span class="Price"> Charges: {{r.Hotel.Rooms.Room[i].Net_Price}}</span> -->
+                                                    </li>
+
+                                                    <!-- <i class="fa fa-times" aria-hidden="true"></i> -->
+                                                </ul>
+
+                                                <!-- <div class="view_crt">
+                                                            <a href="/Cart" class="btn btn-primary float-right">View Cart</a>
+                                                           
+                                                        </div> -->
+
+                                            </div>
+                                        </div>
+
+                                        <!-- <h5><a href>View Tarif</a></h5> -->
+                                        <span class="addrs">{{r.duration}} hours</span>
+
+                                        <!-- <div class="row">
+                                                <div class="col-md-3">
+                                                    <div class="check-in-box">
+                                                        <div class="cal-block">
+                                                            <div class="cb-top">
+                                                                <span class="checkin-text">Check-In</span>
+                                                                <span class="bold bkg-date ng-binding"></span>
+                                                            </div>
+                                                            <div class="cb-footer ng-binding">
+                                                               {{r.Master.ChkInDate}}  &nbsp;&nbsp;|&nbsp;&nbsp; 1:00 PM
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="check-in-box">
+                                                        <div class="cal-block">
+                                                            <div class="cb-top">
+                                                                <span class="checkin-text">Check-Out</span>
+                                                                <span class="bold bkg-date ng-binding"></span>
+                                                            </div>
+                                                            <div class="cb-footer ng-binding">
+                                                                {{r.Master.ChkOutDate}}&nbsp;&nbsp;|&nbsp;&nbsp; 11:00 AM
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p class="night-del">{{r.Master.Duration}} Days & {{r.Master.Duration-1}} Nights</p>
+            
+                                                    <span class="room-del">Room 1: 2 Adults</span>
+                                                </div>
+                                            </div> -->
+
+                                        <!-- <div class="inclusions">
+                                                <p>Inclusions</p>
+                                                <li>
+                                                    Breakfast
+                                                </li>
+                                                <li>
+                                                    Early Check-in / Late Check-out (Subject to Availability)
+                                                </li>
+                                            </div> -->
+                                    </div>
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <span *ngFor="let s of cartitems">
+                        <div class="row booking-form" *ngIf="s.SightSeeingId!=undefined">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="usr">Adults</label>
+                                    <select class="form-control" id="AdltCount" name="AdltCount" [(ngModel)]="PriceCal.AdultCount">
+                                        <option>Select Adult</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                        <option>6</option>
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label for="usr">Childs</label>
+
+                                    <select class="form-control" id="chldCount" [(ngModel)]="PriceCal.ChildCount" name="chldCount">
+                                        <option>Select Child</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                        <option>6</option>
+                                    </select>
+
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-primary" (click)="calculatePrice()">Calculate
+                                        Sight Price</button>
+                                </div>
+                            </div>
+                        </div>
+                    </span>
+                    <div class="travrller-details" *ngFor="let add of Adultdtl; let i=index">
+                        <div class="reviw-head">
+                            <div class="num-circle">02</div>
+                            Enter Traveller Details
+                        </div>
+
+                        <div class="trvller-inner">
+                                
+                            <div class="row booking-form">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="sel1">Title <span style="color: #ed1300">*</span></label>
+                                        <select class="form-control" id="Title{{i}}" [(ngModel)]="Adultdtl[i].Title" name="Title{{i}}"
+                                            #Title{{i}}="ngModel">
+                                            <option selected="selected" value="Mr">Mr.</option>
+                                            <option>Mrs.</option>
+                                            <option>Ms.</option>
+    
+                                        </select>
+    
+    
+                                    </div>
+                                </div>
+    
+                                <div class="col-md-5">
+                                    <div class="form-group" [class.has-error]="FirstName.invalid && FirstName.touched">
+                                        <label for="usr">First Name <span style="color: #ed1300">*</span></label>
+                                        <input type="text" class="form-control" id="txtFirstName" required [(ngModel)]="Adultdtl[i].FirstName"
+                                            name="FirstName" pattern="[a-zA-Z][a-zA-Z ]+" #FirstName="ngModel">
+                                        <div class="help-block" *ngIf="FirstName.invalid && FirstName.touched">First name
+                                            is required</div>
+    
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group" [class.has-error]="LastName.invalid && LastName.touched">
+                                        <label for="usr">Last name<span style="color: #ed1300">*</span></label>
+                                        <input type="text" class="form-control" id="txtLastName" required pattern="[a-zA-Z][a-zA-Z ]+"
+                                            [(ngModel)]="Adultdtl[i].LastName" name="LastName" #LastName="ngModel">
+                                        <div class="help-block" *ngIf="LastName.invalid && LastName.touched">Last name is
+                                            required</div>
+    
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="row booking-frm-2">
+    
+    
+                                <div class="col-md-7">
+                                    <div class="form-group" [class.has-error]="Email.invalid && Email.touched">
+                                        <label for="usr">Email<span style="color: #ed1300">*</span></label>
+                                        <input type="text" class="form-control" id="txtEmailaddress" required email
+                                            [(ngModel)]="Adultdtl[i].Email" name="Email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                                            #Email="ngModel">
+                                        <div class="help-block" *ngIf="Email.invalid && Email.touched">Email is required</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group" [class.has-error]="MobileNo.invalid && MobileNo.touched">
+                                        <label for="usr">Mobile No.<span style="color: #ed1300">*</span></label>
+                                        <input type="text" class="form-control" id="txtMobileNo" required [(ngModel)]="Adultdtl[i].MobileNo"
+                                            name="MobileNo" pattern="[0-9]*" minlength="10" maxlength="10" #MobileNo="ngModel">
+                                        <div class="help-block" *ngIf="MobileNo.invalid && MobileNo.touched">Mobile number
+                                            is
+                                            invalid</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                       
+
+
+                    </div>
+                    <span *ngIf="NoOfChild>0">
+                        <div class="passenger-del" *ngFor="let add of Childdtl; let i=index">
+                            <div class="tic-title">
+                                <div class="t-h">
+                                    <span class="circle">
+                                        <img src="assets/images/traveler-with-a-suitcase.png">
+                                    </span>
+
+                                    <span class="head-txt">
+                                        Child Traveller Details
+                                    </span>
+
+                                </div>
+                            </div>
+
+                            <div class="row booking-form">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="sel1">Title <span style="color: #ed1300">*</span></label>
+                                        <select class="form-control" id="Title" [(ngModel)]="Childdtl[i].Title" name="Title{{i}}"
+                                            #Title="ngModel">
+                                            <option selected="selected" value="Mr">Mr</option>
+                                            <option>Masters</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-5">
+                                    <div class="form-group" [class.has-error]="FirstName.invalid && FirstName.touched">
+                                        <label for="usr">First Name <span style="color: #ed1300">*</span></label>
+                                        <input type="text" class="form-control" id="FirstName" required [(ngModel)]="Childdtl[i].FirstName"
+                                            name="FirstName" pattern="[a-zA-Z][a-zA-Z ]+" #FirstName="ngModel">
+                                        <div class="help-block" *ngIf="FirstName.invalid && FirstName.touched">First
+                                            Name is required</div>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group" [class.has-error]="LastName.invalid && LastName.touched">
+                                        <label for="usr">Last name<span style="color: #ed1300">*</span></label>
+                                        <input type="text" class="form-control" id="LastName" required pattern="[a-zA-Z][a-zA-Z ]+"
+                                            [(ngModel)]="Childdtl[i].LastName" name="LastName" #LastName="ngModel">
+                                        <div class="help-block" *ngIf="LastName.invalid && LastName.touched">Last Name
+                                            is required</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row booking-frm-2">
+
+
+                                <div class="col-md-7">
+                                    <div class="form-group" [class.has-error]="Email.invalid && Email.touched">
+                                        <label for="usr">Email<span style="color: #ed1300">*</span></label>
+                                        <input type="text" class="form-control" id="emailaddress" required email
+                                            [(ngModel)]="Childdtl[i].Email" name="Email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                                            #Email="ngModel">
+                                        <div class="help-block" *ngIf="Email.invalid && Email.touched">Email is
+                                            required</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-5" [class.has-error]="Email.invalid && Email.touched">
+                                    <div class="form-group">
+                                        <label for="usr">Age<span style="color: #ed1300">*</span></label>
+                                        <input type="text" class="form-control" id="Age" required [(ngModel)]="Childdtl[i].Age"
+                                            name="Age" pattern="[0-9]*" minlength="1" maxlength="2" #Age="ngModel">
+                                        <div class="help-block" *ngIf="Age.invalid && Age.touched">Age is required</div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </span>
+
+                </div>
+                <div class="col-md-3">
+                  
+
+                    <div class="tot-fare sticky-top">
+                            <div class="tic-title">
+                                Tariff Details
+                            </div>
+                            <div class="check_details">
+                                <div class="checkout-coll">
+                                    <div class="chk-detais-row">
+                                     <span *ngFor="let ht of cartitems">
+                                                    <div class="chk-line" *ngIf="ht.Hotel!==undefined">
+                                                        <span class="chk-l">Hotel Charges:</span>
+                                                        <span class="chk-r">{{charge}}</span>
+                                                        <div class="clear"></div>
+                                                    </div>
+                                                    <div class="chk-line" *ngIf="ht.PackageId!==undefined">
+                                                        <span class="chk-l">Package Cost:</span>
+                                                        <span class="chk-r">{{ht.Costing}}</span>
+                                                        <div class="clear"></div>
+                                                    </div>
+                                                    <div class="chk-line" *ngIf="ht.SightSeeingId!==undefined">
+                                                        <span class="chk-l">SightSeeing Adult Fare:</span>
+                                                        <span class="chk-r">{{ht.AdultFare}}</span>
+                                                        <div class="clear"></div>
+                                                    </div>
+                                                </span>
+
+                                        <div class="chk-line">
+                                            <span class="chk-l">GST:</span>
+                                            <span class="chk-r">{{GST|round}}</span>
+                                            <div class="clear"></div>
+                                        </div>
+                                        <div class="chk-line">
+                                            <span class="chk-l">Fee & Taxes</span>
+                                            <span class="chk-r">{{Tax|round}}</span>
+                                            <div class="clear"></div>
+                                        </div>
+
+                                       </div>
+                                </div>
+
+                                <div class="chk-total">
+                                        <div class="chk-total-l">Total Price</div>
+        
+                                        <div class="chk-total-r">
+                                                <i class="fa fa-inr" *ngIf="roomcurrency=='INR'"></i>{{TotalPrice|round}}</div>
+                                        <div class="clear"></div>
+                                    </div>
+
+                                <div class="payment-method">
+                                        Select Payment Method
+                                </div>
+                                <div class="select-py-mtd">
+                                        <div class="form-check">
+                                                <input class="form-check-input" name="paymentmethod" [(ngModel)]="Adultdtl[0].paymentmethod" type="radio" alue="CreditLimit" >
+                                                <label class="form-check-label" for="payment-1">
+                                                        By Credit Limit
+                                                </label>
+                                              </div>
+                                              <div class="form-check">
+                                                <input class="form-check-input" type="radio" [(ngModel)]="Adultdtl[0].paymentmethod" name="paymentmethod"
+                                                value="PaymentGetway">
+                                                <label class="form-check-label" for="payment-2">
+                                                        By Credit Card
+                                                </label>
+                                              </div>
+                                </div>
+    
+                                <div class="pat-btn">
+                                        <button type="submit" class="payt-btn" (click)="HotelBooking(occupencyMaster)">PROCEED
+                                                TO PAYMENT</button>
+                                </div>
+
+
+                            </div>
+                        
+
+                           
+
+
+                        </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
+

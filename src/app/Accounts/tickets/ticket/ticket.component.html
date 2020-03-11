@@ -1,0 +1,257 @@
+<nav class="social">
+  <ul>
+      <li>
+          <a routerLink="/MyBookings" style="cursor:pointer">Home
+              <i class="fa fa-home" aria-hidden="true"></i>
+          </a>
+      </li>
+      <li>
+          <a (click)="printComponent('itinaryhtmlforemail')" style="cursor:pointer">Print
+              <i class="fa fa-print" aria-hidden="true"></i>
+          </a>
+      </li>
+  </ul>
+</nav>
+<div style="width: 800px;
+padding: 7px 20px 20px 20px;
+margin: 30px auto;
+font-family: Helvetica, Arial, sans-serif;
+background-color: #ffffff;
+border: 2px solid #ccc;
+box-shadow: 2px 2px 2px 1px #ececec;">
+<table id="itinaryhtmlforemail"  cellspacing="0" cellpadding="0" border="0">
+      <tbody>
+          <tr>
+              <td>
+                  <h3 style="text-align: center;">Electronic Ticket Receipt</h3>
+                  <table style="min-width: 100%; font-family: Helvetica, Arial, sans-serif;" width="100%" cellspacing="0" cellpadding="0" border="0">
+                      <tbody>
+                          <tr>
+                              <td style="width: 50%">
+                                <p>
+                                    Xpenseco<br>126, 1 Floor, Kirti Shikhar Tower,<br>
+                                    Janakpuri,<br> New Delhi-58<br>booking@xpenseco.com
+                                </p>
+                                  <p><b>Passenger Contact</b> : {{ticket.PhoneNo}}</p>
+                              </td>
+                              <td style="text-align: right; display: flex; justify-content: flex-end; padding-top: 20px;padding-right: 19px;"><img src="assets/images/travel-fare-img/ss-logo.png"></td>
+                          </tr>
+                      </tbody>
+                  </table>
+                  <table style="font-size: 12px; border: 2px solid #b1b1b1; border-collapse: collapse; background-color: #fff !important; font-family: Helvetica, Arial, sans-serif; margin-bottom: 10px;" width="100%" cellspacing="0" cellpadding="0" border="0">
+                      <tbody>
+                          <tr>
+                              <td style="padding: 4px 6px; text-align: left; line-height: 20px;border-bottom: 1px solid #868686" width="33%"><b>Booking Reference No :</b> {{ticket.BookingRef}}</td>
+                              <td style="padding: 4px 6px; text-align: left; line-height: 20px;border-bottom: 1px solid #868686"><b>Booking Date :</b> {{ticket.BookingDate}}</td>
+                              <td style="padding: 4px 6px; text-align: left; line-height: 20px;border-bottom: 1px solid #868686"><b>Staff Name</b> :Ranjit kumar<br>(Booking@travelfare.com)</td>
+
+                          </tr>
+                          <tr>
+                              <td style="padding: 10px 6px;border-bottom: 1px solid #868686"><b>GDS/Airline PNR :</b>{{ticket.PNRNo}}</td>
+                              <td style="padding: 10px 6px;border-bottom: 1px solid #868686"><b>Status: </b>{{ticket.Status}}</td>
+                              <td style="padding: 10px 6px;border-bottom: 1px solid #868686"><b>Fare Type: </b>Normal Fare</td>
+
+                          </tr>
+                          <tr>
+                              <td style="padding: 10px 6px;border-bottom: 1px solid #868686"><b>Trip Type :</b>{{itineraryDetails[0].Jounrytype}}</td>
+                              <td style="padding: 10px 6px;border-bottom: 1px solid #868686"><b>Trip Name: </b>{{segmentDetails[0].SCityName}}({{segmentDetails[0].OriginCode}}) To {{segmentDetails[0].DCityName}}({{segmentDetails[0].DestiCode}})</td>
+                              <td style="padding: 10px 6px;border-bottom: 1px solid #868686"><b>Tour Code: </b>AHJDU67</td>
+
+                          </tr>
+                      </tbody>
+                  </table>
+                  <table style="min-width: 100%; border-collapse: collapse; font-family: Helvetica, Arial, sans-serif; border: 2px solid #b1b1b1; border-bottom: none;" width="100%;" cellspacing="0" cellpadding="0" border="0">
+                      <tbody>
+                          <tr>
+                              <th style="font-size: 12px; text-align: left; padding: 2px 6px;  line-height: 20px;" width="201">
+                                  <div style="font-size: 12px; font-weight: normal;"><b>Traveller Details</b></div>
+                              </th>
+                              <th style="padding: 2px 10px; font-size: 12px; text-align: left;" width="133" valign="middle">&nbsp;</th>
+
+                          </tr>
+                      </tbody>
+                  </table>
+
+                  <table style="font-size: 12px; border: 2px solid #b1b1b1; border-collapse: collapse; background-color: #fff !important; font-family: Helvetica, Arial, sans-serif; margin-bottom: 10px;" width="100%" cellspacing="0" cellpadding="0" border="0">
+                      <tbody>
+                          <tr>
+                              <td style="padding: 4px 6px; text-align: left; line-height: 20px;border-bottom: 1px solid #868686; width:16%;"><b>Pax Name</b></td>
+                              <td style="padding: 4px 6px; text-align: left; line-height: 20px;border-bottom: 1px solid #868686; width:10%;"><b>Type</b></td>
+                              <td style="padding: 4px 6px; text-align: left; line-height: 20px;border-bottom: 1px solid #868686; width:10%;"><b>Meal<br>Pref</b></td>
+                              <td style="padding: 4px 6px; text-align: left; line-height: 20px;border-bottom: 1px solid #868686;width:10%;"><b>Seat<br>Pref</b></td>
+                              <td style="padding: 4px 6px; text-align: left; line-height: 20px;border-bottom: 1px solid #868686;width:10%;"><b>Sector</b></td>
+                              <td style="padding: 4px 6px; text-align: left; line-height: 20px;border-bottom: 1px solid #868686;width:10%;"><b>FFN<br>Number</b></td>
+                              <td style="padding: 4px 6px; text-align: left; line-height: 20px;border-bottom: 1px solid #868686;width:10%;"><b>Ticket<br>Number</b></td>
+                              <td style="padding: 4px 6px; text-align: left; line-height: 20px;border-bottom: 1px solid #868686;width:10%;"><b>Airline<br>PNR</b></td>
+                              <td style="padding: 4px 6px; text-align: left; line-height: 20px;border-bottom: 1px solid #868686; width: 20%"><b>Bag</b></td>
+
+                          </tr>
+                          <tr *ngFor="let PM of passengerMaster let m=index;">
+                              <td style="padding: 10px 6px;border-bottom: 1px solid #868686;"><b>{{PM.Title}} {{PM.FirstName}} {{PM.LastName}}</b></td>
+                              <td style="padding: 10px 6px;border-bottom: 1px solid #868686;"><b>{{PM.PassengerType}} </b></td>
+                              <td style="padding: 10px 6px;border-bottom: 1px solid #868686;"><b>{{PM.PreferedMeal}} </b></td>
+                              <td style="padding: 10px 6px;border-bottom: 1px solid #868686;"><b>{{PM.PreferedSeat}} </b></td>
+                              <td style="padding: 10px 6px;border-bottom: 1px solid #868686;"><b>{{segmentDetails[0].OriginCode}}:{{segmentDetails[0].DestiCode}}</b></td>
+                              <td style="padding: 10px 6px;border-bottom: 1px solid #868686;"><b></b></td>
+                              <td style="padding: 10px 6px;border-bottom: 1px solid #868686;"><b>{{PM.TicketNo}}</b></td>
+                              <td style="padding: 10px 6px;border-bottom: 1px solid #868686;"><b>{{PM.PNRNo}}</b></td>
+                              <td style="padding: 10px 6px;border-bottom: 1px solid #868686;"><b>{{bookingMaster[0].BaggageAllowance}}</b></td>
+                          </tr>
+
+                      </tbody>
+                  </table>
+
+                  <table style="min-width: 100%; border-collapse: collapse; font-family: Helvetica, Arial, sans-serif; border: 2px solid #b1b1b1; border-bottom: none;" width="100%;" cellspacing="0" cellpadding="0" border="0">
+                      <tbody>
+                          <tr>
+                              <th style="font-size: 12px; text-align: left; padding: 2px 6px;  line-height: 20px;" width="201">
+                                  <div style="font-size: 12px; font-weight: normal;"><b>Flight Details</b></div>
+                              </th>
+                              <th style="padding: 2px 10px; font-size: 12px; text-align: left;" width="133" valign="middle">&nbsp;</th>
+
+                          </tr>
+                      </tbody>
+                  </table>
+                  <table style="font-size: 12px; border: 2px solid #b1b1b1; border-collapse: collapse; background-color: #fff !important; font-family: Helvetica, Arial, sans-serif; margin-bottom: 10px;" width="100%" cellspacing="0" cellpadding="0" border="0">
+                      <tbody>
+                          <tr>
+                              <td style="padding: 4px 6px; text-align: left; line-height: 20px;border-bottom: 1px solid #ccc;"><b>Flight Number</b></td>
+                              <td style="padding: 4px 6px; text-align: left; line-height: 20px;border-bottom: 1px solid #ccc;"><b>Departure</b></td>
+                              <td style="padding: 4px 6px; text-align: left; line-height: 20px;border-bottom: 1px solid #ccc;"><b>Arrivals</b></td>
+                              <td style="padding: 4px 6px; text-align: left; line-height: 20px;border-bottom: 1px solid #ccc;"><b>Duration</b></td>
+                              <td style="padding: 4px 6px; text-align: left; line-height: 20px;border-bottom: 1px solid #ccc;border-left: 1px solid #737373;"><b>Fare Class Type</b></td>
+
+
+                          </tr>
+                          <tr *ngFor="let SD of segmentDetails let n=index;">
+                              <td style="padding: 10px 6px;border-bottom: 1px solid #ccc;">{{passengerMaster[0].AirlineName}}({{SD.AirlineCode}}) - Economy({{SD.FareClass}})</td>
+                              <td style="padding: 10px 6px;border-bottom: 1px solid #ccc;">{{SD.DepTime}}, {{SD.DepDate}},<br>{{SD.SAirportName}},<br>{{SD.ScityName}}({{SD.OriginCode}}),<br>Terminal - </td>
+                              <td style="padding: 10px 6px;border-bottom: 1px solid #ccc;">{{SD.ArTime}}, {{SD.ArDate}},<br>{{SD.DAirportName}},<br>{{SD.DcityName}}({{SD.DestiCode}}),<br>Terminal -</td>
+                              <td style="padding: 10px 6px;border-bottom: 1px solid #ccc;">{{SD.Duration}} Min</td>
+                              <td style="padding: 10px 6px;border-bottom: 1px solid #ccc;border-left: 1px solid #737373;">{{ticket.NonRefundable}}</td>
+
+                          </tr>
+
+
+                      </tbody>
+                  </table>
+
+                  <table style="font-size: 12px; border: 2px solid #b1b1b1; border-collapse: collapse; background-color: #fff !important; font-family: Helvetica, Arial, sans-serif; margin-bottom: 10px;" width="100%" cellspacing="0" cellpadding="0" border="0">
+                      <tbody>
+                          <tr>
+                              <td style="padding: 4px 6px; text-align: left; line-height: 20px;border-bottom: 1px solid #ccc;"><b>Fare Details:</b></td>
+                              <td style="padding: 4px 6px; text-align: right; line-height: 20px;border-bottom: 1px solid #ccc;"><b></b></td>
+                          </tr>
+                          <tr>
+                              <td style="padding: 4px 6px; text-align: left; line-height: 20px;border-bottom: 1px solid #ccc;"><b>Base Fare:</b></td>
+                              <td style="padding: 4px 6px; text-align: right; line-height: 20px;border-bottom: 1px solid #ccc;color: red;"><b>{{ticket.AdultBaseFare}}</b></td>
+                          </tr>
+                          <tr>
+                              <td style="padding: 4px 6px; text-align: left; line-height: 20px;border-bottom: 1px solid #ccc;"><b>Surcharge and Taxes: YQ: 
+                                  <span style="color: red;">{{ticket.AdultYq}}</span> 
+                                Other Taxes:<span style="color: red;">{{ticket.AdtOtherCharges}}</span> JN:<span style="color: red;">0.0</span></b></td>
+                              <td style="padding: 4px 6px; text-align: right; line-height: 20px;border-bottom: 1px solid #ccc;color: red;"><b>{{ticket.AdultYq + ticket.AdtOtherCharges}}</b></td>
+                          </tr>
+                          <tr>
+                              <td style="padding: 4px 6px; text-align: left; line-height: 20px;border-bottom: 1px solid #ccc;"><b>Service Tax:</b></td>
+                              <td style="padding: 4px 6px; text-align: right; line-height: 20px;border-bottom: 1px solid #ccc;color: red;"><b>{{ticket.AdultTax}}</b></td>
+                          </tr>
+                          <tr>
+                              <td style="padding: 4px 6px; text-align: left; line-height: 20px;border-bottom: 1px solid #ccc;"><b>SSR Charges: <span style="color: red;">0.0</span></b></td>
+                              <td style="padding: 4px 6px; text-align: right; line-height: 20px;border-bottom: 1px solid #ccc;color: red;"><b>0.00</b></td>
+                          </tr>
+                          <tr>
+                              <td style="padding: 4px 6px; text-align: left; line-height: 20px;border-bottom: 1px solid #ccc;"><b>Processing Fee:</b></td>
+                              <td style="padding: 4px 6px; text-align: right; line-height: 20px;border-bottom: 1px solid #ccc;color: red;"><b>0.00</b></td>
+                          </tr>
+                          <tr>
+                              <td style="padding: 4px 6px; text-align: left; line-height: 20px;border-bottom: 1px solid #ccc;"><b style="color: red;">Grand Total:</b></td>
+                              <td style="padding: 4px 6px; text-align: right; line-height: 20px;border-bottom: 1px solid #ccc;color: red;"><b>{{ticket.AdtCustTotal}}</b></td>
+                          </tr>
+
+
+
+                      </tbody>
+                  </table>
+
+                  <table style="font-family: Helvetica, Arial, sans-serif; background-color: #ffffff;" width="100%" cellspacing="0" cellpadding="0" border="0">
+                      <tbody>
+                          <tr>
+                              <td style="padding: 0 0 4px; border: 2px solid #b1b1b1;" width="50%" valign="top">
+                                  <table style="font-family: Helvetica, Arial, sans-serif;" width="100%" cellspacing="1px" cellpadding="0" border="0">
+                                      <tbody>
+                                          <tr>
+                                              <td style="font-size: 12px; padding: 4px 6px; line-height: 20px; border-bottom: 1px solid #868686;"><b>Rules and Conditions / Flight Notes</b></td>
+
+                                          </tr>
+                                          <tr>
+                                              <td style="font-size: 13px; padding: 4px 6px; line-height: 20px;">
+                                                  <b>Flight Notes</b>
+                                                 
+                                                  <p style="text-align:justify">1 - Cabin Baggage Allowance Domestic: Hand/ Cabin baggage of maximum 7 kg 
+                                                    (which would include Laptop and duty free shopping bags) having maximum over all dimensions of: 115 cms. (L+W+H) on
+                                                     Boeing flights and 108 cms. (L+W+H) on Bombardier flights) hand bag is allowed to be carried per passenger, free 
+                                                     of cost. Passengers with infants are allowed to carry an additional piece of hand baggage of maximum 7 kg., 
+                                                     not exceeding the size dimensions, as mentioned hereinbefore.
+                                                      </p>
+                                                      <p style="text-align:justify">2 - Checked-in Baggage Allowance: For Domestic travel, Airline allows free baggage allowance of 
+                                                        15 Kgs per passenger as checked-in baggage. In case of International travel, Baggage allowance of 20 Kg ( 30 Kg in case 
+                                                        passenger is travelling to/from Colombo, Kabul, Dubai, Muscat, Hongkong ) is allowed. Baggage allowance for MLE-TRV is 25
+                                                         Kgs. From Ex India to Jeddah 25 kgs & Ex Jeddah to India will be 25 kgs of check-in baggage + 5 liters of Zam Zam water 
+                                                         will be allowed.
+                                                      </p>
+                                                      <p style="text-align:justify">3 - For passengers travelling on Airline domestic sector to Airline international sector or vice 
+                                                        versa, the free baggage allowance and cabin baggage allowance of International sector will be applicable. Passenger travelling
+                                                         on Airline domestic Sector and having connection on another airline to/from an international destination, are allowed Free 
+                                                         Baggage Allowance of 15 Kgs per passenger per flight. (W.e.f 4th Nov,2014)</p>
+                                                  
+                                              </td>
+                                          </tr>
+                                          <tr>
+                                              <td style="font-size: 13px; padding: 4px 6px; line-height: 20px;">
+                                                  <b>Check-in At Airport</b>
+                                                  <p style="text-align:justify">1 - Domestic: Airport check-in counters will open two hours prior to the scheduled departure time. Passengers are encouraged to report at the Airport between 1-2 hours prior to the scheduled departure time. Check-in counters for all our flights will close 45 minutes prior to departure. International: Airport check-in counters will open 3 hours prior to the scheduled departure time. Check-in counters for all flights will close 60 minutes (75 minutes in case of Dubai and Kabul) prior to departure.
+                                                      Failure to do so can result in your booking being cancelled and the fare retained. Web check-in facility is available on www.spicejet.com, for all flights originating from India only, but is not available for Group Bookings, Defense Bookings, Student Bookings, Infant Bookings and flights originating from Srinagar, Jammu.
+                                                      </p>
+                                                      <p style="text-align:justify">2 - 
+                                                          Boarding gate closes 20 minutes ( 45 minutes in case of Kabul and 25 minutes in case of other international travel ) prior to scheduled departure time and failure to board within the stipulated time can result in denied boarding with fare retained.
+
+                                                      </p>
+                                                      <p style="text-align:justify">3 - 
+                                                          Passengers doing web check-in shall be responsible for ensuring their hand-baggage meets the physical dimension limits the weight limits, and must pay for excess cabin baggage (if any) at the airport check-in counter. There will be random checks at boarding gates for hand baggage size and weight, and if found oversized or overweight, INR 400/ Kg (effective from 22nd June, 2018) will be chargeable, and additionally the bag may be taken from the passenger to be placed in the hold.
+
+                                                      </p>
+                                              </td>
+                                          </tr>
+                                          <tr>
+                                              <td style="font-size: 13px; padding: 4px 6px; line-height: 20px;">
+                                                  <b>CONDITIONS OF CONTRACT AND OTHER IMPORTANT NOTICES</b>
+                                                  <p style="text-align:justify">1 - Excess baggage charges will be payable for carriage of baggage over the free baggage allowance limits. Excess baggage can also be pre-booked (at discounted rates) up to 6 hours prior to scheduled departure time of the flight on www.spicejet.com, by calling at our Reservations from outside India : +91 987 180 3333, +91 965 400 3333, from within India : 0 987 180 3333, 0 965 400 3333 or at our airport ticketing counters.
+                                                    </p>
+                                                    <p style="text-align:justify">2 - 
+                                                        Revised Free Excess Baggage and Excess Baggage Charges for international sector(s) is applicable on booking made on or after 10thJuly, 2014.
+
+                                                    </p>
+                                                    <p style="text-align:justify">3 - 
+                                                        We strongly recommend that all valuables (e.g. camera, jewellery, cash, electronics, perishables items, etc.) and medication shall be carried in cabin baggage only. Airline assumes no responsibility for any pilferage/ damage to valuables incase they are carried in check-in baggage and the passenger shall be doing so at their sole risk and consequences.
+                                                    </p>
+                                                    <p style="text-align:justify">4 - 
+                                                        Passengers travelling to UAE/Oman from India for employment/tourist purposes shall be requiring an “OK TO BOARD” comment in the PNR. Kindly get in touch with your visa issuing agency for the same.
+                                                    </p>
+                                                    <p style="text-align:justify">5 - 
+                                                        All Foreign Nationals/ Non-Resident Indians are mandatorily required to carry their Passport with valid visa for their travel.
+                                                      </p>
+                                              </td>
+                                          </tr>
+
+                                      </tbody>
+                                  </table>
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </td>
+          </tr>
+      </tbody>
+  </table>
+</div>

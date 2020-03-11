@@ -1,0 +1,252 @@
+<style>
+  .help-block {
+      color: red
+  }
+
+  .regist {
+      width: 100%;
+      max-width: 100%;
+      padding: 3em 3em 3em 3em;
+      margin: 0em auto;
+      background-color: #fff;
+      border-radius: 0px 0px 5px 5px;
+      box-shadow: 0px 3px 10px -2px rgba(0, 0, 0, 0.2);
+  }
+  .pagination>.disabled>a,
+  .pagination>.disabled>a:focus,
+  .pagination>.disabled>a:hover,
+  .pagination>.disabled>span,
+  .pagination>.disabled>span:focus,
+  .pagination>.disabled>span:hover {
+      color: #777;
+      cursor: not-allowed;
+      background-color: #fff;
+      border-color: #ddd;
+  }
+
+  .pagination>li>a,
+  .pagination>li>span {
+      position: relative;
+      float: left;
+      padding: 6px 12px;
+      margin-left: -1px;
+      line-height: 1.42857143;
+      color: #337ab7;
+      text-decoration: none;
+      background-color: #fff;
+      border: 1px solid #ddd;
+  }
+
+  a {
+      cursor: pointer;
+  }
+</style>
+<site-header></site-header>
+<div class="support-area">
+  <div class="container">
+      <div class="regist">
+          <div class="row">
+              <div class="col-md-3">
+                  <div class="left-area">
+                      <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                          <a class="nav-link active show" (click)="BookingQueue()" id="v-pills-home-tab" data-toggle="pill" href="#group" role="tab"
+                              aria-selected="true">
+                              Booking Queues</a>
+                          <a class="nav-link" id="v-pills-profile-tab" (click)="CancellationQueue()" data-toggle="pill" href="#credit" role="tab" aria-selected="false">
+                              Cancellation Queues</a>
+                          <a class="nav-link" id="v-pills-messages-tab" (click)="RescheduleQueue()" data-toggle="pill" href="#support" role="tab" aria-selected="false">
+                              Reschedule Queues</a>
+                          <a class="nav-link" id="v-pills-messages-tab" (click)="PaymentQueue()" data-toggle="pill" href="#support" role="tab" aria-selected="false">
+                              Pending Payment Queues</a>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-md-9">
+                  <div *ngIf="bking">
+                          <h4>Booking Queue</h4>
+                          <div class="table-responsive table-full-width">
+                                <table class="table table-striped table-bordered table-hover">
+                                        <thead style="background-color: rgb(16, 94, 140);color:white">
+                                            <tr>
+                                                <th>TxID</th>
+                                                <th>Booking Date Time</th>
+                                                <th>InvAmt</th>
+                                                <th>FQ</th>
+                                                <th>Book By</th>
+                                                <th>Origin-Dest</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tr *ngFor="let data of pagedItems3">
+                                            <td>{{data.BookingRef}}</td>                                       
+                                            <td>{{data.BookingDate}}</td>
+                                            <td>{{data.Netamt}}</td>
+                                            <td>{{data.TotalBookingAmount}}</td>
+                                            <td>{{data.AgentId}}</td>
+                                            <td>{{data.Origin}}-{{data.Destination}}</td>
+                                            <td>{{data.Status}}</td>
+                                        </tr>
+                                    </table>
+
+                          </div>
+                            
+                        
+                    
+                              <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+                                      <li [ngClass]="{disabled:pager.currentPage === 1}">
+                                          <a (click)="setPage(1)">First</a>
+                                      </li>
+                                      <li [ngClass]="{disabled:pager.currentPage === 1}">
+                                          <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+                                      </li>
+                                      <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                                          <a (click)="setPage(page)">{{page}}</a>
+                                      </li>
+                                      <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                                          <a (click)="setPage(pager.currentPage + 1)">Next</a>
+                                      </li>
+                                      <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                                          <a (click)="setPage(pager.totalPages)">Last</a>
+                                      </li>
+                                  </ul>
+                  </div>
+                  <div *ngIf="cncl">
+                      <h4>Cancellation Queue</h4>
+                      <div class="table-responsive table-full-width">
+                      <table class="table table-striped table-bordered table-hover">
+                          <thead style="background-color: rgb(16, 94, 140);color:white">
+                              <tr>
+                                  <th>Agent ID</th>
+                                  <th>Booking Ref</th>
+                                  <th> Name</th>
+                                  <th> Contact</th>
+                                  <th> Remark</th>
+                                  <th> Type</th>
+                                  <th>Status</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr *ngFor="let data of pagedItems2">
+                                  <td>{{data.AgentID}}</td>
+                                  <td>{{data.BookingRef}}</td>
+                                  <td>{{data.RequestName}}</td>
+                                  <td>{{data.RequestContact}}</td>
+                                  <td>{{data.RequestRemark}}</td>
+                                  <td>{{data.CancelType}}</td>
+                                  <td>{{data.Status}}</td>
+                              </tr>
+                          </tbody>
+                      </table>
+                      </div>
+                      <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+                              <li [ngClass]="{disabled:pager.currentPage === 1}">
+                                  <a (click)="setPage3(1)">First</a>
+                              </li>
+                              <li [ngClass]="{disabled:pager.currentPage === 1}">
+                                  <a (click)="setPage3(pager.currentPage - 1)">Previous</a>
+                              </li>
+                              <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                                  <a (click)="setPage3(page)">{{page}}</a>
+                              </li>
+                              <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                                  <a (click)="setPage3(pager.currentPage + 1)">Next</a>
+                              </li>
+                              <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                                  <a (click)="setPage3(pager.totalPages)">Last</a>
+                              </li>
+                          </ul>
+                  </div>
+                  <div *ngIf="rchdl">
+                      <h4>Reschedule Queue</h4>
+                      <div class="table-responsive table-full-width">
+                      <table class="table table-striped table-bordered table-hover" *ngIf="rchdl">
+                          <thead style="background-color: rgb(16, 94, 140);color:white">
+                              <tr>
+                                  <th>Agent ID</th>
+                                  <th>Booking Ref</th>
+                                  <th> Name</th>
+                                  <th> Contact</th>
+                                  <th> Remark</th>
+                                  <th> Type</th>
+                                  <th>Status</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr *ngFor="let data of pagedItems">
+                                  <td>{{data.AgentID}}</td>
+                                  <td>{{data.BookingRef}}</td>
+                                  <td>{{data.RequestName}}</td>
+                                  <td>{{data.RequestContact}}</td>
+                                  <td>{{data.RequestRemark}}</td>
+                                  <td>{{data.CancelType}}</td>
+                                  <td *ngIf="pagedItems[0].Status=='Pending'" style="color:#ffbb33">{{data.Status}}</td>
+                                  <td *ngIf="pagedItems[0].Status=='Cancelled'" style="color:red">{{data.Status}}</td>
+                              </tr>
+                          </tbody>
+                      </table>
+                      </div>
+                      <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+                              <li [ngClass]="{disabled:pager.currentPage === 1}">
+                                  <a (click)="setPage1(1)">First</a>
+                              </li>
+                              <li [ngClass]="{disabled:pager.currentPage === 1}">
+                                  <a (click)="setPage1(pager.currentPage - 1)">Previous</a>
+                              </li>
+                              <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                                  <a (click)="setPage1(page)">{{page}}</a>
+                              </li>
+                              <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                                  <a (click)="setPage1(pager.currentPage + 1)">Next</a>
+                              </li>
+                              <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                                  <a (click)="setPage1(pager.totalPages)">Last</a>
+                              </li>
+                          </ul>
+                  </div>
+                  <div *ngIf="pmnt">
+                          <h4>Payment Queue</h4>
+                          <div class="table-responsive table-full-width">
+                          <table class="table table-striped table-bordered table-hover" *ngIf="pmnt">
+                              <thead style="background-color: rgb(16, 94, 140);color:white">
+                                  <tr>
+                                      <th>Agent ID</th>
+                                      <th>Amount</th>
+                                      <th> Request Date</th>
+                                      <th> Remark</th>
+                                      <th> Status</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr *ngFor="let data of pagedItems1">
+                                      <td>{{data.AgentID}}</td>
+                                      <td>{{data.Amount}}</td>
+                                      <td>{{data.RequestDate}}</td>
+                                      <td>{{data.Remark}}</td>
+                                      <td>{{data.Status}}</td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                          </div>
+                          <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+                                  <li [ngClass]="{disabled:pager.currentPage === 1}">
+                                      <a (click)="setPage2(1)">First</a>
+                                  </li>
+                                  <li [ngClass]="{disabled:pager.currentPage === 1}">
+                                      <a (click)="setPage2(pager.currentPage - 1)">Previous</a>
+                                  </li>
+                                  <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                                      <a (click)="setPage2(page)">{{page}}</a>
+                                  </li>
+                                  <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                                      <a (click)="setPage2(pager.currentPage + 1)">Next</a>
+                                  </li>
+                                  <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                                      <a (click)="setPage2(pager.totalPages)">Last</a>
+                                  </li>
+                              </ul>
+                      </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

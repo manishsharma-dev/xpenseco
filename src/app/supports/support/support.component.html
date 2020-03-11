@@ -1,0 +1,631 @@
+<style>
+  .help-block{color:red}
+</style>
+<site-header></site-header>
+<div class="support-area">
+  <div class="container">
+          <div class="row">
+                  <div class="col-md-3">
+                          <div class="left-area">
+                                  <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                          <a class="nav-link active show" (click)="grouprequest()" id="v-pills-home-tab" data-toggle="pill" href="#group" role="tab"
+                                                  aria-selected="true">
+                                                  Group Booking Request</a>
+                                          <a class="nav-link" id="v-pills-profile-tab" (click)="creditrequest()" data-toggle="pill" href="#credit" role="tab" aria-selected="false">
+                                                  Credit Request</a>
+                                          <a class="nav-link" id="v-pills-messages-tab" (click)="supportrequrst()" data-toggle="pill" href="#support" role="tab" aria-selected="false">
+                                                  Support Request</a>
+
+
+                                  </div>
+                          </div>
+                  </div>
+
+                  <div class="col-md-9">
+                          <div class="tab-content" id="v-pills-tabContent">
+                                  <div class="tab-pane fade active show" id="group" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                                          <div class="row trip">
+                                                  <div class="col-md-12">
+                                                          <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                                                  <div class="panel panel-default">
+                                                                          <div class="panel-heading" role="tab" id="headingOne">
+
+                                                                          </div>
+                                                                          <div id="collapseOne" class="panel-collapse collapse show" role="tabpanel" aria-labelledby="headingOne">
+                                                                                  <div class="panel-body">
+                                                                                          <form name="first" (ngSubmit)="f.form.valid && addbooking()" #f="ngForm" novalidate>
+                                                                                                  <div class="support-box-inner" *ngIf="group">
+                                                                                                          <h3>Group Travel
+                                                                                                                  Request
+                                                                                                          </h3>
+
+                                                                                                          <div class="row journery-type">
+
+                                                                                                                  <div class="col-md-5">
+                                                                                                                          <div class="form-group">
+                                                                                                                                  <label for="">Journey
+                                                                                                                                          Type</label>
+
+                                                                                                                                  <select class="form-control" name="JourneyType" [(ngModel)]="model.JourneyType" #JourneyType="ngModel" required>
+                                                                                                                                          <option selected="selected" value="Domestic">Domestic</option>
+                                                                                                                                          <option>International</option>
+                                                                                                                                  </select>
+                                                                                                                          </div>
+                                                                                                                  </div>
+                                                                                                                  <div class="col-md-7">
+                                                                                                                          <div class="form-group">
+                                                                                                                                  <label for="">Trip
+                                                                                                                                          Type</label>
+
+                                                                                                                                  <select class="form-control" name="Trip" [(ngModel)]="model.Trip" #Trip="ngModel" required>
+                                                                                                                                          <option>One
+                                                                                                                                                  Way</option>
+                                                                                                                                          <option>Return</option>
+                                                                                                                                  </select>
+                                                                                                                          </div>
+                                                                                                                  </div>
+                                                                                                          </div>
+
+                                                                                                          <div class="or-des row">
+                                                                                                                  <div class="col-md-5">
+                                                                                                                          <div class="form-group">
+                                                                                                                                  <label>Origin</label>
+                                                                                                                                  <select class="form-control" name="Origin" [(ngModel)]="model.Origin" #Origin="ngModel" required>
+                                                                                                                                          <option selected="selected" value="Select Origin">Select Origin</option>
+                                                                                                                                          <option value="">------</option>
+                                                                                                                                          <option value="BLR">Bangalore</option>
+                                                                                                                                          <option value="BOM">Bombay</option>
+                                                                                                                                          <option value="CCU">Calcutta</option>
+                                                                                                                                          <option value="DEL">Delhi</option>
+                                                                                                                                          <option value="GOI">Goa</option>
+                                                                                                                                          <option value="HYD">Hyderabad</option>
+                                                                                                                                          <option value="MAA">Chennai</option>
+                                                                                                                                          <option value="">------</option>
+                                                                                                                                          <option value="IXA">Agartala</option>
+                                                                                                                                          <option value="AGX">Agatti
+                                                                                                                                                  Island
+                                                                                                                                          </option>
+                                                                                                                                          <option value="AGR">Agra</option>
+                                                                                                                                          <option value="AMD">Ahmedabad</option>
+                                                                                                                                          <option value="AJL">Aizawl</option>
+                                                                                                                                          <option value="IXD">Allahabad</option>
+                                                                                                                                          <option value="ATQ">Amritsar</option>
+                                                                                                                                          <option value="IXU">Aurangabad</option>
+                                                                                                                                          <option value="IXB">Bagdogra</option>
+                                                                                                                                          <option value="BLR">Bangalore</option>
+                                                                                                                                          <option value="IXG">Belgaum</option>
+                                                                                                                                          <option value="VID">Bellary</option>
+                                                                                                                                          <option value="BHU">Bhavnagar</option>
+                                                                                                                                          <option value="BHO">Bhopal</option>
+                                                                                                                                          <option value="BBI">Bhubaneshwar</option>
+                                                                                                                                          <option value="BHJ">Bhuj</option>
+                                                                                                                                          <option value="IXC">Chandigarh</option>
+                                                                                                                                          <option value="MAA">Chennai</option>
+                                                                                                                                          <option value="COK">Cochin</option>
+                                                                                                                                          <option value="CJB">Coimbatore</option>
+                                                                                                                                          <option value="DED">Dehradun</option>
+                                                                                                                                          <option value="DHM">Dharamsala</option>
+                                                                                                                                          <option value="DIB">Dibrugarh</option>
+                                                                                                                                          <option value="DMU">Dimapur</option>
+                                                                                                                                          <option value="DIU">Diu</option>
+                                                                                                                                          <option value="GAY">Gaya</option>
+                                                                                                                                          <option value="GOI">Goa</option>
+                                                                                                                                          <option value="GOP">Gorakhpur</option>
+                                                                                                                                          <option value="GAU">Guwahati</option>
+                                                                                                                                          <option value="GWL">Gwalior</option>
+                                                                                                                                          <option value="HBX">Hubli</option>
+                                                                                                                                          <option value="HYD">Hyderabad</option>
+                                                                                                                                          <option value="IMF">Imphal</option>
+                                                                                                                                          <option value="IDR">Indore</option>
+                                                                                                                                          <option value="JLR">Jabalpur</option>
+                                                                                                                                          <option value="JAI">Jaipur</option>
+                                                                                                                                          <option value="JSA">Jaisalmer</option>
+                                                                                                                                          <option value="IXJ">Jammu</option>
+                                                                                                                                          <option value="JGA">Jamnagar</option>
+                                                                                                                                          <option value="IXW">Jamshedpur</option>
+                                                                                                                                          <option value="JDH">Jodhpur</option>
+                                                                                                                                          <option value="JRH">Jorhat</option>
+                                                                                                                                          <option value="IXY">Kandla</option>
+                                                                                                                                          <option value="KNU">Kanpur</option>
+                                                                                                                                          <option value="HJR">Khajuraho</option>
+                                                                                                                                          <option value="KOP">Kolhapur</option>
+                                                                                                                                          <option value="CCU">Kolkata</option>
+                                                                                                                                          <option value="CCJ">Kozhikode</option>
+                                                                                                                                          <option value="KUU">Kulu</option>
+                                                                                                                                          <option value="LTU">Latur</option>
+                                                                                                                                          <option value="IXL">Leh</option>
+                                                                                                                                          <option value="IXI">Lilabari</option>
+                                                                                                                                          <option value="LKO">Lucknow</option>
+                                                                                                                                          <option value="IXM">Madurai</option>
+                                                                                                                                          <option value="IXE">Mangalore</option>
+                                                                                                                                          <option value="BOM">Mumbai</option>
+                                                                                                                                          <option value="NAG">Nagpur</option>
+                                                                                                                                          <option value="NDC">Nanded</option>
+                                                                                                                                          <option value="DEL">New
+                                                                                                                                                  Delhi
+                                                                                                                                          </option>
+                                                                                                                                          <option value="PAT">Patna</option>
+                                                                                                                                          <option value="PBD">Porbandar</option>
+                                                                                                                                          <option value="IXZ">Port
+                                                                                                                                                  Blair
+                                                                                                                                          </option>
+                                                                                                                                          <option value="PNQ">Pune</option>
+                                                                                                                                          <option value="RPR">Raipur</option>
+                                                                                                                                          <option value="RJA">Rajahmundry</option>
+                                                                                                                                          <option value="RAJ">Rajkot</option>
+                                                                                                                                          <option value="IXR">Ranchi</option>
+                                                                                                                                          <option value="SHL">Shillong</option>
+                                                                                                                                          <option value="IXS">Silchar</option>
+                                                                                                                                          <option value="SLV">Shimla</option>
+                                                                                                                                          <option value="SSE">Sholapur</option>
+                                                                                                                                          <option value="SXR">Srinagar</option>
+                                                                                                                                          <option value="STV">Surat</option>
+                                                                                                                                          <option value="TEZ">Tezpur</option>
+                                                                                                                                          <option value="TRZ">Tiruchirapally</option>
+                                                                                                                                          <option value="TIR">Tirupati</option>
+                                                                                                                                          <option value="TRV">Trivandrum</option>
+                                                                                                                                          <option value="TCR">Tuticorin</option>
+                                                                                                                                          <option value="UDR">Udaipur</option>
+                                                                                                                                          <option value="BDQ">Vadodara</option>
+                                                                                                                                          <option value="VNS">Varanasi</option>
+                                                                                                                                          <option value="VDY">Vidyanagar</option>
+                                                                                                                                          <option value="VGA">Vijaywada</option>
+                                                                                                                                          <option value="VTZ">Vishakhapatnam</option>
+                                                                                                                                  </select>
+
+                                                                                                                          </div>
+                                                                                                                  </div>
+                                                                                                                  <div class="col-md-7">
+                                                                                                                          <div class="form-group">
+                                                                                                                                  <label>Destination</label>
+                                                                                                                                  <select class="form-control" name="Destination" [(ngModel)]="model.Destination" 
+                                                                                                                                  #Destination="ngModel" required>
+                                                                                                                                          <option selected="selected" value="Select Destination">Select Destination</option>
+                                                                                                                                          <option value="">------</option>
+                                                                                                                                          <option value="BLR">Bangalore</option>
+                                                                                                                                          <option value="BOM">Bombay</option>
+                                                                                                                                          <option value="CCU">Calcutta</option>
+                                                                                                                                          <option value="DEL">Delhi</option>
+                                                                                                                                          <option value="GOI">Goa</option>
+                                                                                                                                          <option value="HYD">Hyderabad</option>
+                                                                                                                                          <option value="MAA">Chennai</option>
+                                                                                                                                          <option value="">------</option>
+                                                                                                                                          <option value="IXA">Agartala</option>
+                                                                                                                                          <option value="AGX">Agatti
+                                                                                                                                                  Island
+                                                                                                                                          </option>
+                                                                                                                                          <option value="AGR">Agra</option>
+                                                                                                                                          <option value="AMD">Ahmedabad</option>
+                                                                                                                                          <option value="AJL">Aizawl</option>
+                                                                                                                                          <option value="IXD">Allahabad</option>
+                                                                                                                                          <option value="ATQ">Amritsar</option>
+                                                                                                                                          <option value="IXU">Aurangabad</option>
+                                                                                                                                          <option value="IXB">Bagdogra</option>
+                                                                                                                                          <option value="BLR">Bangalore</option>
+                                                                                                                                          <option value="IXG">Belgaum</option>
+                                                                                                                                          <option value="VID">Bellary</option>
+                                                                                                                                          <option value="BHU">Bhavnagar</option>
+                                                                                                                                          <option value="BHO">Bhopal</option>
+                                                                                                                                          <option value="BBI">Bhubaneshwar</option>
+                                                                                                                                          <option value="BHJ">Bhuj</option>
+                                                                                                                                          <option value="IXC">Chandigarh</option>
+                                                                                                                                          <option value="MAA">Chennai</option>
+                                                                                                                                          <option value="COK">Cochin</option>
+                                                                                                                                          <option value="CJB">Coimbatore</option>
+                                                                                                                                          <option value="DED">Dehradun</option>
+                                                                                                                                          <option value="DHM">Dharamsala</option>
+                                                                                                                                          <option value="DIB">Dibrugarh</option>
+                                                                                                                                          <option value="DMU">Dimapur</option>
+                                                                                                                                          <option value="DIU">Diu</option>
+                                                                                                                                          <option value="GAY">Gaya</option>
+                                                                                                                                          <option value="GOI">Goa</option>
+                                                                                                                                          <option value="GOP">Gorakhpur</option>
+                                                                                                                                          <option value="GAU">Guwahati</option>
+                                                                                                                                          <option value="GWL">Gwalior</option>
+                                                                                                                                          <option value="HBX">Hubli</option>
+                                                                                                                                          <option value="HYD">Hyderabad</option>
+                                                                                                                                          <option value="IMF">Imphal</option>
+                                                                                                                                          <option value="IDR">Indore</option>
+                                                                                                                                          <option value="JLR">Jabalpur</option>
+                                                                                                                                          <option value="JAI">Jaipur</option>
+                                                                                                                                          <option value="JSA">Jaisalmer</option>
+                                                                                                                                          <option value="IXJ">Jammu</option>
+                                                                                                                                          <option value="JGA">Jamnagar</option>
+                                                                                                                                          <option value="IXW">Jamshedpur</option>
+                                                                                                                                          <option value="JDH">Jodhpur</option>
+                                                                                                                                          <option value="JRH">Jorhat</option>
+                                                                                                                                          <option value="IXY">Kandla</option>
+                                                                                                                                          <option value="KNU">Kanpur</option>
+                                                                                                                                          <option value="HJR">Khajuraho</option>
+                                                                                                                                          <option value="KOP">Kolhapur</option>
+                                                                                                                                          <option value="CCU">Kolkata</option>
+                                                                                                                                          <option value="CCJ">Kozhikode</option>
+                                                                                                                                          <option value="KUU">Kulu</option>
+                                                                                                                                          <option value="LTU">Latur</option>
+                                                                                                                                          <option value="IXL">Leh</option>
+                                                                                                                                          <option value="IXI">Lilabari</option>
+                                                                                                                                          <option value="LKO">Lucknow</option>
+                                                                                                                                          <option value="IXM">Madurai</option>
+                                                                                                                                          <option value="IXE">Mangalore</option>
+                                                                                                                                          <option value="BOM">Mumbai</option>
+                                                                                                                                          <option value="NAG">Nagpur</option>
+                                                                                                                                          <option value="NDC">Nanded</option>
+                                                                                                                                          <option value="DEL">New
+                                                                                                                                                  Delhi
+                                                                                                                                          </option>
+                                                                                                                                          <option value="PAT">Patna</option>
+                                                                                                                                          <option value="PBD">Porbandar</option>
+                                                                                                                                          <option value="IXZ">Port
+                                                                                                                                                  Blair
+                                                                                                                                          </option>
+                                                                                                                                          <option value="PNQ">Pune</option>
+                                                                                                                                          <option value="RPR">Raipur</option>
+                                                                                                                                          <option value="RJA">Rajahmundry</option>
+                                                                                                                                          <option value="RAJ">Rajkot</option>
+                                                                                                                                          <option value="IXR">Ranchi</option>
+                                                                                                                                          <option value="SHL">Shillong</option>
+                                                                                                                                          <option value="IXS">Silchar</option>
+                                                                                                                                          <option value="SLV">Shimla</option>
+                                                                                                                                          <option value="SSE">Sholapur</option>
+                                                                                                                                          <option value="SXR">Srinagar</option>
+                                                                                                                                          <option value="STV">Surat</option>
+                                                                                                                                          <option value="TEZ">Tezpur</option>
+                                                                                                                                          <option value="TRZ">Tiruchirapally</option>
+                                                                                                                                          <option value="TIR">Tirupati</option>
+                                                                                                                                          <option value="TRV">Trivandrum</option>
+                                                                                                                                          <option value="TCR">Tuticorin</option>
+                                                                                                                                          <option value="UDR">Udaipur</option>
+                                                                                                                                          <option value="BDQ">Vadodara</option>
+                                                                                                                                          <option value="VNS">Varanasi</option>
+                                                                                                                                          <option value="VDY">Vidyanagar</option>
+                                                                                                                                          <option value="VGA">Vijaywada</option>
+                                                                                                                                          <option value="VTZ">Vishakhapatnam</option>
+                                                                                                                                  </select>
+
+                                                                                                                          </div>
+                                                                                                                  </div>
+                                                                                                          </div>
+
+                                                                                                          <div class="or-des row">
+                                                                                                                  <div class="col-md-5">
+                                                                                                                          <div class="form-group" >
+                                                                                                                                  <label>Start
+                                                                                                                                          Date
+                                                                                                                                  </label>
+                                                                                                                                  <input type="date" class="form-control" name="StartDate" placeholder="28/06/2018" [(ngModel)]="model.StartDate" #StartDate="ngModel" required/>
+                                                                                                                                 
+                                                                                                                          </div>
+                                                                                                                  </div>
+                                                                                                                  <div class="col-md-7">
+                                                                                                                          <div class="form-group">
+                                                                                                                                  <label>Return
+                                                                                                                                          Date
+                                                                                                                                  </label>
+
+
+                                                                                                                                  <input type="date" class="form-control" name="ReturnDate" placeholder="30/06/2018" [(ngModel)]="model.ReturnDate" #ReturnDate="ngModel" required/>
+
+
+
+                                                                                                                          </div>
+                                                                                                                  </div>
+                                                                                                          </div>
+
+                                                                                                          <div class="or-des row">
+                                                                                                                  <div class="col-md-5">
+                                                                                                                          <div class="form-group">
+                                                                                                                                  <label>FLEXIBLE
+                                                                                                                                          BY
+                                                                                                                                  </label>
+                                                                                                                                  <select class="form-control" name="Flexible" [(ngModel)]="model.Flexible" #Flexible="ngModel" required>
+                                                                                                                                          <option>Select
+                                                                                                                                                  Days</option>
+                                                                                                                                          <option>1</option>
+                                                                                                                                          <option>2</option>
+                                                                                                                                          <option>3</option>
+                                                                                                                                          <option>4</option>
+                                                                                                                                  </select>
+
+                                                                                                                          </div>
+                                                                                                                  </div>
+                                                                                                                  <div class="col-md-7">
+                                                                                                                          <div class="form-group">
+                                                                                                                                  <label>FLEXIBLE
+                                                                                                                                          BY
+                                                                                                                                  </label>
+                                                                                                                                  <select class="form-control" name="Flexibility" [(ngModel)]="model.Flexibility" #Flexibility="ngModel" required>
+                                                                                                                                          <option>Select
+                                                                                                                                                  Days</option>
+                                                                                                                                          <option>1</option>
+                                                                                                                                          <option>2</option>
+                                                                                                                                          <option>3</option>
+                                                                                                                                          <option>4</option>
+                                                                                                                                  </select>
+
+                                                                                                                          </div>
+                                                                                                                  </div>
+                                                                                                          </div>
+
+                                                                                                          <div class="row journery-type m-tt">
+                                                                                                                  <div class="col-md-5">
+                                                                                                                          <p>
+                                                                                                                                  No of Passengers
+                                                                                                                          </p>
+                                                                                                                  </div>
+                                                                                                                  <div class="col-md-7">
+                                                                                                                          <div class="form-group">
+                                                                                                                                  <input type="number" class="form-control m-t" name="NoOfPassenger" [(ngModel)]="model.NoOfPassenger" #NoOfPassenger="ngModel"
+                                                                                                                                          required>
+                                                                                                                          </div>
+                                                                                                                  </div>
+
+                                                                                                          </div>
+
+
+                                                                                                          <div class="or-des row">
+                                                                                                                  <div class="col-md-5">
+                                                                                                                          <div class="form-group">
+                                                                                                                                  <label>Prefer
+                                                                                                                                          Class</label>
+                                                                                                                                  <select class="form-control" name="PreferClass" [(ngModel)]="model.PreferClass" #PreferClass="ngModel" required>
+                                                                                                                                          <option>All</option>
+                                                                                                                                          <option>Economy</option>
+                                                                                                                                          <option>Business</option>
+
+                                                                                                                                  </select>
+
+                                                                                                                          </div>
+                                                                                                                  </div>
+                                                                                                                  <div class="col-md-7">
+                                                                                                                          <div class="form-group">
+                                                                                                                                  <label> Prefer
+                                                                                                                                          Airline</label>
+                                                                                                                                  <select class="form-control" name="PreferAirline" [(ngModel)]="model.PreferAirline" #PreferAirline="ngModel" required>
+                                                                                                                                          <option value="All">All</option>
+                                                                                                                                          <option value="GDS">BSP
+                                                                                                                                                  Carriers
+                                                                                                                                                  Only
+                                                                                                                                          </option>
+                                                                                                                                          <option value="LCC">Low
+                                                                                                                                                  Cost
+                                                                                                                                                  Only
+                                                                                                                                          </option>
+                                                                                                                                          <option value="G8">Go
+                                                                                                                                                  airways(G8)
+                                                                                                                                          </option>
+                                                                                                                                          <option value="SG">Spicejet(SG)</option>
+                                                                                                                                          <option value="9W">Jet
+                                                                                                                                                  Airways(9W)
+                                                                                                                                          </option>
+                                                                                                                                          <option value="I7">Paramount(I7)</option>
+                                                                                                                                          <option value="IT">Kingfisher(IT)</option>
+                                                                                                                                          <option value="S2">Jetlite(S2)</option>
+                                                                                                                                          <option value="IC">Indian
+                                                                                                                                                  Airlines(IC)
+                                                                                                                                          </option>
+                                                                                                                                          <option value="AI">Air
+                                                                                                                                                  India(AI)
+                                                                                                                                          </option>
+
+                                                                                                                                  </select>
+
+                                                                                                                          </div>
+                                                                                                                  </div>
+                                                                                                          </div>
+
+
+                                                                                                          <div class="row m-tt">
+                                                                                                                  <div class="col-md-12">
+                                                                                                                          <div class="form-group">
+                                                                                                                                  <label for="comment">Additional
+                                                                                                                                          Remarks
+                                                                                                                                  </label>
+                                                                                                                                  <textarea class="form-control" rows="5" name="Remark" [(ngModel)]="model.Remark" #Remark="ngModel" required></textarea>
+                                                                                                                          </div>
+                                                                                                                  </div>
+                                                                                                          </div>
+                                                                                                          <div class="row m-tt" style="text-align: center">
+                                                                                                                  <button type="submit" class="btn btn-md btn-info">Submit</button>
+                                                                                                          </div>
+
+
+
+                                                                                                  </div>
+                                                                                          </form>
+                                                                                          <form name="Second" (ngSubmit)="f.form.valid && addcredit()" #f="ngForm" novalidate>
+                                                                                                  <div class="support-box-inner credit-req" *ngIf="credit">
+                                                                                                          <h3>Credit Request</h3>
+
+                                                                                                          <div class="row journery-type">
+                                                                                                                  <div class="col-md-3">
+                                                                                                                          <p>
+                                                                                                                                  Agent Id
+                                                                                                                          </p>
+                                                                                                                  </div>
+                                                                                                                  <div class="col-md-9">
+                                                                                                                          <div class="form-group">
+
+                                                                                                                                  <input type="text" name="Agent" readonly="readonly" class="form-control m-t" [(ngModel)]="model.Agent" #Agent="ngModel" required>
+                                                                                                                          </div>
+                                                                                                                  </div>
+
+
+
+                                                                                                          </div>
+
+
+                                                                                                          <div class="row m-tt">
+                                                                                                                  <div class="col-md-3">
+                                                                                                                          <p>
+                                                                                                                                  <b> Amount
+                                                                                                                                          Required
+                                                                                                                                  </b>
+                                                                                                                          </p>
+                                                                                                                  </div>
+                                                                                                                  <div class="col-md-9">
+                                                                                                                          <div class="form-group">
+
+                                                                                                                                  <input type="number" class="form-control m-t" name="AmoutnRequired" [(ngModel)]="model.AmoutnRequired" #AmoutnRequired="ngModel" required>
+                                                                                                                          </div>
+                                                                                                                  </div>
+                                                                                                          </div>
+
+
+                                                                                                          <div class="row m-tt">
+
+                                                                                                                  <div class="col-md-3">
+                                                                                                                          <p>
+                                                                                                                                  <b>Remarks</b>
+                                                                                                                          </p>
+                                                                                                                  </div>
+                                                                                                                  <div class="col-md-9">
+                                                                                                                          <div class="form-group">
+
+                                                                                                                                  <textarea class="form-control" rows="5" name="AdRemark" [(ngModel)]="model.AdRemark" #AdRemark="ngModel"></textarea>
+                                                                                                                          </div>
+                                                                                                                  </div>
+                                                                                                          </div>
+                                                                                                          <div class="row m-tt" style="text-align: center">
+                                                                                                                  <button type="submit" class="btn btn-md btn-info">Credit Request</button>
+                                                                                                          </div>
+
+
+
+                                                                                                  </div>
+                                                                                          </form>
+                                                                                          <form name="third" (ngSubmit)="f.form.valid && addsupport()" #f="ngForm" novalidate>
+                                                                                                  <div class="support-box-inner credit-req" *ngIf="request">
+                                                                                                          <h3>Support Request</h3>
+
+                                                                                                          <div class="row journery-type">
+                                                                                                                  <div class="col-md-3">
+                                                                                                                          <p>
+                                                                                                                                  Agent Id
+                                                                                                                          </p>
+                                                                                                                  </div>
+                                                                                                                  <div class="col-md-9">
+                                                                                                                          <div class="form-group">
+
+                                                                                                                                  <input type="text" readonly="readonly" class="form-control m-t" name="AgenID" [(ngModel)]="model.AgenID" #AgenID="ngModel" required/>
+                                                                                                                          </div>
+                                                                                                                  </div>
+
+
+
+                                                                                                          </div>
+
+
+                                                                                                          <div class="row m-tt">
+                                                                                                                  <div class="col-md-3">
+                                                                                                                          <p>
+                                                                                                                                  <b> Service</b>
+                                                                                                                          </p>
+                                                                                                                  </div>
+                                                                                                                  <div class="col-md-9">
+                                                                                                                          <div class="form-group">
+
+                                                                                                                                  <select class="form-control" name="Service" [(ngModel)]="model.Service">
+                                                                                                                                          <option value="Flight Booking">Flight Booking</option>
+                                                                                                                                          <option>Flight Cancellation</option>
+                                                                                                                                          <option>Refund</option>
+                                                                                                                                          <option>General Enquiry
+                                                                                                                                          </option>
+                                                                                                                                  </select>
+                                                                                                                          </div>
+                                                                                                                  </div>
+                                                                                                          </div>
+
+                                                                                                          <div class="row m-tt">
+                                                                                                                  <div class="col-md-3">
+                                                                                                                          <p>
+                                                                                                                                  <b> SupportRegarding
+                                                                                                                                  </b>
+                                                                                                                          </p>
+                                                                                                                  </div>
+                                                                                                                  <div class="col-md-9">
+                                                                                                                          <div class="form-group">
+
+                                                                                                                                  <select class="form-control" name="SupportRegarding" [(ngModel)]="model.SupportRegarding" #SupportRegarding="ngModel" required>
+                                                                                                                                          <option>Balance Deducted</option>
+                                                                                                                                          <option>Balance Not Deducted</option>
+                                                                                                                                          <option>BALANCE TRANSFER NOT DONE TOTEP</option>
+                                                                                                                                          <option>REFUND NOT DONE AFTER 24 HRS</option>
+                                                                                                                                          <option>SERVICE NOT ACCESSIBLE</option>
+                                                                                                                                          <option>TICKET NOT PRINTED</option>
+                                                                                                                                          <option>CORRECTION REQUIRED IN TICKET</option>
+                                                                                                                                          <option>RESCHEDULING IN TICKET</option>
+                                                                                                                                          <option>REISSUE/RESET PASSWORD</option>
+                                                                                                                                  </select>
+                                                                                                                          </div>
+                                                                                                                  </div>
+                                                                                                          </div>
+
+                                                                                                          <div class="row journery-type m-tt">
+                                                                                                                  <div class="col-md-3">
+                                                                                                                          <p>
+                                                                                                                                  Transaction Id (optional)
+                                                                                                                          </p>
+                                                                                                                  </div>
+                                                                                                                  <div class="col-md-9">
+                                                                                                                          <div class="form-group">
+                                                                                                                                  <input type="text" name="TransactionId" class="form-control m-t" [(ngModel)]="model.TransactionId" #TransactionId="ngModel" required>
+                                                                                                                          </div>
+                                                                                                                  </div>
+
+                                                                                                          </div>
+
+                                                                                                          <div class="row journery-type m-tt">
+                                                                                                                  <div class="col-md-3">
+                                                                                                                          <p>
+                                                                                                                                  Date of Transaction (optional)
+                                                                                                                          </p>
+                                                                                                                  </div>
+                                                                                                                  <div class="col-md-9">
+                                                                                                                          <div class="form-group">
+                                                                                                                                  <input type="date" name="DateofTransaction" class="form-control m-t" [(ngModel)]="model.DateofTransaction" #DateofTransaction="ngModel" required>
+                                                                                                                          </div>
+                                                                                                                  </div>
+
+                                                                                                          </div>
+
+
+                                                                                                          <div class="row m-tt">
+
+                                                                                                                  <div class="col-md-3">
+                                                                                                                          <p>
+                                                                                                                                  <b>Remarks</b>
+                                                                                                                          </p>
+                                                                                                                  </div>
+                                                                                                                  <div class="col-md-9">
+                                                                                                                          <div class="form-group">
+
+                                                                                                                                  <textarea class="form-control" name="AddRemak" rows="5" [(ngModel)]="model.AddRemak" #AddRemak="ngModel"></textarea>
+                                                                                                                          </div>
+                                                                                                                  </div>
+                                                                                                          </div>
+                                                                                                          <div class="row m-tt" style="text-align: center">
+                                                                                                                  <button type="submit" class="btn btn-primary">Support
+                                                                                                                          Request
+                                                                                                                  </button>
+                                                                                                          </div>
+
+
+
+                                                                                                  </div>
+                                                                                          </form>
+                                                                                  </div>
+                                                                          </div>
+                                                                  </div>
+
+                                                          </div>
+                                                  </div>
+                                          </div>
+                                  </div>
+
+                          </div>
+                  </div>
+          </div>
+
+  </div>
+
+</div>

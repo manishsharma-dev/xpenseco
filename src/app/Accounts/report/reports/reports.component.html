@@ -1,0 +1,69 @@
+<style>
+  .help-block {
+      color: red
+  }
+
+  .regist {
+      width: 100%;
+      max-width: 100%;
+      padding: 3em 3em 3em 3em;
+      margin: 0em auto;
+      background-color: #fff;
+      border-radius: 0px 0px 5px 5px;
+      box-shadow: 0px 3px 10px -2px rgba(0, 0, 0, 0.2);
+  }
+</style>
+<site-header></site-header>
+<div class="register-area">
+  <div class="container">
+      <div class="row">
+          <h3>Reports</h3>
+      </div>
+      <div class="regist">
+          <form name="form" (ngSubmit)="f.form.valid && mybooking()" #f="ngForm" novalidate>
+
+              <div class="row">
+                  <div class="col-lg-2">
+                      <div class="form-group" style="margin-top: 35px;">
+                          Select &nbsp;&nbsp;
+                          <input type="radio" checked="checked">Periodic
+                      </div>
+                  </div>
+                  <div class="col-lg-3">
+                      <div class="form-group">
+                          <label for="">Select Type</label>
+                          <select class="form-control" placeHolder="Select Type" style="height: 38px;" name="Type" [(ngModel)]="model.type" #type="ngModel"
+                              required>
+                              <option>Flight Bookings</option>
+                              <option>Flight Cancellations</option>
+                          </select>
+                      </div>
+                  </div>
+                  <div class="col-lg-3">
+                      <label for="">Date From</label>
+                      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !DateFrom.valid }">
+                          <input type="date" class="form-control" placeholder="Enter Date From" name="DateFrom" [(ngModel)]="model.DateFrom" #DateFrom="ngModel"
+                              required />
+                          <div *ngIf="f.submitted && !DateFrom.valid" class="help-block">Date From is required</div>
+                      </div>
+                  </div>
+                  <div class="col-lg-3">
+                      <label for="">Date To</label>
+                      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !DateTo.valid }">
+                          <input type="date" class="form-control" placeholder="Enter Date To" name="DateTo" [(ngModel)]="model.DateTo" #DateTo="ngModel"
+                              required />
+                          <div *ngIf="f.submitted && !DateTo.valid" class="help-block">Date To is required</div>
+                      </div>
+                  </div>
+                  <div class="col-lg-1">
+                      <div class="form-group">
+                          <br>
+                          <button type="submit" class="btn btn-md btn-info">Submit</button>
+                      </div>
+                  </div>
+              </div>
+
+          </form>
+      </div>
+  </div>
+</div>

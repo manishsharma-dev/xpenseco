@@ -1,0 +1,789 @@
+<site-header></site-header>
+
+<div class="flight-booking">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="review-itn">
+                    <div class="reviw-head">
+                        <div class="num-circle">01</div>
+                        Review Itinerary
+                    </div>
+
+                    <div class="review-inner">
+                        <div class="flg-all-info">
+                            <div class="row" *ngFor="let s of FBookdataD.Segments.Segment; let i=index;">
+
+                                <div class="col-md-3 text-center fli-details fir-1">
+                                    <span *ngIf="i==0">
+                                        <img src="/assets/images/{{s.AirlineCode}}.gif" class="img-fluid airline_img"><br>
+                                        {{s.AirlineName}}<br>
+                                        {{s.AirlineCode}}-{{s.Flightround}}<br>
+                                        Airbus A320-100/200
+                                    </span>
+                                    <span *ngIf="i==1">
+                                        <img src="/assets/images/{{s.AirlineCode}}.gif" class="img-fluid airline_img"><br>
+                                        {{s.AirlineName}}<br>
+                                        {{s.AirlineCode}}-{{s.Flightround}}<br>
+                                        Airbus A320-100/200
+                                    </span>
+                                    <span *ngIf="i==2">
+                                        <img src="/assets/images/{{s.AirlineCode}}.gif" class="img-fluid airline_img"><br>
+                                        {{s.AirlineName}}<br>
+                                        {{s.AirlineCode}}-{{s.Flightround}}<br>
+                                        Airbus A320-100/200
+                                    </span>
+                                    <span *ngIf="i==3">
+                                        <img src="/assets/images/{{s.AirlineCode}}.gif" class="img-fluid airline_img"><br>
+                                        {{s.AirlineName}}<br>
+                                        {{s.AirlineCode}}-{{s.Flightround}}<br>
+                                        Airbus A320-100/200
+                                    </span>
+                                </div>
+                                <div class="col-md-9 fir-2">
+                                    <div class="row Route-del">
+                                        <div class="col-md-3" *ngIf="i==0">
+                                            <span>{{s.Origin.CityName}},{{s.Origin.CountryCode}}</span>
+                                            <span class="txt-lg">
+                                                <div class="tm-rv">{{s.DepDateTime.substring(11,16)}}</div>
+                                            </span>
+                                            <span>
+                                                {{s.AirlineCode}}-{{s.Flightround}}
+                                            </span>
+                                            <span>{{s.Origin.AirportName}}</span>
+                                        </div>
+                                        <div class="col-md-3" *ngIf="i==1">
+                                            <span>{{s.Origin.CityName}},{{s.Origin.CountryCode}}</span>
+                                            <span class="txt-lg">
+                                                <div class="tm-rv">{{s.DepDateTime.substring(11,16)}}</div>
+                                            </span>
+                                            <span>
+                                                {{s.AirlineCode}}-{{s.Flightround}}
+                                            </span>
+                                            <span>{{s.Origin.AirportName}}</span>
+                                        </div>
+                                        <div class="col-md-3" *ngIf="i==2">
+                                            <span><b>{{s.Origin.CityName}}</b>,{{s.Origin.CountryCode}}</span>
+                                            <span class="txt-lg">
+                                                <div class="tm-rv">{{s.DepDateTime.substring(11,16)}}</div>
+                                            </span>
+                                            <span>
+                                                {{s.AirlineCode}}-{{s.Flightround}}
+                                            </span>
+                                            <span>{{s.Origin.AirportName}}</span>
+                                        </div>
+                                        <div class="col-md-3" *ngIf="i==3">
+                                            <span>{{s.Origin.CityName}},{{s.Origin.CountryCode}}</span>
+                                            <span class="txt-lg">
+                                                <div class="tm-rv">{{s.DepDateTime.substring(11,16)}}</div>
+                                            </span>
+                                            <span>
+                                                {{s.AirlineCode}}-{{s.Flightround}}
+                                            </span>
+                                            <span>{{s.Origin.AirportName}}</span>
+                                        </div>
+                                        <div class="col-md-6 time-del">
+                                            <br>
+                                            <p *ngIf="i==0">
+                                                <i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp; {{s.TDuration}}
+                                                &nbsp; |&nbsp; {{this.data.authreq.Request.PreferredCabinClass}}</p>
+
+                                            <p *ngIf="i==1">
+                                                <i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp; {{s.TDurationO}}
+                                                &nbsp; |&nbsp; {{this.data.authreq.Request.PreferredCabinClass}}</p>
+
+                                            <p *ngIf="i==2">
+                                                <i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp; {{s.TDurationO}}
+                                                &nbsp; |&nbsp; {{this.data.authreq.Request.PreferredCabinClass}}</p>
+                                            <p>
+
+                                                <!-- <p>
+                                                    <i class="fa fa-suitcase" aria-hidden="true"></i>&nbsp;{{FBookdataD.Segments.Segment.BaggageAllowance}}                            
+                                                </p> -->
+                                        </div>
+                                        <div class="col-md-3" *ngIf="i==0" style="margin-bottom:20px">
+                                            <span>{{s.Destination.CityName}},{{s.Destination.CountryCode}}</span>
+                                            <span class="txt-lg">
+                                                <div class="tm-rv"> {{s.ArrDateTime.substring(11,16)}}</div>
+                                            </span>
+                                            <span>
+                                                {{s.AirlineCode}}-{{s.Flightround}}
+                                            </span>
+                                            <span>{{s.Destination.AirportName}}</span>
+                                        </div>
+                                        <div class="col-md-3" *ngIf="i==1" style="margin-bottom:20px">
+                                            <span>{{s.Destination.CityName}},{{s.Destination.CountryCode}}</span>
+                                            <span class="txt-lg">
+                                                <div class="tm-rv"> {{s.ArrDateTime.substring(11,16)}}</div>
+                                            </span>
+                                            <span>
+                                                {{s.AirlineCode}}-{{s.Flightround}}
+                                            </span>
+                                            <span>{{s.Destination.AirportName}}</span>
+                                        </div>
+                                        <div class="col-md-3" *ngIf="i==2" style="margin-bottom:20px">
+                                            <span>{{s.Destination.CityName}},{{s.Destination.CountryCode}}</span>
+                                            <span class="txt-lg">
+                                                <div class="tm-rv"> {{s.ArrDateTime.substring(11,16)}}</div>
+                                            </span>
+                                            <span>
+                                                {{s.AirlineCode}}-{{s.Flightround}}
+                                            </span>
+                                            <span>{{s.Destination.AirportName}}</span>
+                                        </div>
+                                        <div class="col-md-3" *ngIf="i==3" style="margin-bottom:20px">
+                                            <span>{{s.Destination.CityName}},{{s.Destination.CountryCode}}</span>
+                                            <span class="txt-lg">
+                                                <div class="tm-rv"> {{s.ArrDateTime.substring(11,16)}}</div>
+                                            </span>
+                                            <span>
+                                                {{s.AirlineCode}}-{{s.Flightround}}
+                                            </span>
+                                            <span>{{s.Destination.AirportName}}</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div class="review-inner" *ngIf="IfReturn">
+                        <div>
+                            <div class="row" *ngFor="let re of FBookdataR.Segments.Segment; let j=index;">
+                                <div class="col-md-3 text-center fli-details fir-1">
+
+                                    <span>
+                                        <img src="/assets/images/{{re.AirlineCode}}.gif" class="img-fluid airline_img">
+                                    </span>
+                                    <span>
+                                        {{re.AirlineName}}<br>
+                                        {{re.AirlineCode}}-{{re.Flightround}}
+                                    </span>
+                                    <span>Airbus A320-100/200</span>
+                                </div>
+                                <div class="col-md-9 fir-2">
+                                    <div class="row Route-del">
+                                        <div class="col-md-3">
+                                            <span>{{re.Origin.CityName}}, {{re.Origin.CountryCode}}</span>
+                                            <span class="txt-lg">
+                                                <div class="tm-rv"> {{re.DepDateTime.substring(11,16)}}</div>
+                                            </span>
+                                            <span>
+                                                {{re.AirlineCode}}-{{re.Flightround}}
+                                            </span>
+                                            <span>{{re.Origin.AirportName}}</span>
+                                        </div>
+                                        <div class="col-md-6 time-del">
+                                            <br>
+                                            <p>
+                                                <i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;{{re.TDuration}}&nbsp;
+                                                |&nbsp; {{this.data.authreq.Request.PreferredCabinClass}}</p>
+                                            <p>
+
+
+                                                <!-- <p>
+                                                        <i class="fa fa-suitcase" aria-hidden="true"></i>&nbsp;&nbsp;{{FBookdataR.Segments.Segment[0].BaggageAllowance}}</p> -->
+                                        </div>
+                                        <div class="col-md-3" style="margin-bottom:40px">
+                                            <span>{{re.Destination.CityName}}, {{re.Destination.CountryCode}}</span>
+                                            <span class="txt-lg">
+                                                <div class="tm-rv">{{re.ArrDateTime.substring(11,16)}}</div>
+                                            </span>
+                                            <span>
+                                                {{re.AirlineCode}}-{{re.Flightround}}
+                                            </span>
+                                            <span>{{re.Destination.AirportName}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tip">
+                        <b>Tip</b> Airlines cancellation charges do apply. Please check cancellation and baggage
+                        policies for more details.
+
+                    </div>
+
+                </div>
+                <div class="travrller-details">
+                    <div class="reviw-head">
+                        <div class="num-circle">02</div>
+                        Enter Traveller Details
+                    </div>
+                    <div class="trvller-inner">
+                        <form #formRef="ngForm" style="width: 100%;">
+
+                            <div class="row" *ngIf="signin">
+                                <div class="col-md-4">
+                                    <div class="form-group" [class.has-error]="username.invalid && username.touched">
+                                        <label for="usr">Email:</label>
+                                        <input type="text" class="form-control" [(ngModel)]="LoginInfo.username" name="username"
+                                            #username="ngModel">
+                                        <div class="help-block" *ngIf="username.invalid && username.touched">user name
+                                            is required</div>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group" [class.has-error]="password.invalid && password.touched">
+                                        <label for="usr">Pass:</label>
+                                        <input type="password" class="form-control" [(ngModel)]="LoginInfo.password"
+                                            name="password" #password="ngModel">
+                                        <div class="help-block" *ngIf="password.invalid && password.touched">password
+                                            is required</div>
+
+                                    </div>
+                                </div>
+                                <div class="booking-devider col-md-4">
+                                    <a class="btn btn-md btn-warning" style="color:white;margin-top:35px" (click)="logininfo()">Login</a>
+                                </div>
+                            </div>
+                            <div class="name-head fill-path">
+                                <h3>Passengers <span>Details</span></h3>
+                                <a (click)="fillpassenger()" style="cursor:pointer;color:#0074cb" class="fill-details">Fill Passenger Details</a>
+                            </div>
+                            <div class="row" *ngFor="let word2 of words2; let in=index">
+
+                              
+                                
+                                <div class="col-md-4">
+                                    <div class="form-group" [class.has-error]="FirstName.invalid && FirstName.touched">
+                                        <label for="usr">First Name</label>
+                                        <input type="text" class="form-control" placeholder="First Name" id="FirstName"
+                                            [(ngModel)]="words2[in].FirstName" name="FirstName" #FirstName="ngModel"
+                                            required>
+                                        <div class="help-block" *ngIf="FirstName.invalid && FirstName.touched">First
+                                            Name is required</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group" [class.has-error]="LastName.invalid && LastName.touched">
+                                        <label for="usr">Last name</label>
+                                        <input type="text" class="form-control" placeholder="Last Name" id="LastName"
+                                            [(ngModel)]="words2[in].LastName" name="LastName" #LastName="ngModel"
+                                            required>
+                                        <div class="help-block" *ngIf="LastName.invalid && LastName.touched">Last Name
+                                            is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="name-head">
+                                <h3>Contact <span>Details</span> </h3>
+                            </div>
+                            <div class="row mar-n-book">
+                                <div class="col-md-4">
+                                    <div class="form-group" [class.has-error]="email.invalid && email.touched">
+                                        <label for="usr">Email:</label>
+                                        <input type="email" class="form-control" placeholder="Enter Email ID"
+                                            [(ngModel)]="Bookflght.Email.emailid" id="email" name="email" #email="ngModel"
+                                            required email>
+                                        <!-- <div class="help-block" *ngIf="email.invalid && email.touched">Email is required</div> -->
+                                        <div class="help-block" *ngIf="email.invalid && email.touched">Email is invalid</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group" [class.has-error]="Mobile.invalid && Mobile.touched">
+                                        <label for="usr">Mobile No:</label>
+                                        <input type="text" class="form-control" minlength="10" maxlength="10"
+                                            placeholder="Enter Phone" pattern="[0-9]*" [(ngModel)]="Bookflght.Contact.Mobile"
+                                            name="Mobile" id="Mobile" #Mobile="ngModel" required>
+                                        <div class="help-block" *ngIf="Mobile.invalid && Mobile.touched">Mobile 
+                                            is invalid</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="FBookdataD.IsLcc=='True' && masterrequest.Request.DCountry!='India'">
+                                <div class="col-lg-12">
+                                    <div class="name-head">
+                                        <h3>Passport <span>Details</span></h3>
+                                    </div>
+
+                                </div>
+
+                               
+                            </div>
+                            <div *ngIf="FBookdataD.IsLcc=='True' && masterrequest.Request.DCountry!='India'">
+                                <span class="row mar-n-book" *ngFor="let word2 of words2; let in=index">
+                                    <div class="col-md-6">
+                                        <div class="form-group" [class.has-error]="Nationalty.invalid && Nationalty.touched">
+                                            <label for="usr">Nationalty.:
+                                                <b style="color:red"> *</b>
+                                            </label>
+                                            <input type="text" class="form-control" name="Nationalty" placeholder="Nationalty"
+                                                [(ngModel)]="words2[in].Nationalty" #Nationalty="ngModel" required>
+                                            <div class="help-block" *ngIf="Nationalty.invalid && Nationalty.touched">Nationalty
+                                                is required</div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group" [class.has-error]="DateOfBirth.invalid && DateOfBirth.touched">
+                                            <label for="usr">Date of Birth:
+                                                <b style="color:red"> *</b>
+                                            </label>
+                                            <input type="date" class="form-control" name="DateOfBirth" [(ngModel)]="words2[in].DateOfBirth"
+                                                #DateOfBirth="ngModel" required>
+                                            <div class="help-block" *ngIf="DateOfBirth.invalid && DateOfBirth.touched">Date
+                                                of Birth is required</div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group" [class.has-error]="PassportNo.invalid && PassportNo.touched">
+                                            <label for="usr">Passport No.:
+                                                <b style="color:red"> *</b>
+                                            </label>
+                                            <input type="text" class="form-control" name="PassportNo" placeholder="Passport No."
+                                                [(ngModel)]="words2[in].PassportNo" #PassportNo="ngModel" required>
+                                            <div class="help-block" *ngIf="PassportNo.invalid && PassportNo.touched">Passport
+                                                No. is required</div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="usr">Issuing Country:
+                                                <b style="color:red"> *</b>
+                                            </label>
+                                            <select class="form-control" style="padding: 0px;height:37px" name="IssueCountry"
+                                                [(ngModel)]="words2[in].IssueCountry" #IssueCountry="ngModel" required>
+                                                <option value="Issuing Country" selected="selected">Issuing Country</option>
+                                                <option value="IN">India</option>
+                                                <option value="AF">Afghanistan</option>
+                                                <option value="AL">Albania</option>
+                                                <option value="DZ">Algeria</option>
+                                                <option value="AD">Andorra</option>
+                                                <option value="AO">Angola</option>
+                                                <option value="AI">Anguilla</option>
+                                                <option value="AG">Antigua and Barbuda</option>
+                                                <option value="AR">Argentina</option>
+                                                <option value="AM">Armenia</option>
+                                                <option value="AW">Aruba</option>
+                                                <option value="AU">Australia</option>
+                                                <option value="AT">Austria</option>
+                                                <option value="AZ">Azerbaijan</option>
+                                                <option value="BS">Bahamas</option>
+                                                <option value="BH">Bahrain</option>
+                                                <option value="BD">Bangladesh</option>
+                                                <option value="BB">Barbados</option>
+                                                <option value="BY">Belarus</option>
+                                                <option value="BE">Belgium</option>
+                                                <option value="BZ">Belize</option>
+                                                <option value="BJ">Benin</option>
+                                                <option value="BM">Bermuda</option>
+                                                <option value="BT">Bhutan</option>
+                                                <option value="BO">Bolivia</option>
+                                                <option value="BQ">Bonaire, St. Eustatius, Saba</option>
+                                                <option value="BA">Bosnia and Herzegovina</option>
+                                                <option value="BW">Botswana</option>
+                                                <option value="BR">Brazil</option>
+                                                <option value="BN">Brunei</option>
+                                                <option value="BG">Bulgaria</option>
+                                                <option value="BF">Burkina Faso</option>
+                                                <option value="BI">Burundi</option>
+                                                <option value="KH">Cambodia</option>
+                                                <option value="CM">Cameroon</option>
+                                                <option value="CA">Canada</option>
+                                                <option value="CV">Cape Verde</option>
+                                                <option value="KY">Cayman Islands</option>
+                                                <option value="CF">Central African Republic</option>
+                                                <option value="TD">Chad</option>
+                                                <option value="CL">Chile</option>
+                                                <option value="CN">China</option>
+                                                <option value="TW">Chinese Taipei</option>
+                                                <option value="CO">Colombia</option>
+                                                <option value="KM">Comores Islands</option>
+                                                <option value="CG">Congo (Brazzaville)</option>
+                                                <option value="CD">Congo (Kinshasa)</option>
+                                                <option value="CK">Cook Islands</option>
+                                                <option value="CR">Costa Rica</option>
+                                                <option value="CI">Cote d'Ivoire</option>
+                                                <option value="HR">Croatia</option>
+                                                <option value="CU">Cuba</option>
+                                                <option value="CW">Curacao</option>
+                                                <option value="CY">Cyprus</option>
+                                                <option value="CZ">Czech Republic</option>
+                                                <option value="DK">Denmark</option>
+                                                <option value="DJ">Djibouti</option>
+                                                <option value="DM">Dominica</option>
+                                                <option value="DO">Dominican Republic</option>
+                                                <option value="EC">Ecuador</option>
+                                                <option value="EG">Egypt</option>
+                                                <option value="SV">El Salvador</option>
+                                                <option value="GQ">Equatorial Guinea</option>
+                                                <option value="ER">Eritrea</option>
+                                                <option value="EE">Estonia</option>
+                                                <option value="ET">Ethiopia</option>
+                                                <option value="FA">Faeroe Islands</option>
+                                                <option value="FK">Falkland Islands</option>
+                                                <option value="FJ">Fiji</option>
+                                                <option value="FI">Finland</option>
+                                                <option value="FR">France</option>
+                                                <option value="GF">French Guiana</option>
+                                                <option value="PF">French Polynesia</option>
+                                                <option value="GP">French West Indies</option>
+                                                <option value="GA">Gabon</option>
+                                                <option value="GM">The Gambia</option>
+                                                <option value="GE">Georgia</option>
+                                                <option value="DE">Germany</option>
+                                                <option value="GH">Ghana</option>
+                                                <option value="GI">Gibraltar</option>
+                                                <option value="GR">Greece</option>
+                                                <option value="GL">Greenland</option>
+                                                <option value="GD">Grenada</option>
+                                                <option value="GU">Guam</option>
+                                                <option value="GT">Guatemala</option>
+                                                <option value="GP">Guadeloupe</option>
+                                                <option value="GN">Guinea</option>
+                                                <option value="GW">Guinea-Bissau</option>
+                                                <option value="GY">Guyana</option>
+                                                <option value="HT">Haiti</option>
+                                                <option value="HN">Honduras</option>
+                                                <option value="HK">Hong Kong</option>
+                                                <option value="HU">Hungary</option>
+                                                <option value="IS">Iceland</option>
+                                                <option value="ID">Indonesia</option>
+                                                <option value="IR">Iran</option>
+                                                <option value="IQ">Iraq</option>
+                                                <option value="IE">Ireland</option>
+                                                <option value="IL">Israel</option>
+                                                <option value="IT">Italy</option>
+                                                <option value="JM">Jamaica</option>
+                                                <option value="JP">Japan</option>
+                                                <option value="JO">Jordan</option>
+                                                <option value="KZ">Kazakhstan</option>
+                                                <option value="KE">Kenya</option>
+                                                <option value="KI">Kiribati</option>
+                                                <option value="KP">North Korea</option>
+                                                <option value="KR">South Korea</option>
+                                                <option value="RK">Kosovo (Rep. of)</option>
+                                                <option value="KW">Kuwait</option>
+                                                <option value="KG">Kyrgyzstan</option>
+                                                <option value="LA">Lao PDR</option>
+                                                <option value="LV">Latvia</option>
+                                                <option value="LB">Lebanon</option>
+                                                <option value="LS">Lesotho</option>
+                                                <option value="LR">Liberia</option>
+                                                <option value="LY">Libya</option>
+                                                <option value="LI">Liechtenstein</option>
+                                                <option value="LT">Lithuania</option>
+                                                <option value="LU">Luxembourg</option>
+                                                <option value="MO">Macao (SAR China)</option>
+                                                <option value="MK">Macedonia</option>
+                                                <option value="MG">Madagascar</option>
+                                                <option value="MW">Malawi</option>
+                                                <option value="MY">Malaysia</option>
+                                                <option value="MV">Maldives</option>
+                                                <option value="ML">Mali</option>
+                                                <option value="MT">Malta</option>
+                                                <option value="MH">Marshall Islands</option>
+                                                <option value="MQ">Martinique</option>
+                                                <option value="MR">Mauritania</option>
+                                                <option value="MU">Mauritius</option>
+                                                <option value="YT">Mayotte</option>
+                                                <option value="MX">Mexico</option>
+                                                <option value="FM">Micronesia</option>
+                                                <option value="MD">Moldova</option>
+                                                <option value="MC">Monaco</option>
+                                                <option value="MN">Mongolia</option>
+                                                <option value="ME">Montenegro</option>
+                                                <option value="MS">Montserrat</option>
+                                                <option value="MA">Morocco</option>
+                                                <option value="MZ">Mozambique</option>
+                                                <option value="MM">Myanmar</option>
+                                                <option value="NA">Namibia</option>
+                                                <option value="NR">Nauru</option>
+                                                <option value="NP">Nepal</option>
+                                                <option value="NL">Netherlands</option>
+                                                <option value="AN">Netherlands Antilles</option>
+                                                <option value="NC">New Caledonia</option>
+                                                <option value="NZ">New Zealand</option>
+                                                <option value="NI">Nicaragua</option>
+                                                <option value="NE">Niger</option>
+                                                <option value="NG">Nigeria</option>
+                                                <option value="NU">Niue</option>
+                                                <option value="NF">Norfolk Island</option>
+                                                <option value="MP">Northern Mariana Islands</option>
+                                                <option value="NO">Norway</option>
+                                                <option value="OM">Oman</option>
+                                                <option value="PK">Pakistan</option>
+                                                <option value="PW">Palau Islands</option>
+                                                <option value="PS">Palestinian Territory</option>
+                                                <option value="PA">Panama</option>
+                                                <option value="PG">Papua New Guinea</option>
+                                                <option value="PY">Paraguay</option>
+                                                <option value="PE">Peru</option>
+                                                <option value="PH">Philippines</option>
+                                                <option value="PL">Poland</option>
+                                                <option value="PT">Portugal</option>
+                                                <option value="PR">Puerto Rico</option>
+                                                <option value="QA">Qatar</option>
+                                                <option value="RE">Reunion</option>
+                                                <option value="RO">Romania</option>
+                                                <option value="RU">Russia</option>
+                                                <option value="RW">Rwanda</option>
+                                                <option value="WS">Samoa</option>
+                                                <option value="AS">American Samoa</option>
+                                                <option value="SM">San Marino</option>
+                                                <option value="ST">Sao Tome</option>
+                                                <option value="SA">Saudi Arabia</option>
+                                                <option value="SN">Senegal</option>
+                                                <option value="RS">Serbia</option>
+                                                <option value="SC">Seychelles</option>
+                                                <option value="SL">Sierra Leone</option>
+                                                <option value="SG">Singapore</option>
+                                                <option value="SK">Slovakia</option>
+                                                <option value="SI">Slovenia</option>
+                                                <option value="SB">Solomon Islands</option>
+                                                <option value="SO">Somalia</option>
+                                                <option value="ZA">South Africa</option>
+                                                <option value="SS">Sudan</option>
+                                                <option value="ES">Spain</option>
+                                                <option value="LK">Sri Lanka</option>
+                                                <option value="KN">St. Kitts-Nevis</option>
+                                                <option value="LC">St. Lucia</option>
+                                                <option value="SX">St. Maarten</option>
+                                                <option value="VC">St. Vincent and the Grenadines</option>
+                                                <option value="SD">Sudan</option>
+                                                <option value="SR">Suriname</option>
+                                                <option value="SZ">Swaziland</option>
+                                                <option value="SE">Sweden</option>
+                                                <option value="CH">Switzerland</option>
+                                                <option value="SY">Syria</option>
+                                                <option value="TW">Taiwan</option>
+                                                <option value="TJ">Tajikistan</option>
+                                                <option value="TZ">Tanzania</option>
+                                                <option value="TH">Thailand</option>
+                                                <option value="TL">East Timor</option>
+                                                <option value="TG">Togo</option>
+                                                <option value="TO">Tonga</option>
+                                                <option value="TT">Trinidad</option>
+                                                <option value="TN">Tunisia</option>
+                                                <option value="TR">Turkey</option>
+                                                <option value="TM">Turkmenistan</option>
+                                                <option value="TC">Turks &amp; Caicos Isl.</option>
+                                                <option value="TV">Tuvalu</option>
+                                                <option value="UG">Uganda</option>
+                                                <option value="UA">Ukraine</option>
+                                                <option value="AE">United Arab Emirates</option>
+                                                <option value="GB">United Kingdom</option>
+                                                <option value="UY">Uruguay</option>
+                                                <option value="US">US</option>
+                                                <option value="UZ">Uzbekistan</option>
+                                                <option value="VU">Vanuatu</option>
+                                                <option value="VA">Vatican City</option>
+                                                <option value="VE">Venezuela</option>
+                                                <option value="VN">Vietnam</option>
+                                                <option value="VG">Virgin Islands (British)</option>
+                                                <option value="VI">Virgin Islands (U.S.A.)</option>
+                                                <option value="YE">Yemen</option>
+                                                <option value="ZM">Zambia</option>
+                                                <option value="ZW">Zimbabwe</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group" [class.has-error]="PassportExpiry.invalid && PassportExpiry.touched">
+                                            <label for="usr">Expiry Date:
+                                                <b style="color:red"> *</b>
+                                            </label>
+                                            <input type="date" class="form-control" name="PassportExpiry" [(ngModel)]="words2[in].PassportExpiry"
+                                                #PassportExpiry="ngModel" required>
+                                            <div class="help-block" *ngIf="PassportExpiry.invalid && PassportExpiry.touched">Passport
+                                                Expiry is required</div>
+
+                                        </div>
+                                    </div>
+                                </span>
+                            </div>
+                            <div class="name-head">
+                                <h3>Meal & Baggage <span>Details</span> </h3>
+                            </div>
+                            <div class="row mar-n-book">
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label for="usr">Meal Type:</label>
+                                        <select class="form-control" [(ngModel)]="Bookflght.Passenger.WSPassenger[0].Meal"
+                                            id="Meal" style="height:38px" name="Meal" (change)="mealcalprice()">
+                                            <option value="--Select Meal--" selected="selected">--Select Meal--</option>
+                                            <option *ngFor="let meal of meallist" value="{{meal.AirlineDescription}},({{meal.Code}}),Rs,{{meal.Price}}">{{meal.AirlineDescription}}-({{meal.Code}})-Rs:{{meal.Price}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label for="usr">Baggages :</label>
+                                        <select class="form-control" [(ngModel)]="Bookflght.Passenger.WSPassenger[0].Baggage"
+                                            id="Baggage" style="height:38px" name="Bagges" (change)="bagcalprice()">
+                                            <option value="--Select Baggage--" selected="selected">--Select Baggage--</option>
+                                            <option *ngFor="let bag of baggage" value="{{bag.Code}}-Rs-{{bag.Price}}">{{bag.Code}}-Rs-{{bag.Price}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <span class="gst-txt">
+                                <input name="gst" type="checkbox" (click)="GstDetails()"> GST Details (Note : Please fill
+                                GST Details only for corporate customer)
+                            </span><br>
+                            <div class="row" *ngIf="GST">
+                                <div class="col-lg-4">
+                                    <label for="usr"> round:</label>
+                                    <input type="text" class="form-control" [(ngModel)]="Bookflght.Passenger.WSPassenger[0].GSTround"
+                                        placeholder="Company GST round" name="GSTround">
+                                </div>
+                                <div class="col-lg-4">
+                                    <label for="usr"> Company Name :</label>
+                                    <input type="text" class="form-control" [(ngModel)]="Bookflght.Passenger.WSPassenger[0].GSTCompanyName"
+                                        placeholder="Company Name" name="CompanyName">
+                                </div>
+                                <div class="col-lg-4">
+                                    <label for="usr">Contact No:</label>
+                                    <input type="text" class="form-control" [(ngModel)]="Bookflght.Passenger.WSPassenger[0].CompanyContactNo"
+                                        placeholder="Contact No" name="ContactNo">
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="GST">
+                                <div class="col-lg-4">
+                                    <label for="usr">Company Address:</label>
+                                    <input type="text" class="form-control" [(ngModel)]="Bookflght.Passenger.WSPassenger[0].CompanyAddress"
+                                        placeholder="Company Address" name="CompanyAddress">
+                                </div>
+                                <div class="col-lg-4">
+                                    <label for="usr">Company Email:</label>
+                                    <input type="email" class="form-control" email [(ngModel)]="Bookflght.Passenger.WSPassenger[0].CompanyEmail"
+                                        placeholder="Company Email" name="CompanyEmail" required>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="name-head">
+                                <h3>Travel <span>Insurance</span> </h3>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+
+
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="CP" (click)="NoCalPrice()">No
+                                            Assistance and Insurance Required
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="CP" (click)="calPrice()">Add
+                                            Travel Assistance and Insurance for only Rs. 161.00 per Passenger (Terms &
+                                            Conditions) Domestic Travel Assistance and Insurance is valid from 07 Dec
+                                            2018 to 07 Dec 2018 from your date of journey or till your date of return,
+                                            which ever is earlier. To know more on the coverage, please <a routerLink="/InsuranceRule"
+                                                target="_default" style="color:blue">Read More</a>
+                                        </label>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <ul class="insurance_details">
+                                    <li>
+                                        <img src="../assets/images/travel-fare-img/plane-2.png">
+                                        <span>Trip Cancellation <br>Reimbursed
+                                            <br>upto ₹ 10,000*</span></li>
+                                    <li>
+                                            <img src="../assets/images/travel-fare-img/luggage.png">
+                                            <span>Baggage Loss <br>Reimbursed <br>upto
+                                            ₹ 5,000*</span></li>
+                                    <li><img src="../assets/images/travel-fare-img/clock.png">
+                                        <span>Flight Delay <br>Reimbursed <br>upto ₹
+                                            2,500*</span></li>
+                                    <li>
+                                            <img src="../assets/images/travel-fare-img/first-aid-kit.png">
+                                            <span>Medical Emergency <br>Reimbursed
+                                            <br>upto ₹ 1,00,000*</span></li>
+                                </ul>
+                            </div>
+
+                            <div class="row">
+                                <span class="note-trvlr">Note : For pax age above 70 years, insurance will not be
+                                    applicable. </span>
+                            </div>
+
+
+                            <div class="row" >
+                                <button class="btn review-btn" [disabled]="!formRef.form.valid" (click)="bookflight()">Review
+                                    Booking</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- {{words2 | json}} -->
+            <div class="col-md-3">
+
+                <div class="tot-fare sticky-top">
+                    <div class="tic-title">
+                        Fare Details
+                    </div>
+                    <div class="check_details">
+                        <div class="checkout-coll">
+                            <div class="chk-detais-row">
+                                <div class="chk-line">
+                                    <span class="chk-l">Price</span>
+                                    <span class="chk-r">{{basefare}}</span>
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="chk-line">
+                                    <span class="chk-l">taxes and fees</span>
+                                    <span class="chk-r">{{TaxAndFees|round}}</span>
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="chk-line">
+                                    <span class="chk-l">Excess Baggage</span>
+                                    <span class="chk-r">{{ExcessBag}}</span>
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="chk-line">
+                                    <span class="chk-l">Meal</span>
+                                    <span class="chk-r">{{Meal}}</span>
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="chk-line">
+                                    <span class="chk-l">Travel Insurance</span>
+                                    <span class="chk-r">{{Insurance}}</span>
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="chk-total">
+                        <div class="chk-total-l">Total Price</div>
+
+                        <div class="chk-total-r">
+                            <i class="fa fa-inr"></i>{{publlishedPrice|round}}</div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="chk-total" *ngIf="priceNotChanged" style="color: red">
+                        Please wait while we are checking updated price..
+                    </div>
+
+
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+</div>

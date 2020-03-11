@@ -1,0 +1,163 @@
+<site-header></site-header>
+<div class="container">
+  <div class="container-fluid">
+    <br>
+    <div class="grid_11" style="margin-bottom:10px">
+      <h4> Flight Details
+        <span id="indentid"></span>
+      </h4>
+      <div class="grid_11">
+        <table cellspacing="4" cellpadding="5" class="grid flighticketprint flighttickethead tickettype2table" style="width:100%;border:1px #ABC solid">
+          <tbody>
+            <tr>
+              <td class="" style="padding-left:20px">Airline PNR</td>
+              <td class="propertyvalue">VMSVL5</td>
+              <td class="" style="padding-left:20px">Booking Date</td>
+              <td class="propertyvalue">{{ticket.BookingDate}}</td>
+            </tr>
+            <tr>
+              <td class="" style="padding-left:20px">Booking Id</td>
+              <td class="propertyvalue">
+                <a target="_blank" style="cursor:pointer">{{ticket.BookingRef}}</a>
+              </td>
+              <td class="" style="padding-left:20px">Passenger Contact</td>
+              <td class="propertyvalue">{{ticket.PhoneNo}}</td>
+            </tr>
+            <tr>
+              <td class="" style="padding-left:20px">Booking Status</td>
+              <td class="propertyvalue">confirmed</td>
+              <td colspan="2"></td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+
+        <table class="table" border="1" style="font-size: 14px; text-align: center;width:100%">
+
+          <thead>
+            <tr style="text-align: center;">
+              <th style="text-align: center;">From - To</th>
+              <th style="text-align: center;">Flight</th>
+              <th style="text-align: center;">Departure Date</th>
+              <th style="text-align: center;">Departure</th>
+              <th style="text-align: center;">Arrival</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let te of segmentDetails let m=index;" style="text-align: center">
+              <td>{{te.SCityName}} ( {{te.OriginCode}} ) --&gt; {{te.DCityName}} ( {{te.DestiCode}} ) </td>
+              <td>{{te.AirlineCode}} - {{te.AirlineNo}} ( Class - {{te.FareClass}}) </td>
+              <td>{{te.DepDate}} </td>
+              <td class="tickettime">{{te.DepTime}}</td>
+              <td class="tickettime">{{te.ArTime}}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="module">
+          <br>
+        </div>
+
+        <table border="1" style="font-size: 14px; text-align: center;width:100%">
+
+          <thead>
+            <tr style="text-align: center;">
+              <th style="text-align: center;">Tx ID</th>
+              <th style="text-align: center;">Journey Type</th>
+              <th style="text-align: center;">Booking Date</th>
+              <th style="text-align: center;">Agent ID</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="text-align: center">
+              <td>{{ticket.BookingRef}}</td>
+              <td>{{ticket.Jounrytype}}</td>
+              <td>{{ticket.BookingDate}} </td>
+              <td class="tickettime">{{AgentID}}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="module"></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="grid_8">
+          <div class="box radius">
+            <div class="padded" style="display: block;">
+              <h2 class="headline radius">Select Passengers For Cancellation - Onward Journey. ({{ticket.Origin}}-{{ticket.Destination}})</h2>
+              <div class="context-box radius holdtable" id="onwardtableholder">
+                <table border="1" cellpadding="0" cellspacing="0" border="0" style="width:100%">
+
+                  <thead>
+                    <tr style="text-align:center">
+                      <th class="header">Select</th>
+                      <th class="header">Pax.Name</th>
+                      <th class="header">Pax.Type</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let pe of passengerDetails let m=index;">
+                      <td>
+                        <input type="checkbox" name="paxselection" id="{{pe.YId}}" class="paxselection">
+                      </td>
+                      <td>{{pe.Title}} {{pe.FirstName}} {{pe.LastName}}</td>
+                      <td>{{pe.PassengerType}}</td>
+                      <td>confirmed</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row"> 
+          <div class="col-lg-6">
+            <div class="padded">
+              <h2 class="headline radius">Remarks Details</h2>
+              <div class="context-box radius holdtable">
+                <form name="f" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
+                  <table border="1" style="border: medium none ; text-align: left;width:100%">
+                    <tbody>
+                      <tr>
+                        <th>Requester Name </th>
+                        <td>
+                          <input type="text" class="form-control" name="RequesterName" [(ngModel)]="model.RequestName" #RequesterName="ngModel" required>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>Contact Number </th>
+                        <td>
+                          <input type="text" class="form-control" name="RequestContact" [(ngModel)]="model.RequestContact" #RequestContact="ngModel" required>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>Remarks </th>
+                        <td>
+                          <textarea class="form-control" name="RequestRemark" [(ngModel)]="model.RequestRemark" #RequestRemark="ngModel"></textarea>
+                        </td>
+                      </tr>
+                      <tr style="text-align: center">
+                        <td></td>
+                        <td>
+                          <input type="submit" class="btn btn-md btn-info" (click)="Reschedule()" value="Reschedule >>">
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+          </div>
+        </div>
+      </div>
+</div>
+
+<br>
+<br>

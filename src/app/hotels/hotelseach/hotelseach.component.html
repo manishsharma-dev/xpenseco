@@ -1,0 +1,682 @@
+<site-header></site-header>
+
+<ng-template #loading>
+  <div class="loader-hotel">
+    <img src="/assets/images/travel-fare-img/hotel-loading.gif" class="img-fluid">
+  </div>
+</ng-template>
+
+<div class="hotel-modify" *ngIf="searchData!=null">
+  <div class="container">
+    <form name="formsearch" class="myForm" (ngSubmit)="f.form.valid" #f="ngForm">
+      <div class="hotel-modify-inner">
+        <span class="row-up-txt-2"> Modify Search </span>
+        <div class="row hotel-inner-row-2">
+          <div class="col-md-4 col-hotel-2">
+            <div class="form-group">
+              <input type="text" class="form-control" name="CountrCityName" id="CountrCityName"
+                placeholder="Enter Destination, Hotel, landmark" (keyup)="searchCountryCity(model)" required
+                pattern="[a-zA-Z][a-zA-Z ]+" autocomplete="off" [(ngModel)]="model" name="CountrCityName"
+                #CountrCityName="ngModel">
+              <!-- <p [hidden]="CountrCityName.valid || CountrCityName.pristine" class="alert alert-danger">
+                                <spen class="fa fa-exclamation-circle" [hidden]="!CountrCityName.hasError('required')" style="color: #ed1300;font-size: 11px;width: calc(100% - 25px);">Last Name is required</spen>
+                                <spen class="fa fa-exclamation-circle" [hidden]="!CountrCityName.hasError('pattern')" style="color: #ed1300;font-size: 11px;width: calc(100% - 25px);">Only alphabets allowed</spen>
+                            </p> -->
+            </div>
+            <div class="autocompleted-results">
+              <ul style="list-style-type: none;">
+                <li *ngFor="let r of CountryCityList">
+                  <a (click)="onselectCountryCity(r)">
+                    <div class="autocompleted-result">
+                      <div>
+                        <input type="hidden" id="countryId" value="{{r.COUNTRY_ID}}" />
+                        <input type="hidden" id="countryCode" value="{{r.COUNTRY_CODE}}" />
+                        <input type="hidden" id="CityId" value="{{r.CITY_ID }}" />
+                        <b>{{ r.CityCode }} </b> - {{r.CITY_NAME}} </div>
+                      <div class="autocompleted-location"> {{r.CITY_NAME }} , {{r.COUNTRY_NAME}} </div>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-2 col-hotel-2">
+            <div class="form-group">
+              <input type="text" class="form-control" [(ngModel)]="HotelFormFields.Master.ChkInDate"
+                placeholder="Check-in " name="DepartureDate" autocomplete="off" class="form-control"
+                [bsConfig]="datepickerconfig" id="FromDate" [(bsValue)]="newVar"
+                value="{{ newVar | date:'dd/MM/yyyy' }}" aria-disabled="true" bsDatepicker required>
+  
+            </div>
+          </div>
+          <div class="col-md-2 col-hotel-2">
+            <div class="form-group">
+              <input type="text" class="form-control" [(ngModel)]="HotelFormFields.Master.ChkOutDate"
+                placeholder="Check-out " name="ReturnDate" class="form-control" [bsConfig]="datepickerconfigto"
+                [(bsValue)]="returnVar" id="ToDate" autocomplete="off" value="{{ returnVar | date:'dd/MM/yyyy' }}"
+                bsDatepicker (click)="setToDate();" required>
+            </div>
+            <input type="hidden" name="ReturnDate" id="ToDate" />
+          </div>
+          <div class="col-md-3 col-hotel-2">
+            <div class="dropdown">
+              <button onclick="myFunction()" class="dropbtn">
+                <span *ngIf="pepleCount">{{adultcount}} People In {{roomno}} Room</span>
+                <span *ngIf="!pepleCount"> 1 Adult, 1 Room</span>
+              </button>
+              <div id="myDropdown" class="dropdown-content">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="rom-box">
+                      <div class="form-group">
+                        <label for="room">Rooms:</label>
+                        <select class="form-control" (change)="drop()" name="NoOfRooms"
+                          [(ngModel)]="HotelFormFields.Master.NoOfRooms">
+                          <option>1</option>
+                          <option>2</option>
+                          <option>3</option>
+                          <option>4</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-8">
+                    <ul class="psngr-form" *ngIf="one">
+                      <li>
+                        <div class="form-group">
+                          <label>Adult</label>
+                          <select class="form-control" name="adult1" id="adult1">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                          </select>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="form-group">
+                          <label>Child</label>
+                          <select class="form-control" name="NoOfChild1" (change)="childone()"
+                            [(ngModel)]="HotelFormFields.Master.NoOfChild1">
+                            <option>0</option>
+                            <option>1</option>
+                            <option>2</option>
+
+                          </select>
+                        </div>
+                      </li>
+                      <li>
+                        <div *ngIf="cage1">
+                          <label for="room">1 age</label>
+                          <select class="form-control" name="cage1" id="cage1">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                            <option>11</option>
+                            <option>12</option>
+                          </select>
+                        </div>
+                      </li>
+                      <li>
+                        <div *ngIf="cage2">
+                          <label for="room">2 age</label>
+                          <select class="form-control" name="cage2" id="cage2">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                            <option>11</option>
+                            <option>12</option>
+
+                          </select>
+                        </div>
+                      </li>
+
+                    </ul>
+                    <ul class="psngr-form" *ngIf="two">
+                      <li>
+                        <div class="form-group">
+                          <label>Adult</label>
+                          <select class="form-control" name="adutl2" id="adult2">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                          </select>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="form-group">
+                          <label>Child</label>
+                          <select class="form-control" name="NoOfChild2" (change)="childtwo()"
+                            [(ngModel)]="HotelFormFields.Master.NoOfChild2">
+                            <option>0</option>
+                            <option>1</option>
+                            <option>2</option>
+
+                          </select>
+                        </div>
+                      </li>
+                      <li>
+                        <div *ngIf="cage3">
+                          <label for="room">1 age</label>
+                          <select class="form-control" name="cage3" id="cage3">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                            <option>11</option>
+                            <option>12</option>
+                          </select>
+                        </div>
+                      </li>
+                      <li>
+                        <div *ngIf="cage4">
+                          <label for="room">2 age</label>
+                          <select class="form-control" name="cage4" id="cage4">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                            <option>11</option>
+                            <option>12</option>
+
+                          </select>
+                        </div>
+                      </li>
+
+                    </ul>
+                    <ul class="psngr-form" *ngIf="three">
+                      <li>
+                        <div class="form-group">
+                          <label>Adult</label>
+                          <select class="form-control" name="adult3" id="adult3">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                          </select>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="form-group">
+                          <label>Child</label>
+                          <select class="form-control" name="NoOfChild3" (change)="childthree()"
+                            [(ngModel)]="HotelFormFields.Master.NoOfChild3">
+                            <option>0</option>
+                            <option>1</option>
+                            <option>2</option>
+
+                          </select>
+                        </div>
+                      </li>
+                      <li>
+                        <div *ngIf="cage5">
+                          <label for="room">1 age</label>
+                          <select class="form-control" name="cage5" id="cage5">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                            <option>11</option>
+                            <option>12</option>
+                          </select>
+                        </div>
+                      </li>
+                      <li>
+                        <div *ngIf="cage6">
+                          <label for="room">2 age</label>
+                          <select class="form-control" name="cage6" id="cage6">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                            <option>11</option>
+                            <option>12</option>
+
+                          </select>
+                        </div>
+                      </li>
+
+                    </ul>
+                    <ul class="psngr-form" *ngIf="four">
+                      <li>
+                        <div class="form-group">
+                          <label>Adult</label>
+                          <select class="form-control" name="adult4" id="adult4">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                          </select>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="form-group">
+                          <label>Child</label>
+                          <select class="form-control" name="NoOfChild4" (change)="childfour()"
+                            [(ngModel)]="HotelFormFields.Master.NoOfChild4">
+                            <option>0</option>
+                            <option>1</option>
+                            <option>2</option>
+
+                          </select>
+                        </div>
+                      </li>
+                      <li>
+                        <div *ngIf="cage7">
+                          <label for="room">1 age</label>
+                          <select class="form-control" name="cage7" id="cage7">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                            <option>11</option>
+                            <option>12</option>
+                          </select>
+                        </div>
+                      </li>
+                      <li>
+                        <div *ngIf="cage8">
+                          <label for="room">2 age</label>
+                          <select class="form-control" name="cage8" id="cage8">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                            <option>11</option>
+                            <option>12</option>
+
+                          </select>
+                        </div>
+                      </li>
+
+                    </ul>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <button class="btn btn-outline-primary" type="button">Done</button>
+                  </div>
+                </div>
+              </div>
+              <img class="img-form" src="assets/images/travel-fare-img/bed.png">
+            </div>
+
+          </div>
+          <div class="col-md-1 col-hotel-2">
+            <a type="submit" class="hotel-sub-btn" (click)=ModifySearch(HotelFormFields);><i class="fa fa-search"
+                aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </form>
+  </div>
+</div>
+
+<section class="result-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 filter-hotel" *ngIf="searchData!=null">
+        <div class="side-box" *ngIf="searchData!=null">
+          <div class="cats-title">
+            Hotel Name
+          </div>
+          <div class="form-area">
+            <input type="text" class="form-control" name="hotelName" id="hotelName">
+            <a (click)="filterbyHotel()">
+              <i class="fa fa-search" aria-hidden="true">
+
+              </i>
+            </a>
+          </div>
+          <div class="cats-title">
+            Price
+          </div>
+
+          <div class="custom-slider">
+            <ng5-slider [(value)]="Minprice" [(highValue)]="Maxprice" [options]="options"
+              (userChangeEnd)="onUserChangeEnd($event)"></ng5-slider>
+          </div>
+        </div>
+
+
+
+
+
+        <!-- <ion-range-slider #sliderElement
+type="double"
+min={{Minprice}}
+max={{Maxprice}}
+from={{Minprice}}
+from_min={{Minprice}}
+from_max={{Maxprice}}
+from_shadow="true"
+to={{Maxprice}}
+to_min={{Minprice}}
+to_max={{Maxprice}}
+to_shadow="true"
+
+
+prefix="Rs: "
+
+decorate_both="false"
+
+(onChange)="myOnChange($event)"
+></ion-range-slider> -->
+
+        <div class="side-box" *ngIf="searchData!=null">
+          <div class="cats-title">
+            Star Category
+          </div>
+          <div class="custom-check">
+            <label class="container">
+              <span class="star">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+              </span>
+              <input type="checkbox" (click)="byStarRating(5)" id="5" name="chkstarrating">
+              <span class="checkmark"></span>
+            </label>
+            <label class="container">
+              <span class="star">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-o"></i>
+              </span>
+              <input type="checkbox" (click)="byStarRating(4)" id="4" name="chkstarrating">
+              <span class="checkmark"></span>
+            </label>
+            <label class="container">
+              <span class="star">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+              </span>
+              <input type="checkbox" (click)="byStarRating(3)"  id="3" name="chkstarrating">
+              <span class="checkmark"></span>
+            </label>
+            <label class="container">
+              <span class="star">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+              </span>
+              <input type="checkbox" (click)="byStarRating(2)"  id="2" name="chkstarrating">
+              <span class="checkmark"></span>
+            </label>
+            <label class="container">
+              <span class="star">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+              </span>
+              <input type="checkbox" (click)="byStarRating(1)"  id="1" name="chkstarrating">
+              <span class="checkmark"></span>
+            </label>
+
+          </div>
+        </div>
+        <div class="side-box" *ngIf="searchData!=null">
+          <div class="cats-title">
+            Show Hotel with
+          </div>
+          <div class="custom-check">
+            <label class="container">
+              Free Breakfast
+              <input type="checkbox" (click)="filterwithHFacility2(true)">
+              <span class="checkmark"></span>
+            </label>
+            <label class="container">
+              Free Cancellation
+              <input type="checkbox" (click)="filterwithHFacility(true)">
+              <span class="checkmark"></span>
+            </label>
+            <label class="container">
+              Free Wifi
+              <input type="checkbox" (click)="filterwithHFacility1(true)">
+              <span class="checkmark"></span>
+            </label>
+
+
+
+          </div>
+        </div>
+
+        <div class="side-box" *ngIf="searchData!=null">
+          <div class="cats-title">
+            Property Type
+          </div>
+          <div class="custom-check">
+            <label class="container">
+              Cottage
+              <input type="checkbox" checked="checked">
+              <span class="checkmark"></span>
+            </label>
+            <label class="container">
+              Resort
+              <input type="checkbox">
+              <span class="checkmark"></span>
+            </label>
+            <label class="container">
+              Homestay
+              <input type="checkbox">
+              <span class="checkmark"></span>
+            </label>
+
+            <label class="container">
+              Villa
+              <input type="checkbox">
+              <span class="checkmark"></span>
+            </label>
+
+            <label class="container">
+              Guesthouse
+              <input type="checkbox">
+              <span class="checkmark"></span>
+            </label>
+
+
+
+
+
+          </div>
+        </div>
+
+      </div>
+      <div *ngIf="searchData  else loading;"></div>
+      <div class="col-md-9 right-box-hotel" *ngIf="searchData!=null">
+        <div class="row top_bar_hotel" *ngIf="searchData!=null">
+
+          <div class="col-md-2">
+            <a class="btn btn-sm btn-default">Sort By: </a>
+          </div>
+
+          <div class="col-md-3">
+            <a class="btn btn-sm btn-default" (click)="RECOMMENDED()">RECOMMENDED </a>
+            <i aria-hidden="true" class="fa fa-sort-desc" *ngIf="RecShow"></i>
+            <i aria-hidden="true" class="fa fa-sort-asc" *ngIf="RecHide"></i>
+          </div>
+
+          <div class="col-md-3">
+            <a class="btn btn-sm btn-default" (click)="STAR()">STAR RATING </a>
+            <i aria-hidden="true" class="fa fa-sort-desc" *ngIf="StarShow"></i>
+            <i aria-hidden="true" class="fa fa-sort-asc" *ngIf="StarHide"></i>
+
+          </div>
+
+          <div class="col-md-2">
+            <a class="btn btn-sm btn-default" (click)="SAVINGS()">SAVINGS </a>
+            <i aria-hidden="true" class="fa fa-sort-desc" *ngIf="SaveShow"></i>
+            <i aria-hidden="true" class="fa fa-sort-asc" *ngIf="SaveHide"></i>
+
+          </div>
+
+          <div class="col-md-2">
+            <a class="btn btn-sm btn-default" (click)="PRICE()">PRICE </a>
+            <i aria-hidden="true" class="fa fa-sort-desc" *ngIf="PriceShow"></i>
+            <i aria-hidden="true" class="fa fa-sort-asc" *ngIf="PriceHide"></i>
+          </div>
+        </div>
+        <div class="hotel-item" *ngFor="let hdata of pagedItems">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="hotel-img">
+                <img src="{{hdata.FrontImage}}" class="img-fluid">
+                <span class="discount">58% off</span>
+              </div>
+            </div>
+            <div class="col-md-5 b-r">
+              <div class="hotel-content">
+                <h4>{{hdata.HName}}</h4>
+                <span class="star" *ngIf="hdata.StarRating == 1">
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star-o"></i>
+                  <i class="fa fa-star-o"></i>
+                  <i class="fa fa-star-o"></i>
+                  <i class="fa fa-star-o"></i>
+                </span>
+                <span class="star" *ngIf="hdata.StarRating == 2">
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star-o"></i>
+                  <i class="fa fa-star-o"></i>
+                  <i class="fa fa-star-o"></i>
+                </span>
+                <span class="star" *ngIf="hdata.StarRating == 3">
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star-o"></i>
+                  <i class="fa fa-star-o"></i>
+                </span>
+                <span class="star" *ngIf="hdata.StarRating == 4">
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-sta"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star-o"></i>
+                </span>
+                <span class="star" *ngIf="hdata.StarRating == 5">
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                </span>
+
+                <p [innerHTML]="hdata.HDes.substring(0,100)">...</p>
+
+                <ul class="service">
+                  <li>
+                    <i class="fa fa-check" aria-hidden="true"></i>&nbsp;Free Cancellation</li>
+                  <li>
+                    <i class="fa fa-wifi" aria-hidden="true"></i>&nbsp;Free Wifi</li>
+                </ul>
+
+                <span class="lock">
+                  <i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;{{hdata.Add}}</span>
+              </div>
+            </div>
+            <div class="col-md-3 p-r">
+              <div class="price-area">
+                <span class="total-price" *ngIf="hdata.CID =='NEGO'">
+                  <i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{hdata.MaxPrice}}
+                </span>
+                <span class="total-price" *ngIf="hdata.CID =='TBO'">
+                  <i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{hdata.MaxPrice}}
+                </span>
+                <button type="button" class="btn btn-primary" (click)=GetRooms(hdata.HIndex);>Select Room</button>
+                <p class="rm-nt">Room/Night</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- pager -->
+        <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+          <li [ngClass]="{disabled:pager.currentPage === 1}">
+            <a (click)="setPage(1)">First</a>
+          </li>
+          <li [ngClass]="{disabled:pager.currentPage === 1}">
+            <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+          </li>
+          <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+            <a (click)="setPage(page)">{{page}}</a>
+          </li>
+          <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+            <a (click)="setPage(pager.currentPage + 1)">Next</a>
+          </li>
+          <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+            <a (click)="setPage(pager.totalPages)">Last</a>
+          </li>
+        </ul>
+      </div>
+
+
+
+
+    </div>
+  </div>
+</section>

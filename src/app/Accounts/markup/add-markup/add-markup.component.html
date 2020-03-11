@@ -1,0 +1,240 @@
+<style>
+  .help-block {
+      color: red
+  }
+
+  .regist {
+      width: 100%;
+      max-width: 100%;
+      padding: 3em 3em 3em 3em;
+      margin: 0em auto;
+      background-color: #fff;
+      border-radius: 0px 0px 5px 5px;
+      box-shadow: 0px 3px 10px -2px rgba(0, 0, 0, 0.2);
+  }
+</style>
+<site-header></site-header>
+<div class="register-area">
+  <div class="container">
+      <div class="row">
+          <h3>Add Markup</h3>
+      </div>
+      <div class="row markup-box">
+          <div class="col-lg-4">
+              <input type="button" (click)="add()" value="Add Markup" style="margin-top:34px" class="btn btn-md btn-info" style="border-radius:0;" />
+              <input type="button" (click)="view()" value="View Markup" style="margin-top:34px" class="btn btn-md btn-primary" style="border-radius:0;" />
+          </div>
+      </div>
+      <form name="form" (ngSubmit)="f.form.valid && addmarkup()" #f="ngForm" novalidate>
+          <div class="regist">
+              <div class="col-lg-4">
+                  <div class="form-group">
+                      <label for="">Select Service</label>
+                      <select class="form-control" placeHolder="Select Service" style="height: 38px;" name="ServiceType" [(ngModel)]="model.ServiceType"
+                          #Category="ngModel" required (change)="GetService()">
+                          <option>Hotel</option>
+                          <option>Package</option>
+                          <option>SightSeeing</option>
+                          <option>Flight</option>
+                      </select>
+                  </div>
+              </div>
+              <div *ngIf="admarkup">
+                  <div class="row">
+                      <div class="col-lg-4" *ngIf="!IsFlight">
+                          <div class="form-group">
+                              <label for="">Select Carrier</label>
+                              <select class="form-control" placeHolder="Select Type" (change)="drop()" style="height: 38px;" name="MarkupType" [(ngModel)]="model.MarkupType"
+                                  #MarkupType="ngModel" required>
+                                  <option>Fixed</option>
+                                  <option>Percentage</option>
+                              </select>
+                          </div>
+                      </div>
+                      <div class="col-lg-4" *ngIf="!IsFlight">
+                          <div class="form-group">
+                              <label for="">Value</label>
+                              <input type="number" class="form-control" name="values" [(ngModel)]="model.values" #values="ngModel" required/>
+                          </div>
+                      </div>
+                  </div>
+                  <br>
+                  <br>
+                  <span *ngIf="IsFlight">
+                      <div class="row">
+
+
+                          <div class="col-lg-4">
+                              <div class="form-group">
+                                  <label for="">Select Category</label>
+                                  <select class="form-control" placeHolder="Select Category" style="height: 38px;" name="Category" [(ngModel)]="model.Category"
+                                      #Category="ngModel" required>
+                                      <option>Flights Domestic</option>
+                                      <option>Flights International</option>
+                                  </select>
+                              </div>
+                          </div>
+                          <div class="col-lg-4">
+                              <div class="form-group">
+                                  <label for="">Select Carrier</label>
+                                  <select class="form-control" placeHolder="Select Carrier" style="height: 38px;" name="Carrier" [(ngModel)]="model.Carrier"
+                                      #Carrier="ngModel" required>
+                                      <option value="All">All</option>
+                                      <option value="G8">Go Air Web(G8)</option>
+                                      <option value="SG">Spicejet Web(SG)</option>
+                                      <option value="9W">Jet Airways(9W)</option>
+                                      <option value="AI">Air India(AI)</option>
+                                      <option value="6E">Indigo Web(6E)</option>
+                                      <option value="6E1">Indigo Coupon(6E1)</option>
+                                      <option value="6E2">Indigo Special(6E2)</option>
+                                      <option value="6E3">Indigo Tour Base(6E3)</option>
+                                      <option value="6EF">Indigo Family(6EF)</option>
+                                      <option value="6E4">Indigo IGN (6E4)</option>
+                                      <option value="6E5">Indigo Corporate Scraper(6E5)</option>
+                                      <option value="6E8">Indigo Corporate API(6E8)</option>
+                                      <option value="SG1">Spicejet Coupon[SG1]</option>
+                                      <option value="SG2">Spicejet Corporate Scraper[SG2]</option>
+                                      <option value="SG3">Spicejet Tour Base[SG3]</option>
+                                      <option value="SGF">Spicejet Family[SGF]</option>
+                                      <option value="SGH">Spicejet Hand Baggage[SGH]</option>
+                                      <option value="G81">Go Air Special[G81]</option>
+                                      <option value="G82">GoAir Special Fares-2[G82]</option>
+                                      <option value="G84">GoAir Special Fares-4[G84]</option>
+                                      <option value="G83">Go Air Business[G83]</option>
+                                      <option value="G87">Go Air Business Corporate[G87]</option>
+                                      <option value="SG8">Spice Jet Retail[SG8]</option>
+                                      <option value="SG9">Spicejet Corporate API[SG9]</option>
+                                      <option value="LB">AirCosta(LB)</option>
+                                      <option value="UK">Vistara(UK)</option>
+                                      <option value="I5">AirAsia(I5)</option>
+                                      <option value="G85">GoAir Special Fares-5[G85]</option>
+                                      <option value="SG5">Spice Spl Fares(SG5)</option>
+                                      <option value="SG7">Spice Spl Fares(SG7)</option>
+                                      <option value="G86">Goair Spl Fares(G86)</option>
+                                      <option value="OP">Air Pegasus(OP)</option>
+                                      <option value="6E6">Indigo Spl Fares(6E6)</option>
+                                      <option value="UK2">Air Vistara[UK2]</option>
+                                  </select>
+                              </div>
+                          </div>
+                          <div class="col-lg-4">
+                              <div class="form-group">
+                                  <label for="">Select Airline Type</label>
+                                  <select class="form-control" placeHolder="Select Airline Type" (change)="drop()" style="height: 38px;" name="MarkupType"
+                                      [(ngModel)]="model.MarkupType" #MarkupType="ngModel" required>
+                                      <option>Fixed</option>
+                                      <option>Percentage</option>
+                                  </select>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-lg-2" *ngIf="fixed">
+                              <div class="form-group">
+                                  <label for=""> Flat</label>
+                                  <input type="number" class="form-control" name="Flat" [(ngModel)]="model.Flat" #Flat="ngModel" required/>
+                              </div>
+                          </div>
+                          <div class="col-lg-2">
+                              <div class="form-group">
+                                  <label for=""> Convenience Fee</label>
+                                  <input type="number" class="form-control" name="Flat" [(ngModel)]="model.ConvenienceFee" #Flat="ngModel" />
+                              </div>
+                          </div>
+
+                          <div class="col-lg-2" *ngIf="percentage">
+                              <div class="form-group">
+                                  <label for="">%BaseFare</label>
+                                  <input type="number" class="form-control" name="BaseFare" [(ngModel)]="model.BaseFare" #BaseFare="ngModel" required/>
+                              </div>
+                          </div>
+                          <div class="col-lg-2" *ngIf="percentage2">
+                              <div class="form-group">
+                                  <label for="">%YQ</label>
+                                  <input type="radio">
+                                  <input type="number" class="form-control" name="YQ" [(ngModel)]="model.YQ" #YQ="ngModel" required/>
+                              </div>
+                          </div>
+                          <div class="col-lg-2" *ngIf="percentage4">
+                              <div class="form-group">
+                                  <label for="">%Tax</label>
+                                  <input type="radio">
+                                  <input type="number" class="form-control" name="Tax" [(ngModel)]="model.TAX" #TAX="ngModel" required/>
+                              </div>
+                          </div>
+                          <div class="col-lg-2">
+                              <div class="form-group">
+                                  <button type="submit" *ngIf="AddData" style="margin-top:34px" class="btn btn-md btn-info">Submit</button>
+                                  <button type="submit" *ngIf="UpdateData" (click)="updatemarkup()" style="margin-top:34px" class="btn btn-md btn-warning">Update</button>
+                              </div>
+                          </div>
+                      </div>
+                  </span>
+              </div>
+          </div>
+      </form>
+      <span *ngIf="IsFlight">
+          <div class="regist" *ngIf="viewmarkup">
+              <table class="table table-striped table-bordered table-hover">
+                  <thead style="background-color: rgb(250, 166, 26);color:white">
+                      <tr>
+                          <th>Added By</th>
+                          <th>Agent Code</th>
+                          <th>Carrier</th>
+                          <th>Service Type</th>
+                          <th>Flat</th>
+                          <th>Convenience Fee</th>
+                          <th>Base Fare</th>
+                          <th>YQ.</th>
+                          <th>Tax</th>
+                          <th>Action</th>
+                      </tr>
+                  </thead>
+                  <!--  -->
+                  <tr *ngFor="let data of markuplist">
+                      <td>{{data.CompanyName}}</td>
+                      <td>{{data.AgentCode}}</td>
+                      <td>{{data.Carrier}}</td>
+                      <td>{{data.Category}}</td>
+                      <td>{{data.Flat}}</td>
+                      <td>{{data.ConvenienceFee}}</td>
+                      <td>{{data.BaseFare}}</td>
+                      <td>{{data.YQ}}</td>
+                      <td>{{data.TAX}}</td>
+                      <td>
+                          <a style="color:green" (click)="edit(data.autoID)">Edit</a>&nbsp;|&nbsp;
+                          <a style="color:Red" (click)="delete(data.autoID)">Delete</a>
+                      </td>
+                  </tr>
+              </table>
+          </div>
+      </span>
+      <span *ngIf="!IsFlight">
+          <div class="regist" *ngIf="viewmarkup">
+              <table class="table table-striped table-bordered table-hover">
+                  <thead style="background-color: rgb(250, 166, 26);color:white">
+                      <tr>
+                          <th>Markup Type</th>
+                          <th>Markup Value</th>
+                          <th>Currency</th>
+                          <th>Service Type</th>
+                          <th>Action</th>
+                      </tr>
+                  </thead>
+                  <!--  -->
+                  <tr *ngFor="let data of markuplist">
+                      <td>{{data.MarkupType}}</td>
+                      <td>{{data.values}}</td>
+                      <td>{{data.MarkUp_Fixed_Curr}}</td>
+                      <td>{{data.ServiceType}}</td>
+
+                      <td>
+                          <a style="color:green" (click)="edit(data.ID)">Edit</a>&nbsp;|&nbsp;
+                          <a style="color:Red" (click)="delete(data.autoID)">Delete</a>
+                      </td>
+                  </tr>
+              </table>
+          </div>
+      </span>
+  </div>
+</div>

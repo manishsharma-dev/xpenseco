@@ -1,0 +1,370 @@
+<site-header></site-header>
+
+<div class="hotel-header">
+  <div class="container">
+    <form name="formsearch" class="myForm" (ngSubmit)="f.form.valid" #f="ngForm">
+      <div class="hotel-inner">
+        <span class="row-up-txt"> Where do you want to go? </span>
+        
+        <div class="row hotel-inner-row">
+          <div class="col-md-4 col-hotel">
+            <div class="form-group">
+                  <input type="text" class="form-control" name="CountrCityName" id="CountrCityName" placeholder="Enter Destination, Hotel, landmark" (keyup)="searchCountryCity(model)"
+                  required pattern="[a-zA-Z][a-zA-Z ]+" autocomplete="off" [(ngModel)]="model" name="CountrCityName"
+                  #CountrCityName="ngModel">
+              <!-- <p [hidden]="CountrCityName.valid || CountrCityName.pristine" class="alert alert-danger">
+                  <spen class="fa fa-exclamation-circle" [hidden]="!CountrCityName.hasError('required')" style="color: #ed1300;font-size: 11px;width: calc(100% - 25px);">Last Name is required</spen>
+                  <spen class="fa fa-exclamation-circle" [hidden]="!CountrCityName.hasError('pattern')" style="color: #ed1300;font-size: 11px;width: calc(100% - 25px);">Only alphabets allowed</spen>
+              </p> -->
+             <img src="assets/images/placeholder.png">
+            </div>
+            <div class="autocompleted-results">
+                  <ul style="list-style-type: none;">
+                      <li *ngFor="let r of CountryCityList">
+                          <a (click)="onselectCountryCity(r)">
+                              <div class="autocompleted-result">
+                                  <div>
+                                      <input type="hidden" id="countryId" value="{{r.COUNTRY_ID}}" />
+                                      <input type="hidden" id="countryCode" value="{{r.COUNTRY_CODE}}" />
+                                      <input type="hidden" id="CityId" value="{{r.CITY_ID }}" />
+                                      <b>{{ r.CityCode }} </b> - {{r.CITY_NAME}} </div>
+                                  <div class="autocompleted-location"> {{r.CITY_NAME }} , {{r.COUNTRY_NAME}} </div>
+                              </div>
+                          </a>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+          <div class="col-md-2 col-hotel">
+            <div class="form-group">
+                  <input type="text" class="form-control" [(ngModel)]="HotelFormFields.Master.ChkInDate" placeholder="Check-in " name="DepartureDate"
+                  autocomplete="off" class="form-control" [bsConfig]="datepickerconfig" id="FromDate" [(bsValue)]="newVar"
+                  value="{{ newVar | date:'dd/MM/yyyy' }}" aria-disabled="true" bsDatepicker required>
+              <img class="img-form" src="assets/images/calendar.png">
+            </div>
+          </div>
+          <div class="col-md-2 col-hotel">
+            <div class="form-group">
+                  <input type="text" class="form-control" [(ngModel)]="HotelFormFields.Master.ChkOutDate" placeholder="Check-out " name="ReturnDate"
+                  class="form-control" [bsConfig]="datepickerconfigto" [(bsValue)]="returnVar" id="ToDate" autocomplete="off"
+                  value="{{ returnVar | date:'dd/MM/yyyy' }}" bsDatepicker (click)="setToDate();" required>
+              <img class="img-form" src="assets/images/calendar.png">
+            </div>
+            <input type="hidden" name="ReturnDate" id="ToDate" />
+          </div>
+          <div class="col-md-3 col-hotel">
+            <div class="dropdown">
+              <button onclick="myFunction()" class="dropbtn">
+                  <span *ngIf="pepleCount">{{adultcount}} People In {{roomno}} Room</span>
+                  <span *ngIf="!pepleCount"> 1 Adult, 1 Room</span>
+              </button>
+              <div id="myDropdown" class="dropdown-content">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="rom-box">
+                      <div class="form-group">
+                        <label for="room">Rooms:</label>
+                        <select class="form-control" (change)="drop()" name="NoOfRooms" [(ngModel)]="HotelFormFields.Master.NoOfRooms">
+                          <option>1</option>
+                          <option>2</option>
+                          <option>3</option>
+                          <option>4</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-8">
+                    <ul class="psngr-form" *ngIf="one">
+                      <li>
+                        <div class="form-group">
+                          <label>Adult</label>
+                          <select class="form-control" name="adult1" id="adult1">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                          </select>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="form-group">
+                          <label>Child</label>
+                          <select class="form-control" name="NoOfChild1" (change)="childone()" [(ngModel)]="HotelFormFields.Master.NoOfChild1">
+                            <option>0</option>
+                            <option>1</option>
+                            <option>2</option>
+  
+                          </select>
+                        </div>
+                      </li>
+                      <li>
+                          <div *ngIf="cage1">
+                              <label for="room">1 age</label>
+                              <select class="form-control" name="cage1" id="cage1">
+                                  <option>1</option>
+                                  <option>2</option>
+                                  <option>3</option>
+                                  <option>4</option>
+                                  <option>5</option>
+                                  <option>6</option>
+                                  <option>7</option>
+                                  <option>8</option>
+                                  <option>9</option>
+                                  <option>10</option>
+                                  <option>11</option>
+                                  <option>12</option>
+                              </select>
+                          </div>
+                      </li>
+                      <li>
+                          <div *ngIf="cage2">
+                              <label for="room">2 age</label>
+                              <select class="form-control" name="cage2" id="cage2">
+                                  <option>1</option>
+                                  <option>2</option>
+                                  <option>3</option>
+                                  <option>4</option>
+                                  <option>5</option>
+                                  <option>6</option>
+                                  <option>7</option>
+                                  <option>8</option>
+                                  <option>9</option>
+                                  <option>10</option>
+                                  <option>11</option>
+                                  <option>12</option>
+                  
+                              </select>
+                          </div>
+                      </li>
+  
+                    </ul>
+                    <ul class="psngr-form" *ngIf="two">
+                        <li>
+                          <div class="form-group">
+                            <label>Adult</label>
+                            <select class="form-control" name="adutl2" id="adult2">
+                              <option>1</option>
+                              <option>2</option>
+                              <option>3</option>
+                              <option>4</option>
+                            </select>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="form-group">
+                            <label>Child</label>
+                            <select class="form-control" name="NoOfChild2" (change)="childtwo()" [(ngModel)]="HotelFormFields.Master.NoOfChild2">
+                              <option>0</option>
+                              <option>1</option>
+                              <option>2</option>
+    
+                            </select>
+                          </div>
+                        </li>
+                        <li>
+                            <div *ngIf="cage3" >
+                                <label for="room">1 age</label>
+                                <select class="form-control" name="cage3" id="cage3">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
+                                    <option>11</option>
+                                    <option>12</option>
+                                </select>
+                            </div>
+                        </li>
+                        <li>
+                            <div *ngIf="cage4">
+                                <label for="room">2 age</label>
+                                <select class="form-control" name="cage4" id="cage4">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
+                                    <option>11</option>
+                                    <option>12</option>
+                    
+                                </select>
+                            </div>
+                        </li>
+    
+                      </ul>
+                      <ul class="psngr-form" *ngIf="three">
+                          <li>
+                            <div class="form-group">
+                              <label>Adult</label>
+                              <select class="form-control" name="adult3" id="adult3">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                              </select>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="form-group">
+                              <label>Child</label>
+                              <select class="form-control" name="NoOfChild3" (change)="childthree()" [(ngModel)]="HotelFormFields.Master.NoOfChild3">
+                                <option>0</option>
+                                <option>1</option>
+                                <option>2</option>
+      
+                              </select>
+                            </div>
+                          </li>
+                          <li>
+                              <div *ngIf="cage5">
+                                  <label for="room">1 age</label>
+                                  <select class="form-control" name="cage5" id="cage5">
+                                      <option>1</option>
+                                      <option>2</option>
+                                      <option>3</option>
+                                      <option>4</option>
+                                      <option>5</option>
+                                      <option>6</option>
+                                      <option>7</option>
+                                      <option>8</option>
+                                      <option>9</option>
+                                      <option>10</option>
+                                      <option>11</option>
+                                      <option>12</option>
+                                  </select>
+                              </div>
+                          </li>
+                          <li>
+                              <div *ngIf="cage6">
+                                  <label for="room">2 age</label>
+                                  <select class="form-control" name="cage6" id="cage6">
+                                      <option>1</option>
+                                      <option>2</option>
+                                      <option>3</option>
+                                      <option>4</option>
+                                      <option>5</option>
+                                      <option>6</option>
+                                      <option>7</option>
+                                      <option>8</option>
+                                      <option>9</option>
+                                      <option>10</option>
+                                      <option>11</option>
+                                      <option>12</option>
+                      
+                                  </select>
+                              </div>
+                          </li>
+      
+                        </ul>
+                        <ul class="psngr-form" *ngIf="four">
+                            <li>
+                              <div class="form-group">
+                                <label>Adult</label>
+                                <select class="form-control" name="adult4" id="adult4">
+                                  <option>1</option>
+                                  <option>2</option>
+                                  <option>3</option>
+                                  <option>4</option>
+                                </select>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="form-group">
+                                <label>Child</label>
+                                <select class="form-control" name="NoOfChild4" (change)="childfour()" [(ngModel)]="HotelFormFields.Master.NoOfChild4">
+                                  <option>0</option>
+                                  <option>1</option>
+                                  <option>2</option>
+        
+                                </select>
+                              </div>
+                            </li>
+                            <li>
+                                <div *ngIf="cage7">
+                                    <label for="room">1 age</label>
+                                    <select class="form-control" name="cage7" id="cage7">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                        <option>6</option>
+                                        <option>7</option>
+                                        <option>8</option>
+                                        <option>9</option>
+                                        <option>10</option>
+                                        <option>11</option>
+                                        <option>12</option>
+                                    </select>
+                                </div>
+                            </li>
+                            <li>
+                                <div *ngIf="cage8">
+                                    <label for="room">2 age</label>
+                                    <select class="form-control" name="cage8" id="cage8">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                        <option>6</option>
+                                        <option>7</option>
+                                        <option>8</option>
+                                        <option>9</option>
+                                        <option>10</option>
+                                        <option>11</option>
+                                        <option>12</option>
+                        
+                                    </select>
+                                </div>
+                            </li>
+        
+                          </ul>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <button class="btn btn-outline-primary" type="button">Done</button>
+                  </div>
+                </div>
+              </div>
+              <img class="img-form" src="assets/images/bed.png">
+            </div>
+  
+          </div>
+          <div class="col-md-1 col-hotel">
+            <a type="submit" class="hotel-sub-btn" (click)=GetHotels(HotelFormFields);><i class="fa fa-search" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="all_querys_hotel" *ngIf="query">
+          <a class="nav-link" id="ref-list" (click)="referesh()" class="btn btn-list">Refresh</a>
+
+          <ul>
+            <li style="color:black" *ngFor="let q of allqueris">
+              <input type="radio" name="RequestNumber"
+                (click)="filldata(q.reqnumber)">{{q.reqnumber}}<span>{{q.Status}}</span>
+            </li>
+          </ul>
+
+        </div>
+
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+

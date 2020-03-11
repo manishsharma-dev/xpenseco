@@ -1,0 +1,327 @@
+<site-header></site-header>
+<div class="review-booking">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="review-area">
+                    <div class="row ">
+                        <div class="col-lg-12 top_bar-review">
+                            <div class="tic-title">
+                                <div class="t-h">
+
+                                    <span class="head-txt">
+                                        Flight Details
+                                    </span>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row ">
+                        <div class="dep" *ngIf="return">
+                            <p>Departure</p>
+                        </div>
+                        <div class="col-lg-12 table-responsive">
+                            <div class="inner-area-book">
+                                <div class="row fli-new-del" *ngFor="let se of FBookdata[0].Segments.Segment let m=index;" style="font-size:12px">
+
+                                    <div class="col-md-2" style="text-align: center">
+                                        <p>
+                                            <img src="/assets/images/{{se.AirlineCode}}.gif" class="img-fluid airline_img">
+                                        </p>
+                                        <p class="bottom_air">{{se.AirlineCode}}-{{se.FlightNumber}}</p>
+                                        <p class="bottom_air">{{se.AirlineName}}</p>
+                                    </div>
+                                    <div class="col-md-2 m-hid">
+                                        <br>
+                                        <br>
+                                        <table>
+                                            <tr>
+                                                <td>{{se.Origin.AirportCode}}</td>
+                                                <td>
+                                                    <i class="fa fa-arrow-right"></i>
+                                                </td>
+                                                <td>{{se.Destination.AirportCode}}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <span>
+                                            <b>Departure</b><br>
+                                            <b>{{se.Origin.AirportCode}}</b>
+                                        </span>
+                                        <span>
+                                            {{se.DepDateTime.substring(11,16)}}&nbsp;
+                                            <br>&nbsp;{{se.DepDateTime|date}}
+                                        </span>
+                                        <br>
+                                        <span>{{se.Origin.AirportName}}</span>
+                                        <br>
+                                        <span>Terminal-{{se.Origin.Terminal}}</span>
+                                        <br>
+                                        <span>Airbus A320-100/200</span>
+                                    </div>
+                                    <div class="col-md-2 m-hid">
+                                        <span>
+                                            <img src="/assets/images/time-line-4.png" style="width: 60px;">
+                                        </span>
+                                        <br>
+                                        <span>
+                                            <b> {{se.TDuration}}</b>
+                                        </span>
+                                    </div>
+                                    <div class="col-md-3" style="margin-bottom: 30px">
+                                        <span>
+                                            <b>Arrival</b><br>
+                                            <b>{{se.Destination.AirportCode}}</b>
+                                        </span>
+                                        <span>
+                                            {{se.ArrDateTime.substring(11,16)}}&nbsp;
+                                            <br>&nbsp;{{se.ArrDateTime|date}}
+                                        </span>
+                                        <br>
+                                        <span>{{se.Destination.AirportName}}</span>
+                                        <br>
+                                        <span>Terminal-{{se.Destination.Terminal}}</span>
+                                        <br>
+                                        <span *ngIf="FBookdata[0].NonRefundable=='false'">
+                                            <i class="fa fa-money "></i>
+                                            <b style="color:green">&nbsp;Refundable</b>
+                                        </span>
+                                        <span *ngIf="FBookdata[0].NonRefundable=='true'">
+                                            <i class="fa fa-money "></i>
+                                            <b style="color:red">&nbsp;Non Refundable</b>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="row" *ngIf="return">
+                        <div class="dep">
+                            <p>Return</p>
+                        </div>
+                        <div class="col-lg-12 table-responsive">
+                            <div class="inner-area-book">
+                                <div class="row fli-new-del" *ngFor="let se of FBookdata[1].Segments.Segment let m=index;" style="font-size:12px">
+
+                                    <div class="col-md-2" style="text-align: center">
+                                        <p>
+                                            <img src="/assets/images/{{se.AirlineCode}}.gif" class="img-fluid airline_img">
+                                        </p>
+                                        <p class="bottom_air">{{se.AirlineCode}}-{{se.FlightNumber}}</p>
+                                        <p class="bottom_air">{{se.AirlineName}}</p>
+                                    </div>
+                                    <div class="col-md-2 m-hid">
+                                        <br>
+                                        <br>
+                                        <table>
+                                            <tr>
+                                                <td>{{se.Origin.AirportCode}}</td>
+                                                <td>
+                                                    <i class="fa fa-arrow-right"></i>
+                                                </td>
+                                                <td>{{se.Destination.AirportCode}}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <span>
+                                                <b>Departure</b><br>
+                                            <b>{{se.Origin.AirportCode}}</b>
+                                        </span>
+                                        <span>
+                                            {{se.DepDateTime.substring(11,16)}}&nbsp;
+                                            <br>&nbsp;{{se.DepDateTime|date}}
+                                        </span>
+                                        <br>
+                                        <span>{{se.Origin.AirportName}}</span>
+                                        <br>
+                                        <span>Terminal-{{se.Origin.Terminal}}</span>
+                                        <br>
+                                        <span>Airbus A320-100/200</span>
+                                    </div>
+                                    <div class="col-md-2 m-hid">
+                                        <span>
+                                            <img src="/assets/images/time-line-4.png" style="width: 60px;">
+                                        </span>
+                                        <br>
+                                        <span>
+                                            <b> {{se.TDuration}}</b>
+                                        </span>
+                                    </div>
+                                    <div class="col-md-3" style="margin-bottom: 30px">
+                                        <span>
+                                            <b>Arrival</b><br>
+                                            <b>{{se.Destination.AirportCode}}</b>
+                                        </span>
+                                        <span>
+                                            {{se.ArrDateTime.substring(11,16)}}&nbsp;
+                                            <br>&nbsp;{{se.ArrDateTime|date}}
+                                        </span>
+                                        <br>
+                                        <span>{{se.Destination.AirportName}}</span>
+                                        <br>
+                                        <span>Terminal-{{se.Destination.Terminal}}</span>
+                                        <br>
+                                        <span *ngIf="FBookdata[0].NonRefundable=='false'">
+                                            <i class="fa fa-money "></i>
+                                            <b style="color:green">&nbsp;Refundable</b>
+                                        </span>
+                                        <span *ngIf="FBookdata[0].NonRefundable=='true'">
+                                            <i class="fa fa-money "></i>
+                                            <b style="color:red">&nbsp;Non Refundable</b>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-12 top_bar-review">
+                            <div class="tic-title">
+                                <div class="t-h">
+
+                                    <span class="head-txt">
+                                        Contact Details
+                                    </span>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <table class="table table-bordered table-striped">
+                                <tr>
+                                    <td>
+                                        <b>Emaild ID:</b>
+                                    </td>
+                                    <td>{{this.ContactDetails.emailid}}
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>Mobile Number:</b>
+                                    </td>
+                                    <td>{{Phone}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 top_bar-review">
+                            <div class="tic-title">
+                                <div class="t-h">
+
+                                    <span class="head-txt">
+                                        Passenger Details
+                                    </span>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" *ngFor="let p of passengerData let m=index;">
+                        <div class="col-lg-12">
+                            <table class="table table-bordered table-striped">
+                                <tr>
+                                    <td>
+                                        <b>Name:</b>
+                                    </td>
+                                    <td>{{p.Title}} {{p.FirstName}} {{p.LastName}}</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>Gender:</b>
+                                    </td>
+                                    <td>{{p.Gender}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3">
+                <div class="review-area">
+                    <div class="row">
+                        <div class="col-lg-12 top_bar-review">
+                            <div class="tic-title">
+                                <div class="t-h">
+
+                                    <span class="head-txt">
+                                        Fare Details
+                                    </span>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <table class="table table-bordered table-striped">
+                                <tr>
+                                    <td>Price</td>
+                                    <td>{{basefare}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Taxes and fees</td>
+                                    <td>{{TaxAndFees|round}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Excess Baggage</td>
+                                    <tD>{{passengerDetails.BaggageFare}}</tD>
+                                </tr>
+                                <tr>
+                                    <td>Meal</td>
+                                    <tD>{{passengerDetails.MealFare}}</tD>
+                                </tr>
+                                <tr>
+                                    <td>Travel Insurance</td>
+                                    <tD>{{passengerDetails.Insurance}}</tD>
+                                </tr>                               
+                                <tr>
+                                    <td>Total</td>
+                                    <td>{{publlishedPrice|round}}</td>
+                                    <input type="text" id="pprice" style="display: none" value="{{publlishedPrice|round}}">
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <div class="chk-line">
+                                            <div class="chk-total-l">
+                                                <input type="radio" name="paymentmethod" [(ngModel)]="Adultdtl.paymentmethod" value="CreditLimit" checked> By Credit Limit
+                                            </div>
+                                            <div class="chk-total-l">
+                                                <input type="radio" [(ngModel)]="Adultdtl.paymentmethod" name="paymentmethod" value="PaymentGetway" /> By Credit Card
+                                            </div>
+                                            <div class="clear"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row review-btn-2">
+
+                        <div class="col-lg-12" style="text-align: center">
+                            <button class="btn btn-md btn-warning" (click)="bookflight()">Confirm Booking</button>
+                        </div>
+
+
+                        <div class="col-lg-12" style="text-align: center">
+                            <a class="btn btn-md btn-danger" (click)="cancel()">Cancel</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

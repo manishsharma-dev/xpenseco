@@ -1,0 +1,85 @@
+<site-header></site-header>
+
+
+<section class="package">
+  <div class="package-header">
+    <div class="container">
+      <p>Exclusive Tours & Holiday Packages</p>
+
+      <div class="search-box-package">
+
+        <div class="row">
+          <div class="col-md-9">
+            <div class="form-group">
+
+              <input type="text" class="form-control" placeholder="Enter Destination" name="CountrCityName"
+                id="CountrCityName" (click)="searchCountryCity(model)" (keyup)="searchCountryCity(model)"
+                autocomplete="off" required pattern="[a-zA-Z][a-zA-Z ]+" [(ngModel)]="model" name="CountrCityName"
+                #CountrCityName="ngModel">
+            </div>
+            <input type="hidden" id="CountryId" />
+            <input type="hidden" id="CountryName" />
+            <input type="hidden" id="CityId" />
+            <input type="hidden" id="CityName" />
+            <div class="autocompleted-results" id="ar2">
+              <ul style="list-style-type: none;">
+                <span *ngIf="CountryCityList">
+                  <li *ngFor="let r of CountryCityList">
+                    <a (click)="onselectCountryCity(r)">
+                      <div>
+                        <div class="autocompleted-location">
+                          <div class="row">
+                            <div class="col-md-12">
+                              <ul>
+                                <li> <span>{{r.CityName }}</span> , {{r.Countryname}}</li>
+
+                              </ul>
+                            </div>
+                          </div>
+
+
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                </span>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <button type="button" class="btn btn-primary" (click)=GetHoliday(HolidayFormFields);>Search</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="package-main">
+  <div class="container">
+    <h2>Packages for top-selling destinations in India</h2>
+    <div class="row">
+      <div class="col-md-4">
+        <img src="/assets/images/travel-fare-img/p-1.jpg" class="img-fluid">
+      </div>
+      <div class="col-md-4">
+        <img src="/assets/images/travel-fare-img/p-2.jpg" class="img-fluid">
+      </div>
+      <div class="col-md-4">
+        <img src="/assets/images/travel-fare-img/p-3.jpg" class="img-fluid">
+      </div>
+    </div>
+    <div class="row mar-pakge">
+      <div class="col-md-4">
+        <img src="/assets/images/travel-fare-img/p-4.jpg" class="img-fluid">
+      </div>
+      <div class="col-md-4">
+        <img src="/assets/images/travel-fare-img/p-5.jpg" class="img-fluid">
+      </div>
+      <div class="col-md-4">
+        <img src="/assets/images/travel-fare-img/p-6.jpg" class="img-fluid">
+      </div>
+    </div>
+  </div>
+</section>

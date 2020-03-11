@@ -1,0 +1,650 @@
+<style>
+
+    body{
+        background-color: #f5f5f5!important;
+    }
+    </style>
+
+<site-header></site-header>
+
+<ng-template #loading>
+    <div class="loader-hotel result-area">
+        <img src="/assets/images/travel-fare-img/hotel-loading.gif" class="img-fluid">
+    </div>
+</ng-template>
+
+<div class="hotel-modify" *ngIf="searchData!=null">
+    <div class="container">
+        <form name="formsearch" class="myForm" (ngSubmit)="f.form.valid" #f="ngForm">
+            <div class="hotel-modify-inner">
+                <span class="row-up-txt-2"> Modify Search </span>
+                <div class="row hotel-inner-row-2">
+                    <div class="col-md-4 col-hotel-2">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="CountrCityName" id="CountrCityName"
+                                placeholder="Enter Destination, Hotel, landmark" (keyup)="searchCountryCity(model)"
+                                required pattern="[a-zA-Z][a-zA-Z ]+" autocomplete="off" [(ngModel)]="model" name="CountrCityName"
+                                #CountrCityName="ngModel">
+                            <!-- <p [hidden]="CountrCityName.valid || CountrCityName.pristine" class="alert alert-danger">
+                                    <spen class="fa fa-exclamation-circle" [hidden]="!CountrCityName.hasError('required')" style="color: #ed1300;font-size: 11px;width: calc(100% - 25px);">Last Name is required</spen>
+                                    <spen class="fa fa-exclamation-circle" [hidden]="!CountrCityName.hasError('pattern')" style="color: #ed1300;font-size: 11px;width: calc(100% - 25px);">Only alphabets allowed</spen>
+                                </p> -->
+                        </div>
+                        <div class="autocompleted-results">
+                            <ul style="list-style-type: none;">
+                                <li *ngFor="let r of CountryCityList">
+                                    <a (click)="onselectCountryCity(r)">
+                                        <div class="autocompleted-result">
+                                            <div>
+                                                <input type="hidden" id="countryId" value="{{r.COUNTRY_ID}}" />
+                                                <input type="hidden" id="countryCode" value="{{r.COUNTRY_CODE}}" />
+                                                <input type="hidden" id="CityId" value="{{r.CITY_ID }}" />
+                                                <b>{{ r.CityCode }} </b> - {{r.CITY_NAME}} </div>
+                                            <div class="autocompleted-location"> {{r.CITY_NAME }} , {{r.COUNTRY_NAME}}
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-hotel-2">
+                        <div class="form-group">
+                            <input type="text" class="form-control" [(ngModel)]="HotelFormFields.Master.ChkInDate"
+                                placeholder="Check-in " name="DepartureDate" autocomplete="off" class="form-control"
+                                [bsConfig]="datepickerconfig" id="FromDate" [(bsValue)]="newVar" value="{{ newVar | date:'dd/MM/yyyy' }}"
+                                aria-disabled="true" bsDatepicker required>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-hotel-2">
+                        <div class="form-group">
+                            <input type="text" class="form-control" [(ngModel)]="HotelFormFields.Master.ChkOutDate"
+                                placeholder="Check-out " name="ReturnDate" class="form-control" [bsConfig]="datepickerconfigto"
+                                [(bsValue)]="returnVar" id="ToDate" autocomplete="off" value="{{ returnVar | date:'dd/MM/yyyy' }}"
+                                bsDatepicker (click)="setToDate();" required>
+                        </div>
+                        <input type="hidden" name="ReturnDate" id="ToDate" />
+                    </div>
+                    <div class="col-md-3 col-hotel-2">
+                        <div class="dropdown">
+                            <button onclick="myFunction()" class="dropbtn">
+                                <span *ngIf="pepleCount">{{adultcount}} People In {{roomno}} Room</span>
+                                <span *ngIf="!pepleCount"> 1 Adult, 1 Room</span>
+                            </button>
+                            <div id="myDropdown" class="dropdown-content">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="rom-box">
+                                            <div class="form-group">
+                                                <label for="room">Rooms:</label>
+                                                <select class="form-control" (change)="drop()" name="NoOfRooms"
+                                                    [(ngModel)]="HotelFormFields.Master.NoOfRooms">
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <ul class="psngr-form" *ngIf="one">
+                                            <li>
+                                                <div class="form-group">
+                                                    <label>Adult</label>
+                                                    <select class="form-control" name="adult1" id="adult1">
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                    </select>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="form-group">
+                                                    <label>Child</label>
+                                                    <select class="form-control" name="NoOfChild1" (change)="childone()"
+                                                        [(ngModel)]="HotelFormFields.Master.NoOfChild1">
+                                                        <option>0</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+
+                                                    </select>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div *ngIf="cage1">
+                                                    <label for="room">1 age</label>
+                                                    <select class="form-control" name="cage1" id="cage1">
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                        <option>7</option>
+                                                        <option>8</option>
+                                                        <option>9</option>
+                                                        <option>10</option>
+                                                        <option>11</option>
+                                                        <option>12</option>
+                                                    </select>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div *ngIf="cage2">
+                                                    <label for="room">2 age</label>
+                                                    <select class="form-control" name="cage2" id="cage2">
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                        <option>7</option>
+                                                        <option>8</option>
+                                                        <option>9</option>
+                                                        <option>10</option>
+                                                        <option>11</option>
+                                                        <option>12</option>
+
+                                                    </select>
+                                                </div>
+                                            </li>
+
+                                        </ul>
+                                        <ul class="psngr-form" *ngIf="two">
+                                            <li>
+                                                <div class="form-group">
+                                                    <label>Adult</label>
+                                                    <select class="form-control" name="adutl2" id="adult2">
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                    </select>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="form-group">
+                                                    <label>Child</label>
+                                                    <select class="form-control" name="NoOfChild2" (change)="childtwo()"
+                                                        [(ngModel)]="HotelFormFields.Master.NoOfChild2">
+                                                        <option>0</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+
+                                                    </select>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div *ngIf="cage3">
+                                                    <label for="room">1 age</label>
+                                                    <select class="form-control" name="cage3" id="cage3">
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                        <option>7</option>
+                                                        <option>8</option>
+                                                        <option>9</option>
+                                                        <option>10</option>
+                                                        <option>11</option>
+                                                        <option>12</option>
+                                                    </select>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div *ngIf="cage4">
+                                                    <label for="room">2 age</label>
+                                                    <select class="form-control" name="cage4" id="cage4">
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                        <option>7</option>
+                                                        <option>8</option>
+                                                        <option>9</option>
+                                                        <option>10</option>
+                                                        <option>11</option>
+                                                        <option>12</option>
+
+                                                    </select>
+                                                </div>
+                                            </li>
+
+                                        </ul>
+                                        <ul class="psngr-form" *ngIf="three">
+                                            <li>
+                                                <div class="form-group">
+                                                    <label>Adult</label>
+                                                    <select class="form-control" name="adult3" id="adult3">
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                    </select>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="form-group">
+                                                    <label>Child</label>
+                                                    <select class="form-control" name="NoOfChild3" (change)="childthree()"
+                                                        [(ngModel)]="HotelFormFields.Master.NoOfChild3">
+                                                        <option>0</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+
+                                                    </select>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div *ngIf="cage5">
+                                                    <label for="room">1 age</label>
+                                                    <select class="form-control" name="cage5" id="cage5">
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                        <option>7</option>
+                                                        <option>8</option>
+                                                        <option>9</option>
+                                                        <option>10</option>
+                                                        <option>11</option>
+                                                        <option>12</option>
+                                                    </select>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div *ngIf="cage6">
+                                                    <label for="room">2 age</label>
+                                                    <select class="form-control" name="cage6" id="cage6">
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                        <option>7</option>
+                                                        <option>8</option>
+                                                        <option>9</option>
+                                                        <option>10</option>
+                                                        <option>11</option>
+                                                        <option>12</option>
+
+                                                    </select>
+                                                </div>
+                                            </li>
+
+                                        </ul>
+                                        <ul class="psngr-form" *ngIf="four">
+                                            <li>
+                                                <div class="form-group">
+                                                    <label>Adult</label>
+                                                    <select class="form-control" name="adult4" id="adult4">
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                    </select>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="form-group">
+                                                    <label>Child</label>
+                                                    <select class="form-control" name="NoOfChild4" (change)="childfour()"
+                                                        [(ngModel)]="HotelFormFields.Master.NoOfChild4">
+                                                        <option>0</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+
+                                                    </select>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div *ngIf="cage7">
+                                                    <label for="room">1 age</label>
+                                                    <select class="form-control" name="cage7" id="cage7">
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                        <option>7</option>
+                                                        <option>8</option>
+                                                        <option>9</option>
+                                                        <option>10</option>
+                                                        <option>11</option>
+                                                        <option>12</option>
+                                                    </select>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div *ngIf="cage8">
+                                                    <label for="room">2 age</label>
+                                                    <select class="form-control" name="cage8" id="cage8">
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                        <option>7</option>
+                                                        <option>8</option>
+                                                        <option>9</option>
+                                                        <option>10</option>
+                                                        <option>11</option>
+                                                        <option>12</option>
+
+                                                    </select>
+                                                </div>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <!-- <button class="btn btn-outline-primary" type="button">Done</button> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <img class="img-form" src="assets/images/travel-fare-img/bed.png">
+                        </div>
+
+                    </div>
+                    <div class="col-md-1 col-hotel-2">
+                        <a type="submit" class="hotel-sub-btn" (click)=GetHotels(HotelFormFields);><i class="fa fa-search"
+                                aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+<div *ngIf="searchData  else loading;"></div>
+<section class="result-area-2" *ngIf="searchData!=null">
+    <div class="container">
+        <nav class="breadcrumb">
+            <a class="breadcrumb-item" href="#">Home</a>
+            <a class="breadcrumb-item" href="#">{{searchData.Master.CityName}} , {{searchData.Master.CountryName}}</a>
+            <a class="breadcrumb-item active" href="#">{{searchData.Hotel.HName}}</a>
+
+        </nav>
+
+        <div class="top-hotel-row">
+
+            <div class="row">
+
+                <div class="col-md-8">
+                    <div class="pull-left htD-details">
+                        <h2>{{searchData.Hotel.HName}}</h2>
+
+
+                        <span class="star" *ngIf="searchData.Hotel.StarRating == 1">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                        </span>
+                        <span class="star" *ngIf="searchData.Hotel.StarRating == 2">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                        </span>
+                        <span class="star" *ngIf="searchData.Hotel.StarRating == 3">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o"></i>
+                        </span>
+                        <span class="star" *ngIf="searchData.Hotel.StarRating == 4">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-sta"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-o"></i>
+                        </span>
+                        <span class="star" *ngIf="searchData.Hotel.StarRating == 5">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </span>
+                        <span class="hotel-address">Plot no 3, Sector 10, 205 Delhi Road South West, District Center,
+                            Dwarka, New Delhi, 110075 </span>
+                    </div>
+
+                </div>
+
+                <div class="col-md-4 price-area-2">
+
+
+                    <p class="rate-bg"><span>Lowest Rate for this Hotel:</span>&nbsp;{{searchData.Hotel.Rooms.Room[0].Gross_Price/searchData.Master.Duration
+                        | number:0}}
+
+
+                    </p>
+                    <span>Price: Per Room/Night</span>
+
+                    <div class="book-btn-col" *ngIf="searchData.Hotel.CID=='TBO'">
+
+                        <button type="button" class="btn btn-primary book-btn" (click)=hotelbooking();>Book Now</button>
+                        <br />
+                    </div>
+
+
+                </div>
+            </div>
+        
+            <nav class="nav">
+                <a class="nav-link active" href="Hotel-Detail#photo">Photos</a>
+                <a class="nav-link" href="Hotel-Detail#room">Rooms</a>
+                <a class="nav-link" href="Hotel-Detail#Factieilis">Hotel Facilities</a>
+                <a class="nav-link" href="Hotel-Detail#hpolicy">Hotel Policy</a>
+                <a class="nav-link" href="Hotel-Detail#cpolicy">Cancellation Policy</a>
+            </nav>
+
+        </div>
+
+
+        <div class="slider-area" id="photo">
+            <div class="row">
+                <div class="col-md-8">
+                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                        </ol>
+                        <div class="carousel-inner" role="listbox" *ngIf="searchData.Hotel.CID!='TBO'">
+
+                            <div class="carousel-item active">
+                                <img class="d-block img-fluid" src="/assets/images/hotel-d2.jpg" alt="First slide">
+                            </div>
+                            <div class="carousel-item">
+                                <img class="d-block img-fluid" src="{{searchData.Hotel.FrontImage}}" alt="Second slide">
+                            </div>
+                            <div class="carousel-item">
+                                <img class="d-block img-fluid" src="/assets/images/hotel-d3.jpg" alt="Third slide">
+                            </div>
+                        </div>
+                        <div class="carousel-inner" role="listbox" *ngIf="searchData.Hotel.CID=='TBO'">
+
+                            <div class="carousel-item active">
+                                <img class="d-block img-fluid" src="{{searchData.Hotel.ImageList.Image[0].ImagePath}}"
+                                    alt="First slide">
+                            </div>
+                            <div class="carousel-item" *ngFor="let img of searchData.Hotel.ImageList.Image">
+                                <img class="d-block img-fluid" src="{{img.ImagePath}}" alt="Second slide">
+                            </div>
+
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="right-slider-box">
+                        <div class="review-box">
+                            <h3>Excellent</h3>
+                            <p>4.5 <span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i
+                                        class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i
+                                        class="fa fa-star-o" aria-hidden="true"></i></span></p>
+
+                            <div class="services">
+                                <p><span>Phenomenal Service</span> 5.0/5</p>
+                                <p><span>Astounding Value</span> 5.0/5</p>
+                            </div>
+
+                            <div class="prefered">
+                                <h4>Preferred By</h4>
+                                <p>Family</p>
+                                <p>Couple</p>
+                            </div>
+
+                            <div class="chek-in-out">
+                                <p><span>Check-in:</span> 1:00 PM</p>
+                                <p><span>Check-out:</span> 11:00 AM</p>
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="h-des">
+                    <h5>OVERVIEW</h5>
+                    <p [innerHTML]="searchData.Hotel.HDes">
+
+                    </p>
+                   
+                </div>
+            </div>
+        </div>
+
+
+        <div class="room-type" id="room">
+            <h5>Select Room</h5>
+
+
+
+            <div class="room-slct">
+                <div class="row bk-row" *ngFor="let rdata of searchData.Hotel.Rooms.Room">
+
+                    <div class="left-boxx">
+                        <img src="/assets/images/travel-fare-img/hotel-img.jpg">
+                      
+                    </div>
+                    <div class="right-boxx">
+                        <p>{{rdata.RDes}}</p>
+                        <span class="r-o">{{rdata.Meal_Des}}</span>
+
+                        <div class="all-hotel-row row">
+                            <div class="col-md-2">
+                                <h4>Max Guests</h4>
+                                <img src="/assets/images/travel-fare-img/man.png">
+                                <img src="/assets/images/travel-fare-img/man.png">
+                            </div>
+                            <div class="col-md-3">
+                                <h4>Inclusions </h4>
+                                <ul>
+                                    <li>Complimentary Wi-Fi </li>
+                                    <li>Mineral Water</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-3">
+                                <h4>Highlights </h4>
+                                <ul>
+                                    <li>Free Cancellation</li>
+                                    <li>Free Wi-Fi </li>
+                                    <li *ngIf="rdata.IsAllowCancelletion == true">Refundable</li>
+                                    <li *ngIf="rdata.IsAllowCancelletion == false">Non-Refundable </li>
+
+                                </ul>
+                            </div>
+                            <div class="col-md-2">
+                                <h4>Price for 2 nights</h4>
+                                <span class="price-ho">
+                                    <span class="curncy">{{rdata.Gross_Currency}}</span>{{rdata.Gross_Price}}</span>
+                            </div>
+                            <div class="col-md-2" *ngIf="searchData.Hotel.CID!='TBO'">
+                                <button type="button" class="slct-room" (click)=hotelPrebooking(rdata.RID);>Add Room</button>
+                            </div>
+                            <div class="col-md-2" *ngIf="searchData.Hotel.CID=='TBO'">
+                                <button type="button" class="slct-room" (click)=hotelPrebooking(rdata.RIndex);>Add Room</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+</div>
+
+        <!-- <div class="location">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d108015.48486749474!2d77.11578282502258!3d32.21813469056771!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m0!4m5!1s0x39048822febf5dd1%3A0xf226d439158fbd62!2s{{searchData.Hotel.HName}}!3m2!1d32.218154!2d77.185823!5e0!3m2!1sen!2sin!4v1526907538346" width="100%" height="250" frameborder="0" style="border:0" allowfullscreen></iframe>
+            </div>
+ -->
+        <div class="policy" id="Factieilis">
+            <h5>Hotel Facilities</h5>
+
+            <hr>
+
+            <ul class="hf-ul">
+                <li *ngIf="searchData.Hotel.CID!='TBO'">
+                    {{searchData.Hotel.HFacilities}}
+                </li>
+                <li *ngFor="let hf of searchData.Hotel.HotelFacility.Facility">
+                    {{hf.FacilityName}}
+                </li>
+            </ul>
+        </div>
+        <div class="policy" id="hpolicy">
+            <h5>Hotel Policy</h5>
+
+            <hr>
+            <p *ngIf="searchData.Hotel.CID!='TBO'">{{preBookData.Policies.Policy.Desc}}</p>
+            <p *ngIf="searchData.Hotel.CID=='TBO'">{{searchData.Hotel.HotelPolicy}}</p>
+          
+        </div>
+        <div class="policy" id="cpolicy">
+            <h5>Cancellation Policy</h5>
+
+            <hr>
+            <p>Cancellation Policy Cancellation and prepayment policies vary according to room type. Please check the
+                Fare policy associated with your room.</p>
+            <p>Extra Bed The inclusion of extra bed with a booking is facilitated with a folding cot or a mattress as
+                an extra bed.</p>
+            <p>Payment Mode You can pay now or you can pay at the hotel if your selected room type has this option.</p>
+        </div>
+
+    </div>
+</section>

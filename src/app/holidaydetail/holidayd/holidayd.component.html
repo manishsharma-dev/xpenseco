@@ -1,0 +1,987 @@
+<site-header></site-header>
+
+
+
+<div class="package-detils">
+  <span *ngFor="let img of searchData.Images; let i=index">
+
+    <div class="top-img" *ngIf="img.IsDetailheader" [style.background]="'url(http://zapcms.mageinfotech.com/Images/ImageGallery/'+img.BigImage+')'">
+
+    </div>
+    <span *ngIf="i==0">
+      <div class="top-imgdef" *ngIf="!img.IsDetailheader"></div>
+    </span>
+  </span>
+  <div class="all-white">
+    <div class="container">
+
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="#">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="#">Holiday</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">{{searchData.CityJurny[0].City}}</li>
+        </ol>
+      </nav>
+      <div class="row">
+        <div class="col-md-9">
+          <div class="pkg-top-heading">
+            <h3>{{searchData.PackageName}}</h3>
+          </div>
+          <div class="row">
+            <div class="col-md-2">
+              <div class="dn-box">
+                <ul>
+                  <li>
+                    <span class="d-c">
+                      {{searchData.days-1}}
+                    </span>
+
+                    <span class="n-c">
+                      Nights
+                    </span>
+                  </li>
+                  <li>
+                    <span class="d-c">
+                      {{searchData.days}}
+                    </span>
+                    <span class="n-c">
+                      Days
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-10">
+              <div class="flight-line">
+                <span>
+                  <i class="fa fa-plane" aria-hidden="true"></i>&nbsp;
+                  <i class="fa fa-long-arrow-right" aria-hidden="true" *ngFor="let hdata of searchData.CityJurny; let i=index">
+                    &nbsp;{{hdata.CityName}}&nbsp;
+                  </i>
+
+                  <i class="fa fa-long-arrow-right" aria-hidden="true"></i>&nbsp;
+                  <i class="fa fa-plane planes-2" aria-hidden="true"></i>
+                </span>
+              </div>
+              <p class="fli-p">Inclusions</p>
+              <ul class="fli-icon" *ngFor="let p of ServiceList[0].servicelist">
+                <li>
+                  <span class="tour-box" *ngIf="p.ServiceName=='Flight'">
+                    <i class="fa fa-plane" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Flight"></i>
+                  </span>
+                </li>
+                <li>
+                  <span class="tour-box" *ngIf="p.ServiceName=='Hotel'">
+                    <i class="fa fa-bed" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Hotel"></i>
+                  </span>
+                </li>
+                <li>
+                  <span class="tour-box" *ngIf="p.ServiceName=='Meal'">
+                    <i class="fa fa-cutlery" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Meals"></i>
+                  </span>
+                </li>
+                <li>
+                  <span class="tour-box" *ngIf="p.ServiceName=='Car'">
+                    <i class="fa fa-car" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Car"></i>
+                  </span>
+                </li>
+                <li>
+                  <span class="tour-box" *ngIf="p.ServiceName=='Bus'">
+                    <i class="fa fa-bus" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Bus"></i>
+                  </span>
+                </li>
+                <li>
+                  <span class="tour-box" *ngIf="p.ServiceName=='SightSeeing'">
+                    <i class="fa fa-binoculars" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Sightseening"></i>
+                  </span>
+                </li>
+                <li>
+                  <span class="tour-box" *ngIf="p.ServiceName=='Transfer'">
+                    <i class="fa fa-taxi" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Transfer"></i>
+                  </span>
+                </li>
+
+              </ul>
+            </div>
+
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="price-box">
+            <h4>
+              <span class="price" *ngIf="searchData.Currency=='INR'">
+
+                <i class="fa fa-inr" aria-hidden="true"></i>{{searchData.Costing | round}}
+              </span>
+              <span class="price" *ngIf="searchData.Currency=='USD'">
+                <i class="fa fa-usd" aria-hidden="true"></i>{{searchData.Costing | round}}</span>
+
+            </h4>
+            <span>Starting price per adult</span>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#book-popup">Book Now</button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <form (ngSubmit)="loginForm.form.valid" #loginForm="ngForm">
+      <div class="tabs-area">
+        <div class="container">
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+
+            <li class="nav-item">
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+                aria-selected="false">Overview</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="itinerary-tab" data-toggle="tab" href="#itinerary" role="tab" aria-controls="itinerary"
+                aria-selected="false">Itinerary</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
+                aria-selected="false">Inclusions / Exclusions</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="AddonTour-tab" data-toggle="tab" href="#AddonTour" role="tab" aria-controls="AddonTour"
+                aria-selected="false">Flight details</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="tearmsCond-tab" data-toggle="tab" href="#tearmsCond" role="tab" aria-controls="tearmsCond"
+                aria-selected="false">Accommodation</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="Add-On-tab" data-toggle="tab" href="#Add-On" role="tab" aria-controls="Add-On"
+                aria-selected="false">Add-on</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="Document-tab" data-toggle="tab" href="#Document" role="tab" aria-controls="Document"
+                aria-selected="false">Visa Requirement </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="t-c-tab" data-toggle="tab" href="#t-c" role="tab" aria-controls="t-c"
+                aria-selected="false">Terms & Conditions </a>
+            </li>
+
+
+          </ul>
+          <div class="tab-content" id="myTabContent">
+
+            <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+              <p *ngIf="visShort" class="more-p" [innerHTML]="this.shortDescription|safeHtml">               
+              </p> 
+              <div class="mro-btn" *ngIf="visShort">
+                <a href="#more" data-toggle="collapse" *ngIf="visShort" class="more-btn" (click)="showhidedetails()">More</a>  
+              </div> 
+
+              <div id="more" class="collapse">
+                <p class="more-p" [innerHTML]="this.longDescription|safeHtml"></p>
+              </div>
+
+             
+              <div class="itinerary-box">
+
+                <ul class="itnery-bx" *ngFor="let hdata of searchData.CityJurny; let i=index">
+
+
+                </ul>
+
+              </div>
+
+              <div class="row incl-exclu">
+                <div class="col-md-6 b-d-r">
+                  <p>What your tour price includes?</p>
+                  <ul class="right" *ngFor="let PInc of searchData.Inclusion; let i=index">
+                    <p [innerHTML]="PInc.Desription"></p>
+
+                  </ul>
+                </div>
+                <div class="col-md-6 pdd-left">
+                  <p>What your tour price does not include?</p>
+                  <ul class="wrong " *ngFor="let PExc of searchData.Exculusion; let i=index">
+                    <p [innerHTML]="PExc.Description"></p>
+
+
+                  </ul>
+                </div>
+              </div>
+
+              <p class="tab-head-2">
+                <i class="fa fa-plane" aria-hidden="true"></i>
+                Flight Details</p>
+
+
+
+
+
+
+
+
+
+              <div class="air-detl-bx" *ngFor="let fDtl of searchData.FlightDetail">
+                <div class="air-icn-bx flt_lt">
+                  <div class="air" *ngIf="fDtl.AirLine!=''">
+                    <img src="/assets/images/Flight/{{fDtl.AirLine}}.gif">
+                  </div>
+                  <div class="air" *ngIf="fDtl.AirLine==''">
+                    <img src="/assets/images/Flight/jet.png">
+                  </div>
+                  <div class="air-code">{{fDtl.AirlineNo}}</div>
+                </div>
+
+                <div class="air-detl-lis">
+                  <div class="air-detl-fl">
+                    <div class="air-tme flt_lt">
+                      {{fDtl.DeptTime}}
+
+                    </div>
+                    <div class="air-dur"></div>
+                    <div class="air-tme flt_rht tex-rht">{{fDtl.ArrvTime}}</div>
+
+                  </div>
+
+                  <div class="air-seprat">
+                    <span class="flt_lt"></span>
+                    <span class="dur-bg"></span>
+                    <span class="flt_rht"></span>
+                  </div>
+
+
+                  <div class="air-detl-fl2">
+                    <div class="air-tme2 flt_lt">{{fDtl.DeptFrom}}<span></span></div>
+                    <div class="air-dur2"></div>
+                    <div class="air-tme2 flt_rht tex-rht">{{fDtl.ArrvTo}}<span></span></div>
+
+                  </div>
+                </div>
+
+              </div>
+
+              <p class="tab-head-2">
+                <i aria-hidden="true" class="fa fa-bed"></i>
+                Accommodation</p>
+
+
+              <div class="row img-hotel" *ngFor="let HInfo of searchData.hotel">
+                <div class="col-md-3" *ngIf="HInfo.Thumbnail!=''">
+                  <img src="http://zapcms.mageinfotech.com/Images/ImageGallery/{{HInfo.Thumbnail}}" class="img-fluid w-100 img-hotel">
+                </div>
+                <div class="col-md-3" *ngIf="HInfo.Thumbnail==''">
+                  <img src="/assets/images/bng-hotel.png" class="img-fluid w-100 img-hotel">
+                </div>
+                <div class="col-md-4">
+                  <p class="hh-name">{{HInfo.Hotelname}}</p>
+
+                  <span class="star-h">
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                  </span>
+                  <span class="add-h">
+                    <i class="fa fa-map-marker" aria-hidden="true"></i><span [innerHTML]="HInfo.Description">
+                      </span>
+                    </span>
+
+                  <p class="fac-txt">Facilities</p>
+                  <div class="fac-box">
+                    <i aria-hidden="true" class="fa fa-cutlery"></i>
+                  </div>
+
+                </div>
+              </div>
+
+
+
+
+            </div>
+
+            <div class="tab-pane fade" id="itinerary" role="tabpanel" aria-labelledby="itinerary-tab">
+
+            
+
+              <div class="itinerary-box">
+                <span *ngFor="let img of searchData.Images" class="img-itinry">
+
+                  <img *ngIf="img.IsDetailGallary" src="http://zapcms.mageinfotech.com/Images/ImageGallery/{{img.BigImage}}"
+                    class="img-fluid">
+                </span>
+                <ul class="itnery-bx" *ngFor="let hdata of searchData.CityJurny; let i=index">
+                  <li>
+                    <p [innerHTML]="hdata.Description  | safeHtml">
+                    </p>
+                  </li>
+
+
+
+                </ul>
+              </div>
+
+            </div>
+            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+
+              <div class="row incl-exclu">
+                <div class="col-md-6 b-d-r">
+                  <p>What your tour price includes?</p>
+                  <ul class="right" *ngFor="let PInc of searchData.Inclusion; let i=index">
+                    <p [innerHTML]="PInc.Desription  | safeHtml"></p>
+
+                  </ul>
+                </div>
+                <div class="col-md-6 pdd-left">
+                  <p>What your tour price does not include?</p>
+                  <ul class="wrong " *ngFor="let PExc of searchData.Exculusion; let i=index">
+                    <p [innerHTML]="PExc.Description  | safeHtml"></p>
+
+
+                  </ul>
+                </div>
+              </div>
+
+            </div>
+            <div class="tab-pane fade" id="AddonTour" role="tabpanel" aria-labelledby="AddonTour-tab">
+              <p class="tab-head-2">
+                <i class="fa fa-plane" aria-hidden="true"></i>
+                Flight Details</p>
+              <div class="air-detl-bx" *ngFor="let fDtl of searchData.FlightDetail">
+                <div class="air-icn-bx flt_lt">
+                  <div class="air" *ngIf="fDtl.AirLine!=''">
+                    <img src="/assets/images/Flight/{{fDtl.AirLine}}.gif">
+                  </div>
+                  <div class="air" *ngIf="fDtl.AirLine==''">
+                    <img src="/assets/images/Flight/jet.png">
+                  </div>
+                  <div class="air-code">{{fDtl.AirlineNo}}</div>
+                </div>
+
+                <div class="air-detl-lis">
+                  <div class="air-detl-fl">
+                    <div class="air-tme flt_lt">
+                      {{fDtl.DeptTime}}
+
+                    </div>
+                    <div class="air-dur"></div>
+                    <div class="air-tme flt_rht tex-rht">{{fDtl.ArrvTime}}</div>
+
+                  </div>
+
+                  <div class="air-seprat">
+                    <span class="flt_lt"></span>
+                    <span class="dur-bg"></span>
+                    <span class="flt_rht"></span>
+                  </div>
+
+
+                  <div class="air-detl-fl2">
+                    <div class="air-tme2 flt_lt">{{fDtl.DeptFrom}}<span></span></div>
+                    <div class="air-dur2"></div>
+                    <div class="air-tme2 flt_rht tex-rht">{{fDtl.ArrvTo}}<span></span></div>
+
+                  </div>
+                </div>
+
+              </div>
+
+
+
+
+            </div>
+
+            <div class="tab-pane fade" id="tearmsCond" role="tabpanel" aria-labelledby="tearmsCond-tab">
+
+              <p class="tab-head-2">
+                <i aria-hidden="true" class="fa fa-bed"></i>
+                Accommodation</p>
+
+              <div class="row img-hotel" *ngFor="let HInfo of searchData.hotel">
+                <div class="col-md-3" *ngIf="HInfo.Thumbnail!=''">
+                  <img src="http://zapcms.mageinfotech.com/Images/ImageGallery/{{HInfo.Thumbnail}}" class="img-fluid w-100 img-hotel">
+                </div>
+                <div class="col-md-3" *ngIf="HInfo.Thumbnail==''">
+                  <img src="/assets/images/bng-hotel.png" class="img-fluid w-100 img-hotel">
+                </div>
+                <div class="col-md-4">
+                  <p class="hh-name">{{HInfo.Hotelname}}</p>
+
+                  <span class="star-h">
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                  </span>
+                  <span class="add-h">
+                    <i class="fa fa-map-marker" aria-hidden="true"></i><span [innerHTML]="HInfo.Description  | safeHtml">
+                      </span>
+                    </span>
+
+                  <p class="fac-txt">Facilities</p>
+                  <div class="fac-box">
+                    <i aria-hidden="true" class="fa fa-cutlery"></i>
+                  </div>
+
+                </div>
+              </div>
+
+
+
+
+
+            </div>
+
+            <div class="tab-pane fade" id="Add-On" role="tabpanel" aria-labelledby="Add-On-tab">
+
+
+
+              <div class="hotl-detl-title">Add On</div>
+
+              <div class="itinerary-box" *ngFor="let ct of CityList">
+                <h2>{{ct}} Upgrade</h2>
+                <div class="pckge-box">
+                  <div class="pkg-inner">
+                    <div class="inner-cols" *ngFor="let uh of searchData.UpgradeHotel; let i=index">
+                        <div class="row" *ngIf="ct==searchData.UpgradeHotel[i].CityName">
+                            <div class="col-md-8">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="pkgprice{{i+1}}" value="{{searchData.UpgradeHotel[i].Cost  | round}}" (click)="onCheckboxChange(i+1,uh.Cost)">
+                                    <label class="custom-control-label" for="pkgprice{{i+1}}">{{searchData.UpgradeHotel[i].HotelName}}</label>
+                                  </div>
+                                   <h3></h3>
+                              <p [innerHTML]="searchData.UpgradeHotel[i].Description  | safeHtml">
+
+                              </p>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="pckg-price">
+                                 
+                                
+                                  
+                                    <p *ngIf="searchData.Currency=='INR'">
+                                      <i class="fa fa-inr" aria-hidden="true"></i>
+                                      {{searchData.UpgradeHotel[i].Cost  | round}}
+                                  </p>
+                                  <p *ngIf="searchData.Currency=='USD'">
+                                      <i class="fa fa-usd" aria-hidden="true"></i>
+                                      {{searchData.UpgradeHotel[i].Cost  | round}}
+                                  </p>
+                                <span>Per person</span>
+                              </div>
+                            </div>
+                          </div>
+                    </div>                    
+                  
+                  </div>
+                </div>
+                <!-- <span *ngIf="searchData.AddOn.length>0">
+                  <div align="center" [innerHTML]="searchData.AddOn[0].TourName | safeHtml"></div>
+                </span> -->
+              </div>
+
+              <div class="itinerary-box">
+                  <h2>Tour List</h2>
+                  <div class="pckge-box">
+                    <div class="pkg-inner">
+                      <div class="inner-cols" *ngFor="let tour of searchData.AddOn; let i=index">
+                        <div class="row">
+                          <div class="col-md-8">
+                              <div class="custom-control custom-checkbox">
+                                  <input type="checkbox" class="custom-control-input" id="pkgtoutprice{{i+1}}" value="{{tour.TourCost  | round}}" (click)="onCheckboxChangeTour(i+1,tour.TourCost)">
+                                  <label class="custom-control-label" for="pkgtoutprice{{i+1}}">{{tour.TourName}}</label>
+                                </div>
+                                 <h3></h3>
+                            <p [innerHTML]="tour.TourDescription  | safeHtml">
+
+                            </p>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="pckg-price">
+                                
+                                  <p *ngIf="searchData.Currency=='INR'">
+                                    <i class="fa fa-inr" aria-hidden="true"></i>
+                                    {{tour.TourCost  | round}}
+                                </p>
+                                <p *ngIf="searchData.Currency=='USD'">
+                                    <i class="fa fa-usd" aria-hidden="true"></i>
+                                    {{tour.TourCost  | round}}
+                                </p>
+                              <span>Per person</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>                    
+                    
+                    </div>
+                  </div>
+                  <!-- <span *ngIf="searchData.AddOn.length>0">
+                    <div align="center" [innerHTML]="searchData.AddOn[0].TourName | safeHtml"></div>
+                  </span> -->
+                </div>
+
+
+
+            </div>
+
+            <div class="tab-pane fade" id="Document" role="tabpanel" aria-labelledby="Document-tab">
+
+              <div class="hotl-detl-title">Visa Requirment</div>
+              <ul class="hotl-facl-ar">
+                <p [innerHTML]="searchData.VisaDocument  | safeHtml"></p>
+              </ul>
+
+
+              <ul class="itnery-bx">
+                <p [innerHTML]="searchData.DocumentRequired | safeHtml"></p>
+              </ul>
+            </div>
+
+            <div class="tab-pane fade" id="t-c" role="tabpanel" aria-labelledby="t-c-tab">
+
+              <div class="hotl-detl-title">Payment Terms</div>
+              <ul class="itinerary-box">
+                <P [innerHTML]="searchData.PaymentTearms | safeHtml"></P>
+              </ul>
+
+              <div class="hotl-detl-title">Cancellation Policy</div>
+              <ul class="itinerary-box">
+                <p [innerHTML]="searchData.CancellationPolicy | safeHtml"></p>
+
+              </ul>
+
+              <div class="hotl-detl-title">Notes (T&C)</div>
+              <div class="itinerary-box">
+
+                <ul class="itnery-bx" *ngFor="let tr of searchData.TearmsAndCond">
+                  <p class="itnery-bx" [innerHTML]="tr.Notes | safeHtml"></p>
+
+                </ul>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<!-- book popup box -->
+
+
+<div class="book-popup">
+  <div class="modal fade" id="book-popup">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+
+        <div class="modal-header">
+          <h4 class="modal-title">Book Now</h4>
+          <b style="display:none" id="dayofm">{{getday|date:"d"}}</b>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+
+        <div class="modal-body">
+          <div class="inner-popbook">
+
+            <div class="pop-area">
+              <h4><span> Select</span> Start Date</h4>
+              <div class="underline1"></div>
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label>Year:</label>
+                    <select class="form-control" id="Year" [(ngModel)]="PriceCal.SelectdYear" name="SelectdYear"
+                      (change)="onChange($event.target.value)" placeholder="--Select Year--" required>
+                      <option>--Select Year--</option>
+                      <option *ngFor="let yr of travelYear">{{yr}}</option>
+
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label>Month:</label>
+                    <select class="form-control" [(ngModel)]="PriceCal.selectdMonth" name="selectdMonth" (change)="onChangeM($event.target.value)"
+                      placeholder="--Select Year--" required>
+                      <option>-- select Month--</option>
+                      <option *ngFor="let m of travelMonth">{{m}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label>Date:</label>
+                    <select class="form-control" [(ngModel)]="PriceCal.selectedDay" name="selectedDay" required>
+                      <option>--Travel Day--</option>
+                      <option *ngFor="let day of travelDay">{{day}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!---2-box-end-->
+            <div class="pop-area">
+              <h4><span> Price</span> Details</h4>
+              <div class="underline1"></div>
+              <div class="row">
+                <div class="table-area-book">
+                  <table class="table table-striped table-bordered">
+                    <thead>
+                      <tr>
+                        <th>Twin</th>
+                        <th>Triple</th>
+                        <th>Single</th>
+                        <th>CWB</th>
+                        <th>CNB </th>
+                        <th>Infant</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>{{searchData.Twin | round}}</td>
+                        <td>{{searchData.Triple | round}}</td>
+                        <td>{{searchData.SGL | round }}</td>
+                        <td>{{searchData.CWB | round}}</td>
+                        <td>{{searchData.CNB | round}}</td>
+                        <td>{{searchData.Infant | round}}</td>
+                      </tr>
+                      <!-- <tr>
+                          <td>Double</td>
+                          <td>₹ 28999</td>
+                          <td>N/A</td>
+                          <td>₹ 8000</td>
+                        </tr> -->
+
+                    </tbody>
+                  </table>
+                </div>
+
+              </div>
+            </div>
+            <!---3-box-end-->
+            <div class="pop-area">
+              <h4><span>No. of</span> Rooms</h4>
+              <div class="underline1"></div>
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label>Room:</label>
+                    <select class="form-control" [(ngModel)]="model.noofroom" (change)="roomchange()" name="noofroom">
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="room-box-book" *ngIf="roomone">
+                <span class="room-info">Room 1</span>
+                <div class="row">
+
+                  <!-- <div class="col-md-4">
+                      <div class="form-group">
+                        <label>Room Type:</label>
+                        <select class="form-control" [(ngModel)]="model.roomType1" name="roomType1">
+                          <option>Single</option>
+                          <option>Double</option>
+                        </select>
+                      </div>
+                    </div> -->
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Adult(s):</label>
+                      <select class="form-control" [(ngModel)]="model.Adult1" name="Adult1" (change)="Adultprice1()">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>CWB :</label>
+                      <select class="form-control" [(ngModel)]="model.CWB1" name="CWB1" (change)="Adultprice1()"
+                        placeholder="NA">
+                        <option>NA</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+
+
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>CNB :</label>
+                      <select class="form-control" [(ngModel)]="model.CNB1" name="CNB1" (change)="Adultprice1()"
+                        placeholder="NA">
+                        <option>NA</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>Infant :</label>
+                      <select class="form-control" [(ngModel)]="model.Infant1" name="Infant1" (change)="Adultprice1()"
+                        placeholder="NA">
+                        <option>NA</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="price-box-pop">
+                  <strong>Price</strong>
+                  <span *ngIf="price>0">
+                    <span *ngIf="searchData.Currency=='INR'"> {{price | round}} </span>
+                    <span *ngIf="searchData.Currency=='USD'"> {{price | round}} </span>
+                  </span>
+                  <span *ngIf="price==0">
+                    <span *ngIf="searchData.Currency=='INR'"> {{searchData.Twin | round}} </span>
+                    <span *ngIf="searchData.Currency=='USD'"> {{searchData.Twin | round}} </span>
+                  </span>
+
+                  <span><strong>CWB</strong> = child with bed, <strong>*CNB</strong> = child without bed, <strong>N/A</strong>
+                    = Not Allowed</span>
+                </div>
+              </div>
+              <div class="room-box-book" *ngIf="roomtwo">
+                <span class="room-info">Room 2</span>
+                <div class="row">
+
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Room Type:</label>
+                      <select class="form-control" [(ngModel)]="model.roomType2" name="roomType2">
+                        <option>Single</option>
+                        <option>Double</option>
+
+
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Adult(s):</label>
+                      <select class="form-control" [(ngModel)]="model.Adult2" name="Adult2" (change)="Adultprice2()">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>CWB :</label>
+                      <select class="form-control" [(ngModel)]="model.CWB2" name="CWB2" (change)="Adultprice2()">
+                        <option>NA</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+
+
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>CNB :</label>
+                      <select class="form-control" [(ngModel)]="model.CNB2" name="CNB2" (change)="Adultprice2()">
+                        <option>NA</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>Infant :</label>
+                      <select class="form-control" [(ngModel)]="model.Infant2" name="Infant2" (change)="Adultprice2()">
+                        <option>NA</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="price-box-pop">
+                  <strong>Price</strong>
+
+                  <span *ngIf="price1>0">
+                    <span *ngIf="searchData.Currency=='INR'"> {{price1 | round}} </span>
+                    <span *ngIf="searchData.Currency=='USD'"> {{price1 | round}} </span>
+                  </span>
+                  <span *ngIf="price1==0">
+                    <span *ngIf="searchData.Currency=='INR'"> {{searchData.Twin | round}} </span>
+                    <span *ngIf="searchData.Currency=='USD'"> {{searchData.Twin | round}} </span>
+                  </span>
+                  <span><strong>CWB</strong> = child with bed, <strong>*CNB</strong> = child without bed, <strong>N/A</strong>
+                    = Not Allowed</span>
+                </div>
+              </div>
+              <div class="room-box-book" *ngIf="roomthree">
+                <span class="room-info">Room 3</span>
+                <div class="row">
+
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Room Type:</label>
+                      <select class="form-control" [(ngModel)]="model.roomType3" name="roomType3">
+                        <option>Single</option>
+                        <option>Double</option>
+
+
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Adult(s):</label>
+                      <select class="form-control" [(ngModel)]="model.Adult3" name="Adult3" (change)="Adultprice3()">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>CWB *:</label>
+                      <select class="form-control" [(ngModel)]="model.CWB2" name="CWB2" (change)="Adultprice3()">
+                        <option>NA</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+
+
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>CNB :</label>
+                      <select class="form-control" [(ngModel)]="model.CNB2" name="CNB2" (change)="Adultprice3()">
+                        <option>NA</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>Infant :</label>
+                      <select class="form-control" [(ngModel)]="model.Infant2" name="Infant2" (change)="Adultprice3()">
+                        <option>NA</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="price-box-pop">
+                  <strong>Price</strong>
+
+                  <span *ngIf="price2>0">
+                    <span *ngIf="searchData.Currency=='INR'"> {{price2 | round}} </span>
+                    <span *ngIf="searchData.Currency=='USD'"> {{price2 | round}} </span>
+                  </span>
+                  <span *ngIf="price2==0">
+                    <span *ngIf="searchData.Currency=='INR'"> {{searchData.Twin | round}} </span>
+                    <span *ngIf="searchData.Currency=='USD'"> {{searchData.Twin | round}} </span>
+                  </span><span><strong>CWB</strong> = child with bed, <strong>*CNB</strong> = child without bed,
+                    <strong>N/A</strong>
+                    = Not Allowed</span>
+                </div>
+              </div>
+
+            </div>
+            <!---4-box-end-->
+            <div class="pop-area">
+              <h4><span> Availability</span> Status</h4>
+              <div class="underline1"></div>
+              <div class="row">
+                <a href="#" class="a-book"> On-Request (What does this means?)</a>
+              </div>
+            </div>
+            <!---5-box-end-->
+            <div class="pop-area">
+              <h4><span>Pricing</span> </h4>
+              <div class="underline1"></div>
+              <div class="row">
+                <span class="total-book">Total Price for {{adultCount | round}} Adult(s), {{CWBCount | round}} Child,
+                  {{InfantCount | round}}
+                  Infant:</span>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Total Package Amount</th>
+                      <th><span *ngIf="searchData.Currency=='INR'"> {{TotalPrice | round}} </span>
+                        <span *ngIf="searchData.Currency=='USD'"> {{TotalPrice | round}} </span></th>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Booking Amount<br>
+                        (Min. amt. to be paid now to secure booking)</td>
+                      <td><span *ngIf="searchData.Currency=='INR'"> {{minimumDip | round}} </span>
+                        <span *ngIf="searchData.Currency=='USD'"> {{minimumDip | round}} </span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Balance Amount<br>(To be paid later)</td>
+                      <td><span *ngIf="searchData.Currency=='INR'"> {{BalanceAmount | round}} </span>
+                        <span *ngIf="searchData.Currency=='USD'"> {{BalanceAmount | round}} </span></td>
+                    </tr>
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!---6-box-end-->
+          </div>
+        </div>
+
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="holidayPrebooking()">Proceed</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+

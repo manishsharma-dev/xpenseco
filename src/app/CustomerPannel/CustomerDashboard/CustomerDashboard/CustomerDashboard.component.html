@@ -1,0 +1,377 @@
+<style>
+  .help-block {
+      color: red
+  }
+
+  .regist {
+      width: 100%;
+      max-width: 100%;
+      padding: 3em 3em 3em 3em;
+      margin: 0em auto;
+      background-color: #fff;
+      border-radius: 0px 0px 5px 5px;
+      box-shadow: 0px 3px 10px -2px rgba(0, 0, 0, 0.2);
+  }
+</style>
+<site-header></site-header>
+<div class="register-area">
+  <div class="container">
+      <div class="row">
+          <div class="col-lg-12">
+              <h3>Company Profile</h3>
+          </div>
+      </div>
+      <br>
+      <form name="form" (ngSubmit)="f.form.valid && updatprofile()" #f="ngForm" novalidate>
+      <div class="regist">
+          <div class="row">
+              <div class="col-lg-2">
+                  <div class="form-group">
+                      <label for="">Salution</label>
+                  </div>
+              </div>
+              <div class="col-lg-3">
+                  <div class="form-group" >
+                      <select class="form-control" name="Title"   [(ngModel)]="model.Title" #Title="ngModel"
+                      required >
+                          <option>Mr</option>
+                          <option>Mrs</option>
+                          <option>Ms</option>
+                          <option>Miss</option>
+                          <option>Dr</option>
+                          <option>Prof</option>
+                          <option>Rev</option>
+                          <option>Other</option>
+                      </select>
+                  </div>
+              </div>
+              <div class="col-lg-2">
+                  <div class="form-group">
+                      <label for="">First Name</label>
+                  </div>
+              </div>
+              <div class="col-lg-3">
+                  <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !FirstName.valid }">
+                      <input type="text"  class="form-control" placeholder="Enter First Name" name="FirstName" [(ngModel)]="model.FirstName" #FirstName="ngModel"
+                      required />
+                      <div *ngIf="f.submitted && !FirstName.valid" class="help-block">Phone is required</div>
+                  </div>
+              </div>
+              <div class="col-lg-2">
+                  <img src="assets/images/travel-fare-img/ss-logo.png" class="img-fluid">
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-lg-2">
+                  <div class="form-group">
+                      <label for="">last Name</label>
+                  </div>
+              </div>
+              <div class="col-lg-3">
+                  <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !LastName.valid }">
+                      <input type="text"   class="form-control" placeholder="Enter last Name" name="lastName" [(ngModel)]="model.LastName" #LastName="ngModel"
+                      required />
+                      <div *ngIf="f.submitted && !LastName.valid" class="help-block">Phone is required</div>
+                  </div>
+              </div>
+              <div class="col-lg-2">
+                  <div class="form-group">
+                      <label for="">Age</label>
+                  </div>
+              </div>
+              <div class="col-lg-3">
+                  <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !Age.valid }">
+                      <input type="text"  class="form-control" placeholder="Enter Age" name="Age" [(ngModel)]="model.Age" #Age="ngModel"
+                      required />
+                      <div *ngIf="f.submitted && !Age.valid" class="help-block">Age is required</div>
+                  </div>
+              </div>
+              <div class="col-lg-2">
+                      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !ProfilePic.valid }">
+                  <input type="file" name="ProfilePic"  class="form-control" [(ngModel)]="model.ProfilePic" #ProfilePic="ngModel"
+                  required />
+                  <div *ngIf="f.submitted && !ProfilePic.valid" class="help-block">Profile Pic is required</div>
+              </div>
+          </div>
+          </div>
+          <div class="row">
+              <div class="col-lg-2">
+                  <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !Age.valid }">
+                      <label for="">Gender</label>
+                  </div>
+              </div>
+              <div class="col-lg-3">
+                  <div class="form-group" >
+                      <select class="form-control"  name="Gender" [(ngModel)]="model.Gender" #Gender="ngModel"
+                      required >
+                          <option>Male</option>
+                          <option>Female</option>
+                      </select>
+                  </div>
+              </div>
+              <div class="col-lg-2">
+                  <div class="form-group">
+                      <label for="">Email</label>
+                  </div>
+              </div>
+              <div class="col-lg-3">
+                  <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !Email.valid }">
+                      <input type="text"  class="form-control" placeholder="Enter Email" name="Email" [(ngModel)]="model.Email" #Email="ngModel"
+                      required />
+                      <div *ngIf="f.submitted && !Email.valid" class="help-block">Email is required</div>
+                  </div>
+              </div>
+              <div class="col-lg-2">
+                  <p style="text-align: justify">
+                      Choose 200*60 Jpg/gif/png image for better viewing
+                  </p>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-lg-2">
+                  <div class="form-group">
+                      <label for="">User ID</label>
+                  </div>
+              </div>
+              <div class="col-lg-3">
+                  <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !UserID.valid }">
+                      <input type="text"  class="form-control" placeholder="User ID" name="UserID"  [(ngModel)]="model.UserID" #UserID="ngModel"
+                      required />
+                      <div *ngIf="f.submitted && !UserID.valid" class="help-block">Email is required</div>
+                  </div>
+              </div>
+              <div class="col-lg-2">
+                  <div class="form-group">
+                      <label for="">Fund Balance</label>
+                  </div>
+              </div>
+              <div class="col-lg-3">
+                  <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !FundBalance.valid }">
+                      <input type="text"  class="form-control" placeholder="Fund Balance" name="FundBalance" [(ngModel)]="model.FundBalance" #FundBalance="ngModel"
+                      required />
+                      <div *ngIf="f.submitted && !FundBalance.valid" class="help-block">Fund Balance is required</div>
+                  </div>
+              </div>
+              <div class="col-lg-2">
+                  <button type="submit" class="btn btn-sm btn-info">Upload</button>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-lg-2">
+                  <div class="form-group">
+                      <label for="">Credit Limit</label>
+                  </div>
+              </div>
+              <div class="col-lg-3">
+                  <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !CreditLimit.valid }">
+                      <input type="text"  class="form-control" placeholder="Enter Credit Limit" name="CreditLimit" [(ngModel)]="model.CreditLimit" #CreditLimit="ngModel"
+                      required />
+                      <div *ngIf="f.submitted && !CreditLimit.valid" class="help-block">Credit Limit is required</div>
+                  </div>
+              </div>
+              <div class="col-lg-2">
+                  <div class="form-group">
+                      <label for="">Due</label>
+                  </div>
+              </div>
+              <div class="col-lg-3">
+                  <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !Due.valid }">
+                      <input type="text"  class="form-control" placeholder="Enter Due" name="Due" [(ngModel)]="model.Due" #Due="ngModel"
+                      required />
+                      <div *ngIf="f.submitted && !Due.valid" class="help-block">Due is required</div>
+                  </div>
+              </div>
+              <div class="col-lg-2">
+
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-lg-2">
+                  <div class="form-group">
+                      <label for="">Company</label>
+                  </div>
+              </div>
+              <div class="col-lg-3">
+                  <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !Company.valid }">
+                      <input type="text"  class="form-control" placeholder="Enter Company" name="Company" [(ngModel)]="model.Company" #Company="ngModel"
+                      required />
+                      <div *ngIf="f.submitted && !Company.valid" class="help-block">Company is required</div>
+                  </div>
+              </div>
+              <div class="col-lg-2">
+                  <div class="form-group" >
+                      <label for="">Pan Number</label>
+                  </div>
+              </div>
+              <div class="col-lg-3">
+                  <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !PanNumber.valid }">
+                      <input type="text" class="form-control" placeholder="Enter Pan Number" name="PanNumber" [(ngModel)]="model.PanNumber" #PanNumber="ngModel"
+                          required />
+                      <div *ngIf="f.submitted && !PanNumber.valid" class="help-block">Pan Number is required</div>
+                  </div>
+              </div>
+              <div class="col-lg-2">
+
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-lg-2">
+                  <div class="form-group">
+                      <label for="">Name as on PAN card</label>
+                  </div>
+              </div>
+              <div class="col-lg-3">
+                  <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !NameOnPan.valid }">
+                      <input type="text"  class="form-control" placeholder="Enter Name as on PAN card" name="NameOnPan" [(ngModel)]="model.NameOnPan" #NameOnPan="ngModel"
+                      required />
+                      <div *ngIf="f.submitted && !NameOnPan.valid" class="help-block">Pan Name is required</div>
+                  </div>
+              </div>
+              <div class="col-lg-2">
+                  <div class="form-group">
+                      <label for="">Address</label>
+                  </div>
+              </div>
+              <div class="col-lg-3">
+                  <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !Address.valid }">
+                      <input type="text"  class="form-control" placeholder="Enter Address" name="Address" [(ngModel)]="model.Address" #Address="ngModel"
+                      required />
+                      <div *ngIf="f.submitted && !Address.valid" class="help-block">Address is required</div>
+                  </div>
+              </div>
+              <div class="col-lg-2">
+
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-lg-2">
+                  <div class="form-group">
+                      <label for="">City</label>
+                  </div>
+              </div>
+              <div class="col-lg-3">
+                  <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !City.valid }">
+                      <input type="text"  class="form-control" placeholder="Enter City" name="City" [(ngModel)]="model.City" #City="ngModel"
+                      required />
+                      <div *ngIf="f.submitted && !City.valid" class="help-block">City is required</div>
+                  </div>
+              </div>
+              <div class="col-lg-2">
+                  <div class="form-group">
+                      <label for="">State</label>
+                  </div>
+              </div>
+              <div class="col-lg-3">
+                  <div class="form-group">
+                      <select class="form-control"  name="State" [(ngModel)]="model.State" #State="ngModel">
+                          <option>Andhra Pradesh</option>
+                          <option>Telangana</option>
+                          <option>Karnataka</option>
+                          <option> Uttar Pradesh</option>
+                          <option> Maharashtra</option>
+                          <option> Bihar</option>
+                          <option>West Bengal</option>
+                          <option> Tamil Nadu</option>
+                          <option>  Madhya Pradesh</option>
+                          <option>  Rajasthan</option>
+                          <option> Gujarat</option>
+                          <option>Orissa</option>
+                          <option>Kerala</option>
+                          <option> Jharkhand</option>
+                          <option>  Assam</option>
+                          <option>  Punjab</option>
+                          <option> Haryana</option>
+                          <option>Chhattisgarh</option>
+                          <option> Delhi</option>
+                          <option> Jammu and Kashmir</option>
+                          <option>  Uttarakhand</option>
+                          <option> Himachal Pradesh</option>
+                          <option> Tripura</option>
+                          <option>  Meghalaya</option>
+                          <option>  Manipur</option>
+                          <option>   Nagaland</option>
+                          <option>  Goa</option>
+                          <option> Arunachal Pradesh</option>
+                          <option> Puducherry</option>
+                          <option>  Chandigarh</option>
+                          <option>   Mizoram</option>
+                          <option>    Sikkim</option>
+                          <option>   Andaman and Nicobar Islands</option>
+                          <option>Dadra and Nagar Haveli</option>
+                          <option>  Daman and Diu</option>
+                          <option>   Lakshadweep</option>
+                      </select>
+                  </div>
+              </div>
+              <div class="col-lg-2">
+
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-lg-2">
+                  <div class="form-group">
+                      <label for="">Pin Code</label>
+                  </div>
+              </div>
+              <div class="col-lg-3">
+                  <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !PinCode.valid }">
+                      <input type="text"  class="form-control" placeholder="Enter PinCode" name="PinCode" [(ngModel)]="model.PinCode" #PinCode="ngModel" required/>
+                      <div *ngIf="f.submitted && !PinCode.valid" class="help-block">Pin Code is required</div>
+                  </div>
+              </div>
+              <div class="col-lg-2">
+                  <div class="form-group">
+                      <label for="">Country</label>
+                  </div>
+              </div>
+              <div class="col-lg-3">
+                  <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !Country.valid }">
+                      <input type="text"  class="form-control" placeholder="Enter Country" name="PanNumber" [(ngModel)]="model.Country" #Country="ngModel" required/>
+                      <div *ngIf="f.submitted && !Country.valid" class="help-block">Country is required</div>
+                  </div>
+              </div>
+              <div class="col-lg-2">
+
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-lg-2">
+                  <div class="form-group">
+                      <label for="">Phone</label>
+                  </div>
+              </div>
+
+              <div class="col-lg-3">
+                  <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !Phone.valid }">
+                      <input type="text"  class="form-control" placeholder="Enter Phone" name="Phone" [(ngModel)]="model.Phone" #Phone="ngModel" required/>
+                      <div *ngIf="f.submitted && !Phone.valid" class="help-block">Phone is required</div>
+                  </div>
+              </div>
+              <div class="col-lg-2">
+                  <div class="form-group">
+                      <label for="">Mobile</label>
+                  </div>
+              </div>
+              <div class="col-lg-3">
+                  <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !Mobile.valid }">
+                      <input type="text"  class="form-control" placeholder="Enter Mobile" name="Mobile" [(ngModel)]="model.Mobile" #Mobile="ngModel" required/>
+                      <div *ngIf="f.submitted && !Mobile.valid" class="help-block">Phone is required</div>
+                  </div>
+              </div>
+              <div class="col-lg-2">
+
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-lg-5"></div>
+              <div class="col-lg-2">
+                  <button type="submit" (click)="updatprofile" class="btn btn-md btn-primary">Update</button>
+              </div>
+              <div class="col-lg-5"></div>
+          </div>
+      </div>
+      </form>
+      <br>
+      <br>
+  </div>
+</div>

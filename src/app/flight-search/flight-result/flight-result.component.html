@@ -1,0 +1,1286 @@
+<site-header></site-header>
+<ng-template #loading>
+  <!-- <div class="load-back">
+    <div class="search-loading">
+      <h4>We are seeking best result for you</h4>
+      <p class="load-p">Please wait this will take few seconds only !!!</p>
+
+      <img src="assets/images/travel-fare-img/loading.gif">
+
+      <div class="row load-details">
+
+        <div class="col-md-2">
+          <img class="img-form-2" src="assets/images/travel-fare-img/departures.png">
+          <h3>{{masterrequest.Request.Origin}}</h3>
+        </div>
+        <div class="col-md-3">
+          <p class="p-date"> {{masterrequest.Request.DepartureDate}}</p>
+        </div>
+        <div class="col-md-2">
+          <img class="img-form-2" src="assets/images/travel-fare-img/arrival.png">
+          <h3>{{masterrequest.Request.Destination}}</h3>
+        </div>
+      </div>
+
+    </div>
+  </div> -->
+  <section  class="result-fly-2">
+    <div class="container">
+      <div class="row">
+        <div class="loader-hotel">
+          <img class="img-fluid" src="/assets/images/fly.gif"></div>
+        </div>
+      </div>
+    </section>
+
+
+</ng-template>
+<ng-template #loading2>
+  <div class="row">
+    <div class="col-lg-12" style="text-align: center">
+      <img src="assets/images/loader.gif" class="load-img">
+    </div>
+  </div>
+</ng-template>
+
+
+<div id="pageContent">
+  <!--modify-search-box-->
+
+  <div class="search-page-modify" *ngIf="isresult">
+    <div class="container">
+      <div class="search-page-inner">
+        <div class="row radio-btn">
+          <div class="custom-control custom-radio custom-control-inline" (click)="onewayy()">
+            <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
+            <label class="custom-control-label" for="customRadioInline1">Oneway</label>
+          </div>
+          <div class="custom-control custom-radio custom-control-inline" (click)="Rturny()">
+            <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
+            <label class="custom-control-label" for="customRadioInline2">Return</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-2">
+            <div class="form-group">
+              <div class="autocomplete-wrapper">
+                <input class="form-control" id="source" type="text" placeholder="{{source}}" [(ngModel)]="ClientName"
+                  (click)='searchClient(ClientName)' (keyup)='searchClient(ClientName)' />
+               
+
+                <input class="form-control" id="dest" type="hidden" />
+                <input type="hidden" id="arcode">
+                <input type="hidden" id="arname">
+                <input class="form-control" id="souCity" type="hidden" />
+                <input class="form-control" id="souCountry" type="hidden" />
+                <div class="autocompleted-results" id="ar1" style="position: absolute; z-index: 999999;">
+                  <ul style="list-style-type: none;">
+                    <li *ngFor="let r of clients| slice:0:7">
+                      <a (click)="onselectClient(r)">
+                        <div class="autocompleted-result">
+                          <div class="autocompleted-location">
+                            <div class="row">
+                              <div class="col-md-9">
+                                <span class="city-name">{{r.CityName }}
+                                  <span>{{ r.AirportCode }}</span>
+                                </span>
+                                <span class="air-code">{{r.AirportName}}</span>
+                              </div>
+                              <div class="col-md-3">
+                                <ul class="flg-img">
+                                  <li> {{r.Countryname}}</li>
+                                  <li>
+                                    <img src="/assets/CountryImage/{{r.Countryname|lowercase}}.svg"> </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <div class="autocomplete-wrapper">
+                <input class="form-control" id="txtDestination" type="text" placeholder="{{Denation}}" [(ngModel)]="ClientName1"
+                  (click)='searchClientd(ClientName1)' (keyup)='searchClientd(ClientName1)' />
+               
+                <input class="form-control" id="desti" type="hidden" />
+                <input class="form-control" id="desCountry" type="hidden" />
+                <input class="form-control" id="desCity" type="hidden" />
+                <div class="autocompleted-results" id="ar2" style="position: absolute; z-index: 999999;">
+                  <ul style="list-style-type: none;">
+                    <li *ngFor="let r of clients1| slice:0:7">
+                      <a (click)="onselectClientd(r)">
+                        <div class="autocompleted-result">
+                          <div class="autocompleted-location">
+                            <div class="row">
+                              <div class="col-md-9">
+                                <span class="city-name">{{r.CityName }}
+                                  <span>{{ r.AirportCode }}</span>
+                                </span>
+                                <span class="air-code">{{r.AirportName}}</span>
+                              </div>
+                              <div class="col-md-3">
+                                <ul class="flg-img">
+                                  <li> {{r.Countryname}}</li>
+                                  <li>
+                                    <img src="/assets/CountryImage/{{r.Countryname|lowercase}}.svg"> </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <input class="form-control" [(bsValue)]="newVar" placeholder="{{Derture}}" name="DepartureDate" ngModel
+              value="{{ newVar | date:'yyyy-MM-dd' }}" bsDatepicker autocomplete="off" [bsConfig]="datepickerconfig"
+              [minDate]="minDate" id="FromDate" [maxDate]="maxDate">
+            <!-- <input type="text" [(ngModel)]="name.Request.DepartureDate" name="DepartureDate" style="cursor:pointer;" class="form-control"
+                                        placeholder="{{Derture}}" [bsConfig]="datepickerconfig" id="FromDate" placement="right" [(bsValue)]="newVar"
+                                        value="{{ newVar | date:'yyyy-MM-dd' }}" aria-disabled="true" autocomplete="off" bsDatepicker
+                                        (click)="disableRetunDate();"> -->
+            <input type="hidden" name="Departure" id="FromDate" />
+           
+          </div>
+          <div class="col-md-2" (click)="enableDate();">
+            <input class="form-control" placeholder="{{Rtun}}" [(bsValue)]="returnVar" ngModel value="{{ returnVar | date:'yyyy-MM-dd' }}"
+              bsDatepicker id="ToDate" [bsConfig]="datepickerconfigto" [minDate]="minDate" autocomplete="off" (click)="setToDate();"
+              [maxDate]="maxDate" [disabled]="isDisabled1()">
+            <!-- <input type="text" [(ngModel)]="name.Request.ReturnDate" name="ReturnDate1" class="form-control" id="ToDate"
+                                        placeholder="Denation" [bsConfig]="datepickerconfigto" placement="right" [(bsValue)]="returnVar"
+                                        value="{{ returnVar | date:'yyyy-MM-dd' }}" aria-disabled="true" autocomplete="off" bsDatepicker
+                                        (click)="setToDate();" ng-reflect-bs-value="Return Date"> -->
+            <input type="hidden" name="Return" id="ToDatee" />
+          
+          </div>
+
+          <div class="col-md-2 traveller-home">
+            <!---<div class="form-group">
+                            <input type="text" class="form-control" placeholder="Traveller(S)">
+                            <img src="images/friends.png">
+                        </div>--->
+
+            <div class="dropdown">
+              <button class="dropbtn"> Traveller(S)</button>
+              <div class="dropdown-content">
+
+                <div class="row" *ngIf="pClass">
+                  <div class="col-md-12 inner-traveller">
+
+                    <div class="row">
+                      <div class="col-md-5">
+                        <h3>Adult</h3>
+                        <span>12+ Years</span>
+                      </div>
+                      <div class="col-md-7">
+                        <div class="form-group">
+                          <select class="form-control" (change)="totpassenger()" [(ngModel)]="name.Request.AdultCount"
+                            name="AdultCount">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-5">
+                        <h3>Childeren</h3>
+                        <span>2-12 Years</span>
+
+                      </div>
+                      <div class="col-md-7">
+                        <div class="form-group">
+
+                          <select class="form-control" (change)="totpassenger()" [(ngModel)]="name.Request.ChildCount"
+                            name="ChildCount">
+                            <option>0</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-5">
+                        <h3>Infant</h3>
+                        <span>0-23 months</span>
+                      </div>
+                      <div class="col-md-7">
+                        <div class="form-group">
+
+                          <select class="form-control" (change)="totpassenger()" [(ngModel)]="name.Request.InfantCount"
+                            name="InfantCount">
+                            <option>0</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+          </div>
+          <div class="col-md-2">
+            <button type="button" class="btn btn-primary" (click)='SearchFlight(name)'>Search</button>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+  <!--modify-search-box-end-->
+
+
+
+
+  <div *ngIf="filterresult  else loading;"></div>
+
+  <div class="search-page-main" *ngIf="isresult">
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 fltr-dn">
+          <div class="filter-box-main">
+              <div class="filter-box">
+                  <div class="box-inner">
+                      <div class="email-box">
+                          <a (click)="RemoveFilter()" style="color:#38393a;cursor:pointer"><i class="fa fa-remove"></i>         Remove Filter </a>
+                        </div>
+                    </div>
+                </div>
+            <div class="email-box">
+              <a href="#" data-toggle="modal" data-target="#email-pop"><i class="fa fa-envelope"></i>Email This Search</a>
+            </div>
+            <!---email-pop-->
+            <div class="modal fade" id="email-pop">
+              <div class="modal-dialog">
+                <div class="modal-content">
+
+                  <!-- Modal Header -->
+                  <div class="modal-header">
+                    <h4 class="modal-title">Email This Search</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+
+                  <!-- Modal body -->
+                  <div class="modal-body">
+                    <form>
+                      <div class="form-group">
+                        <label>Your Name:</label>
+                        <input type="text" class="form-control">
+                      </div>
+
+                      <div class="form-group">
+                        <label>Your Email:</label>
+                        <input type="text" class="form-control">
+                      </div>
+                      <div class="form-group">
+                        <label>To:</label>
+                        <input type="text" class="form-control">
+                      </div>
+                      <div class="form-group">
+                        <label>Subject:</label>
+                        <input type="text" class="form-control">
+                      </div>
+                      <div class="form-group">
+                        <label for="comment">Message:</label>
+                        <textarea class="form-control" rows="3"></textarea>
+                      </div>
+                    </form>
+                  </div>
+
+                  <!-- Modal footer -->
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <!---email-pop-->
+
+
+            <div class="filter-box">
+              <div class="box-inner">
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                  <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                      <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
+                          aria-expanded="true" aria-controls="collapseOne">
+                          <i aria-hidden="true" class="fa fa-inr"></i>Price Range
+                        </a>
+                      </h4>
+                    </div>
+                    <div class="custom-slider">
+                    <ng5-slider [(value)]="Minprice" [(highValue)]="Maxprice" [options]="options" (userChangeEnd)="onUserChangeEnd($event)"></ng5-slider>
+                  </div>
+                    <!-- <div id="collapseOne" class="panel-collapse collapse in show" role="tabpanel" aria-labelledby="headingOne">
+                      <div class="panel-body">
+                        <div class="onwrd-mb" *ngIf="return">
+                          <b>Onward</b>
+                        </div>
+
+                        <ion-range-slider style="background-color: #fba618;" #sliderElement type="double" min={{Minprice|round}}
+                          max={{Maxprice|round}} from={{Minprice|round}} from_min={{Minprice|round}} from_max={{Maxprice|round}}
+                          from_shadow="true" to={{Maxprice|round}} to_min={{Minprice|round}} to_max={{Maxprice|round}}
+                          to_shadow="true" prefix="Rs: " decorate_both="false" (onChange)="myOnChange($event)">
+                        </ion-range-slider>
+                        <div class="" *ngIf="return">
+                          <b>Return</b>
+                        </div>
+                        <div class="rten-box" *ngIf="return">
+                          <ion-range-slider style="background-color: #fba618;" #sliderElement type="double" min={{Minprice|round}}
+                            max={{Maxprice|round}} from={{Minprice|round}} from_min={{Minprice|round}} from_max={{Maxprice|round}}
+                            from_shadow="true" to={{Maxprice|round}} to_min={{Minprice|round}} to_max={{Maxprice|round}}
+                            to_shadow="true" prefix="Rs: " decorate_both="false" (onChange)="myOnChangeR($event)">
+                          </ion-range-slider>
+                        </div>
+                      </div>
+                    </div> -->
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+
+            <div class="filter-box">
+              <div class="box-inner">
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                  <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingtwo">
+                      <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsetwo"
+                          aria-expanded="true" aria-controls="collapsetwo">
+                          <i class="fa fa-hand-paper-o" aria-hidden="true"></i>No. of Stops
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsetwo" class="panel-collapse collapse in show" role="tabpanel" aria-labelledby="headingtwo">
+                      <div class="panel-body">
+                        <div class="onwrd-mb" *ngIf="return">
+                          <b>Onward</b>
+                        </div>
+                        <a class="stops" (click)="selectNoOfStops(1)">
+                          <span class="stop-txt">
+                            0
+                          </span>
+                          <span class="stop-txt-right">
+                            Stop
+                          </span>
+                          <span class="stop_price">
+                          </span>
+                        </a>
+                        <a class="stops" (click)="selectNoOfStops(2)">
+                          <span class="stop-txt">
+                            1
+                          </span>
+                          <span class="stop-txt-right">
+                            Stop
+                          </span>
+                          <span class="stop_price">
+                          </span>
+                        </a>
+                        <a class="stops">
+                          <span class="stop-txt" (click)="selectNoOfStops(3)">
+                            2
+                          </span>
+                          <span class="stop-txt-right">
+                            Stop
+                          </span>
+                          <span class="stop_price">
+                          </span>
+                        </a>
+
+                        <div class="onwrd-mb" *ngIf="return">
+                          <b>Return</b>
+                        </div>
+
+                        <div *ngIf="return">
+                          <a class="stops" (click)="selectNoOfStopsR(1)">
+                            <span class="stop-txt">
+                              0
+                            </span>
+                            <span class="stop-txt-right">
+                              Stop
+                            </span>
+                            <span class="stop_price">
+                            </span>
+                          </a>
+                          <a class="stops" (click)="selectNoOfStopsR(2)">
+                            <span class="stop-txt">
+                              1
+                            </span>
+                            <span class="stop-txt-right">
+                              Stop
+                            </span>
+                            <span class="stop_price">
+                            </span>
+                          </a>
+                          <a class="stops">
+                            <span class="stop-txt" (click)="selectNoOfStopsR(3)">
+                              2
+                            </span>
+                            <span class="stop-txt-right">
+                              Stop
+                            </span>
+                            <span class="stop_price">
+                            </span>
+                          </a>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+
+            <div class="filter-box">
+              <div class="box-inner">
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                  <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingthree">
+                      <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsehree"
+                          aria-expanded="true" aria-controls="collapsehree">
+                          <i class="fa fa-clock-o" aria-hidden="true"></i>Departure Time
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapsehree" class="panel-collapse collapse in show" role="tabpanel" aria-labelledby="headinghree">
+                      <div class="panel-body">
+
+                        <div class="timing">
+                          <a (click)="beforesix()">
+                            <img class="img-fluid" src="assets/images/travel-fare-img/sunrise.png">
+                            <span class="f-s">
+                              &lt; 6AM</span>
+                          </a>
+                          <a (click)="sixtotwelve()">
+                            <img class="img-fluid" src="assets/images/travel-fare-img/sun.png">
+                            <span class="f-s">6AM - 12PM</span>
+                          </a>
+                          <a (click)="twelvetosix()">
+                            <img class="img-fluid" src="assets/images/travel-fare-img/misty-day.png">
+                            <span class="f-s">12PM - 6PM</span>
+                          </a>
+                          <a (click)="aftersix()">
+                            <img class="img-fluid" src="assets/images/travel-fare-img/night.png">
+                            <span class="f-s">After 6AM</span>
+                          </a>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+
+
+            <!-- <div class="filter-box">
+              <div class="box-inner">
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                  <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingfour">
+                      <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsefour"
+                          aria-expanded="true" aria-controls="collapsefour">
+                          <i class="fa fa-plane" aria-hidden="true"></i>Airlines</a>
+                      </h4>
+                    </div>
+                    <div id="collapsefour" class="panel-collapse collapse in show" role="tabpanel" aria-labelledby="headingfour">
+                      <div class="panel-body">
+                        <div class="aitline-outer" *ngIf="oneway">
+                          <div class="airlines" *ngFor="let sa of listOfFlightsR;let i=index">
+                            <label class="container">{{sa}}
+                              <input type="checkbox" (change)="filterByAirlineOne(sa,$event)">
+                              <span class="checkmark"></span>
+                            </label>
+                          </div>
+                        </div>
+
+                        <div class="aitline-outer" *ngIf="return">
+                          <div class="onwrd-mb" *ngIf="return">
+                            <b>Onward</b>
+                          </div>
+                          <div class="airlines" *ngFor="let sa of listOfFlightsR;let i=index">
+                            <label class="container">{{sa}}
+                              <input type="checkbox" (change)="filterByAirline(sa,$event)">
+                              <span class="checkmark"></span>
+                            </label>
+                          </div>
+                          <div class="onwrd-mb" *ngIf="return">
+                            <b>Return</b>
+                          </div>
+                          <div class="airlines" *ngFor="let sa of listOfFlightsR;let i=index">
+                            <label class="container">{{sa}}
+                              <input type="checkbox" (change)="filterByAirlineR(sa,$event)">
+                              <span class="checkmark"></span>
+                            </label>
+                          </div>
+                        </div>
+
+
+
+
+
+                      </div>
+                    </div>
+                  </div>
+
+
+                </div>
+              </div>
+            </div> -->
+
+            <div class="filter-box">
+              <div class="box-inner">
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                  <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingfive">
+                      <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsefive"
+                          aria-expanded="true" aria-controls="collapsefive">
+                          <i class="fa fa-ticket" aria-hidden="true"></i>Fare Type</a>
+                      </h4>
+                    </div>
+                    <div id="collapsefive" class="panel-collapse collapse in show" role="tabpanel" aria-labelledby="headingfive">
+                      <div class="panel-body">
+                        <div class="aitline-outer">
+                          <div class="airlines">
+                            <label class="container">Refundable
+                              <input type="checkbox" (click)="refundables()">
+                              <span class="checkmark"></span>
+                            </label>
+                          </div>
+                        </div>
+                        <div class="aitline-outer">
+                          <div class="airlines">
+                            <label class="container">Non-Refundable
+                              <input type="checkbox" (click)="nonrefundable()">
+                              <span class="checkmark"></span>
+                            </label>
+                          </div>
+                        </div>
+
+
+
+
+
+
+
+                      </div>
+                    </div>
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+
+            <div class="filter-box">
+              <div class="box-inner">
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                  <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingsix">
+                      <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsesix"
+                          aria-expanded="true" aria-controls="collapsefive">
+                          <i class="fa fa-money" aria-hidden="true"></i>Show Fare Upto</a>
+                      </h4>
+                    </div>
+                    <div id="collapsesix" class="panel-collapse collapse in show" role="tabpanel" aria-labelledby="headingsix">
+                      <div class="panel-body">
+                        <div class="aitline-outer">
+                          <div class="airlines">
+                            <label class="container">All Available Fares
+                              <input type="checkbox">
+                              <span class="checkmark"></span>
+                            </label>
+                          </div>
+                        </div>
+                        <div class="aitline-outer">
+                          <div class="airlines">
+                            <label class="container">5800
+                              <input type="checkbox">
+                              <span class="checkmark"></span>
+                            </label>
+                          </div>
+                        </div>
+                        <div class="aitline-outer">
+                          <div class="airlines">
+                            <label class="container">7300
+                              <input type="checkbox">
+                              <span class="checkmark"></span>
+                            </label>
+                          </div>
+                        </div>
+                        <div class="aitline-outer">
+                          <div class="airlines">
+                            <label class="container">15900
+                              <input type="checkbox">
+                              <span class="checkmark"></span>
+                            </label>
+                          </div>
+                        </div>
+
+
+
+
+
+
+                      </div>
+                    </div>
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="col-md-9">
+          <div class="fare-calender" id="fre-cldr">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                  <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="fare-cal">
+                      <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#fare-caldr"
+                          aria-expanded="true" aria-controls="fare-caldr">
+                          <i class="fa fa-calendar" aria-hidden="true"></i>
+                          Airline Filter
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="fare-caldr" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="fare-cal">
+                      <div class="panel-body">
+                        <p>{{masterrequest.Request.SCity}} To {{masterrequest.Request.DCity}}
+                          ({{masterrequest.Request.JourneyType}})</p>
+                        <ul class="trvl-info">
+                          <li>
+                            <span>Travel Class</span> : {{masterrequest.Request.PreferredCabinClass}}
+                          </li>
+                          <li>
+                            <span>Passengers</span> : Adult:{{masterrequest.Request.AdultCount}},
+                            child:{{masterrequest.Request.ChildCount}}
+                          </li>
+                          <li>
+                            <span>Departure</span> : {{masterrequest.Request.DepartureDate}}
+                          </li>
+                        </ul>
+                        <ul class="flight-caldr" *ngIf="masterrequest.Request.JourneyType=='OneWay'">
+                              <li>
+                                <a (click)="filterByAirlineOne('All')">
+                                  <span>
+                                    All
+                                  </span>
+                                  <!-- <div class="price-cld">
+                                            Rs.5580
+                                          </div> -->
+                                </a>
+                              </li>
+                              <li *ngFor="let sa of listOfFlightsR;let i=index">
+                                <a (click)="filterByAirlineOne(sa)">
+                                    <!-- /assets/images/{{se.AirlineCode}}.gif -->
+                                  <img *ngIf="sa" src="../assets/images/{{sa}}.gif">
+                                  <span>{{sa}}</span>
+                                  <span *ngFor="let cnt of lsitofFlightCount;let j=index">
+                                    <span href="#" class="flcld-a" *ngIf="i==j"> ({{cnt}}) Flights</span>
+                                  </span>
+                                  <!-- <div class="price-cld">
+                                            Rs.5580
+                                          </div> -->
+                                </a>
+                              </li>
+     </ul>
+                         <span *ngIf="masterrequest.Request.JourneyType=='return'">
+                              <div class="row">
+                                <div class="col-md-6">
+                                    <ul class="flight-caldr">
+                                        <li>
+                                          <a (click)="filterByAirline('All')">
+                                            <span>
+                                              All
+                                            </span>
+                                            <!-- <div class="price-cld">
+                                                      Rs.5580
+                                                    </div> -->
+                                          </a>
+                                        </li>
+                                        <li *ngFor="let sa of listOfFlightsR;let i=index">
+                                          <a (click)="filterByAirline(sa)">
+                                            <img *ngIf="sa" src="../assets/images/{{sa}}.gif">
+                                            <span>{{sa}}</span>
+                                            <span *ngFor="let cnt of lsitofFlightCount;let j=index">
+                                              <span  (click)="filterByAirline(sa)" class="flcld-a" *ngIf="i==j"> ({{cnt}}) Flights</span>
+                                            </span>
+                                            <!-- <div class="price-cld">
+                                                      Rs.5580
+                                                    </div> -->
+                                          </a>
+                                        </li>
+            
+            
+            
+                                      </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <ul class="flight-caldr">
+                                        <li>
+                                          <a (click)="filterByAirlineR('All')">
+                                            <span>
+                                              All
+                                            </span>
+                                            <!-- <div class="price-cld">
+                                                      Rs.5580
+                                                    </div> -->
+                                          </a>
+                                        </li>
+                                        <li *ngFor="let sa of listOfFlightsR;let i=index">
+                                          <a (click)="filterByAirlineR(sa)">
+                                            <img *ngIf="sa" src="../assets/images/{{sa}}.gif">
+                                            <span>{{sa}}</span>
+                                            <span *ngFor="let cnt of lsitofFlightCount;let j=index">
+                                              <span href="#" class="flcld-a" *ngIf="i==j"> ({{cnt}}) Flights</span>
+                                            </span>
+                                            <!-- <div class="price-cld">
+                                                      Rs.5580
+                                                    </div> -->
+                                          </a>
+                                        </li>
+            
+            
+            
+                                      </ul>
+                                  </div>
+                              </div>
+                            </span>
+                         </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="search-result">
+            <div class="row top_bar-sort" *ngIf="Oneresult">
+              <div class="col-md-2">
+                <a class="btn btn-sm btn-default" (click)="shortbyAirlineOne('A')">Airline</a>
+                <i *ngIf="ArA" class="fa fa-sort-desc" aria-hidden="true"></i>
+                <i *ngIf="ArD" class="fa fa-sort-asc" aria-hidden="true"></i>
+              </div>
+              <div class="col-md-2 paddl-0">
+                <a (click)="shortbyDepartureOne('A')" class="btn btn-sm btn-default">Departure</a>
+                <i *ngIf="DepA" class="fa fa-sort-desc" aria-hidden="true"></i>
+                <i *ngIf="DepD" class="fa fa-sort-asc" aria-hidden="true"></i>
+              </div>
+              <div class="col-md-2 paddl-0">
+                <a (click)="shortbyDurationOne('A')" class="btn btn-sm btn-default">Duration</a>
+                <i *ngIf="DurA" class="fa fa-sort-desc" aria-hidden="true"></i>
+                <i *ngIf="DurD" class="fa fa-sort-asc" aria-hidden="true"></i>
+              </div>
+              <div class="col-md-2 paddl-0">
+                <a (click)="shortbyArrivalOne('A')" class="btn btn-sm btn-default">Arrival</a>
+                <i *ngIf="ArrA" class="fa fa-sort-desc" aria-hidden="true"></i>
+                <i *ngIf="ArrD" class="fa fa-sort-asc" aria-hidden="true"></i>
+              </div>
+              
+              <div class="col-md-2 paddl-0">
+                <a (click)="shortbyPriceOne('A')" class="btn btn-sm btn-default">Price</a>
+                <i *ngIf="PrA" class="fa fa-sort-desc" aria-hidden="true"></i>
+                <i *ngIf="PrD" class="fa fa-sort-asc" aria-hidden="true"></i>
+              </div>
+              <div class="col-md-2">
+              </div>
+            </div>
+            <div class="loader1"></div>
+            <!--oneway-->
+            <ng-container *ngIf="oneway;else elseTemplateName">
+              <div *ngFor="let s of filterresult ; let i=index; " [attr.id]="s.SegmentKey" class="text-center padd_all airline_bottom box-flight-main">
+                <div *ngFor="let se of s.Segments.Segment let j=index">
+                  <div class="row srch-box-col" *ngIf="s.Segments.Segment.length==j+1">
+                    <div class="col-md-2">
+
+                      <div class="flight-img-area">
+                        <img src="/assets/images/{{se.AirlineCode}}.gif">
+                        <span>{{se.AirlineName}}</span>
+                        <span>{{se.AirlineCode}}-{{se.Flightround}} ({{se.FareClass}})</span>
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <div class="dept-txt">
+                        {{se.DepDateTime.substring(11,16)}}
+                      </div>
+                      <div class="dept-txt-down" *ngIf="j==0">
+                        {{s.Origin}}
+                        <i class="fa fa-arrow-right"></i>{{se.Destination.AirportCode}}
+                      </div>
+                      <div class="dept-txt-down" *ngIf="j==1">
+                        {{s.Origin}}
+                        <i class="fa fa-arrow-right"></i>{{se.Origin.AirportCode}}
+                        <i class="fa fa-arrow-right"></i>{{se.Destination.AirportCode}}
+                      </div>
+                      <div class="dept-txt-down" *ngIf="j==2">
+                        {{s.Segments.Segment[0].Origin.AirportCode}}
+                        <i class="fa fa-arrow-right"></i>{{s.Segments.Segment[0].Destination.AirportCode}}
+                        <i class="fa fa-arrow-right"></i>{{s.Segments.Segment[1].Destination.AirportCode}}
+                        <i class="fa fa-arrow-right"></i>
+                        {{s.Segments.Segment[2].Destination.AirportCode}}
+                      </div>
+                    </div>
+
+                    <div class="col-md-2">
+                      <div class="duration-txt">
+                        {{se.TDuration}}
+                      </div>
+                      <span class="stops-img" *ngIf="j==0">
+                        <img src="/assets/images/time-line.png">
+                      </span>
+                      <span class="stops-img" *ngIf="j==1">
+                        <img src="/assets/images/time-line-2.png">
+                      </span>
+                      <span class="stops-img" *ngIf="j==2">
+                        <img src="/assets/images/time-line-3.png">
+                      </span>                      
+                      <div class="duration-txt-down" *ngIf="j==0">
+                        Non stop
+                      </div>
+                      <div class="duration-txt-down" *ngIf="j==1">
+                        1 stop
+                      </div>
+                      <div class="duration-txt-down" *ngIf="j==2">
+                        2 stop
+                      </div>
+                      <div class="arr-txt-down">
+                        <span [ngClass]="{'colorGreen' : se.NoOfSeats > 8 ,'colorRed': se.NoOfSeats <= 8 }"><b>{{se.NoOfSeats}} Seats Left</b></span>
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <div class="arr-txt">
+                        {{se.ArrDateTime.substring(11,16)}}
+                      </div>
+                     
+                    </div>
+                  
+                    <div class="col-md-2">
+                      <div class="price-txt">
+
+                          <i class="fa fa-inr" aria-hidden="true"></i> {{s.Fare.PublishedPrice|round}}
+
+                      </div>
+                      <div class="price-txt-down">
+                        <a (click)="FlightDetails(s.SegmentKey,i);" *ngIf="dlOpen" class="btn btn-default">Details</a>
+                        <a (click)="closetab()" class="btn btn-default" *ngIf="dlClose">Details</a>
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <div class="book-btn">
+                        <input type="hidden" [(ngModel)]="SegId" value="{{s.SegmentKey}}" />
+                        <a (click)="btnBookClick(s.SegmentKey);" class="bk-btn">Book</a>
+                        <br>
+                        <!-- <a (click)="FDetails(s.SegmentKey,i);" class="fare" data-toggle="modal" data-target="#farebreakup">
+                          Fare Breakup</a> -->
+                      </div>
+
+                    </div>
+
+                    <!-- <div class="btn-box">
+                      <span ><a (click)="RemoveFilter()"><i class="fa fa-refresh" aria-hidden="true"></i>
+                        </a></span>
+                      <span><a  data-toggle="modal" data-target="#send-mail"><i class="fa fa-envelope"
+                            aria-hidden="true"></i>
+                        </a></span>
+                      <span><a><i class="fa fa-mobile" aria-hidden="true"></i>
+                        </a></span>
+                    </div> -->
+                    <!-- <div class="c-bkng">
+                            <a href="#" data-toggle="modal" data-target="#change-bkcls">Change Booking Class</a>
+                    </div> -->
+                    <!---Change Booking Class-pop-->
+                    <div class="modal fade" id="change-bkcls">
+                      <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+
+                          <!-- Modal Header -->
+                          <div class="modal-header">
+                            <h4 class="modal-title">Change Booking Class</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          </div>
+
+                          <!-- Modal body -->
+                          <div class="modal-body chg-bc">
+                            <p><img src="/assets/images/{{se.AirlineCode}}.gif"><span>{{se.AirlineName}}</span>
+                              <span>{{se.AirlineCode}}-{{se.Flightround}} ({{se.FareClass}})</span></p>
+                            <div class="radio-box">
+                              <form>
+                                <label class="radio-inline">
+                                  <input type="radio" name="optradio" checked>C4
+                                </label>
+                                <label class="radio-inline">
+                                  <input type="radio" name="optradio">D4
+                                </label>
+                                <label class="radio-inline">
+                                  <input type="radio" name="optradio">A2
+                                </label>
+                                <label class="radio-inline">
+                                  <input type="radio" name="optradio" checked>X4
+                                </label>
+                                <label class="radio-inline">
+                                  <input type="radio" name="optradio">F5
+                                </label>
+                                <label class="radio-inline">
+                                  <input type="radio" name="optradio">G1
+                                </label>
+                              </form>
+                            </div>
+                            <button type="button" class="btn btn-default">Get Fare</button>
+                          </div>
+
+                          <!-- Modal footer -->
+                          <div class="modal-footer">
+
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Book Flight</button>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                    <!--Send Mail Popup-->
+                    <div class="modal fade" id="send-mail">
+                      <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                          <!-- Modal Header -->
+                          <div class="modal-header">
+                            <h4 class="modal-title">Send Mail</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          </div>
+                          <!-- Modal body -->
+                          <div class="modal-body chg-bc">
+                            <div class="radio-box">
+                              <form>
+                                <input type="text" placeholder="Enter email id" class="form-control" id="segMailID" name="EmailId" />
+                              </form>
+                            </div>
+                          </div>
+                          <!-- Modal footer -->
+                          <div class="modal-footer">
+                            <button type="button" (click)="MailTicket(s.SegmentKey)" class="btn btn-danger" data-dismiss="modal">Mail Ticket</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!---Change Booking Class-pop-->
+
+                    <div id="FareDtl" *ngIf="FDetail && sId===i" class="fare-breakup-popup">
+                      <div class="modal fade" id="farebreakup">
+
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h4 class="modal-title">Fare Breakup</h4>
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+
+                            <div class="modal-body">
+                              <table class="table table-striped">
+                                <tr>
+                                  <td>Base Fare (ADT * 1 )</td>
+                                  <td></td>
+                                  <td style="color: #00556f">{{masterrequest.Request.Currency}}
+                                    {{fareBreakup[0].Fare.BaseFare}}</td>
+                                </tr>
+                                <tr>
+                                  <td>Fees &amp; Surcharge</td>
+                                  <td></td>
+                                  <td style="color: #00556f">{{masterrequest.Request.Currency}} {{ taxserv|round}}</td>
+                                </tr>
+                                <tr>
+                                  <td>YQ Tax</td>
+                                  <td></td>
+                                  <td style="color: #00556f">{{masterrequest.Request.Currency}}
+                                    {{fareBreakup[0].Fare.FuelSurcharge|round}}</td>
+                                </tr>
+                                <tr>
+                                  <td>Discount</td>
+                                  <td></td>
+                                  <td style="color: #00556f">{{masterrequest.Request.Currency}}
+                                    {{fareBreakup[0].Price.Discount|round}}</td>
+                                </tr>
+                                <tr>
+                                  <td>GST</td>
+                                  <td></td>
+                                  <td style="color: #00556f">{{masterrequest.Request.Currency}}
+                                    {{fareBreakup[0].Price.GST|round}}</td>
+                                </tr>
+                                <tr>
+                                  <td>HC</td>
+                                  <td></td>
+                                  <td style="color: #00556f">{{masterrequest.Request.Currency}}
+                                    {{fareBreakup[0].Price.HC|round}}</td>
+                                </tr>
+                                <tr>
+                                  <td>TF</td>
+                                  <td></td>
+                                  <td style="color: #00556f">{{masterrequest.Request.Currency}}
+                                    {{fareBreakup[0].Price.TransactionFee|round}}</td>
+                                </tr>
+                                <tr>
+                                  <td>TDS</td>
+                                  <td></td>
+                                  <td style="color: #00556f">{{masterrequest.Request.Currency}}
+                                    {{fareBreakup[0].Price.TDS|round}}</td>
+                                </tr>
+                                <tr>
+                                  <td> Net Fare</td>
+                                  <td></td>
+                                  <td style="color: #00556f">{{masterrequest.Request.Currency}}
+                                    {{fareBreakup[0].Fare.OfferedFare|round}}</td>
+                                </tr>
+                                <tr>
+                                  <td> Total</td>
+                                  <td></td>
+                                  <td style="color: #00556f">{{masterrequest.Request.Currency}}
+                                    {{s.Fare.PublishedPrice|round}}</td>
+                                </tr>
+
+                              </table>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div id="Details" *ngIf="flightdetails && sId===i" class="details collapse show">
+
+
+
+                        <div class="card card-body" *ngIf="fldetails">
+                          <div class="details-area">
+                            <!--left-box--->
+
+                            <div class="fli-col-box">
+                              <div class="full-div" *ngFor="let se of s.Segments.Segment let m=index">
+                                <div class="detail-flg-img">
+                                  <img src="/assets/images/{{se.AirlineCode}}.gif" class="img-fluid airline_img">
+                                  <span>{{se.AirlineName}}</span>
+                                  <span>{{se.AirlineCode}}-{{se.FlightNumber}}</span>
+                                </div>
+                                <div class="fli-details-inner">
+                                  <div class="flg-main">
+                                    <div class="left-box" *ngIf="m==0">
+                                      <div class="bod-flg">
+                                        {{se.Origin.AirportCode}}
+                                      </div>
+                                      <div class="dt-tm">
+                                        {{se.DepDateTime.substring(11,16)}}<br>{{se.DepDateTime|date}}
+                                      </div>
+                                      <div class="airport-name">
+                                        <div>{{se.Origin.AirportName}}<br>Terminal-{{se.Origin.Terminal}}<br>Airbus
+                                          A320-100/200</div>
+                                          
+                                      </div>
+                                    </div>
+                                    <div class="left-box" *ngIf="m==1">
+                                      <div class="bod-flg">
+                                        {{se.Origin.AirportCode}}
+                                      </div>
+                                      <div class="dt-tm">
+                                        {{se.DepDateTime.substring(11,16)}}<br>{{se.DepDateTime|date}}
+                                      </div>
+                                      <div class="airport-name">
+                                        <div>{{se.Origin.AirportName}}<br>Terminal-{{se.Origin.Terminal}}<br>Airbus
+                                          A320-100/200</div>
+                                          
+                                      </div>
+                                    </div>
+                                    <div class="left-box" *ngIf="m==2">
+                                      <div class="bod-flg">
+                                        {{se.Origin.AirportCode}}
+                                      </div>
+                                      <div class="dt-tm">
+                                        {{se.DepDateTime.substring(11,16)}}<br>{{se.DepDateTime|date}}
+                                      </div>
+                                      <div class="airport-name">
+                                        <div>{{se.Origin.AirportName}}<br>Terminal-{{se.Origin.Terminal}}<br>Airbus
+                                          A320-100/200</div>
+                                         
+                                      </div>
+                                    </div>
+                                    <div class="time-box">
+                                      <i class="fa fa-clock-o" aria-hidden="true"></i> {{se.TDuration}}
+
+                                    </div>
+                                    <div class="right-box" *ngIf="m==0">
+                                      <div class="bod-flg">
+                                        {{se.Destination.AirportCode}}
+                                      </div>
+                                      <div class="dt-tm">
+                                        {{se.ArrDateTime.substring(11,16)}}<br>{{se.ArrDateTime|date}}
+                                      </div>
+                                      <div class="airport-name">
+                                        <div>{{se.Destination.AirportName}}<br>Terminal-{{se.Destination.Terminal}}</div>
+                                        <div *ngIf="s.BaggageAllowance">Baggage Limit : {{s.BaggageAllowance}}</div>
+                                        <div *ngIf="!s.BaggageAllowance">No baggage covered</div>
+                                      </div>
+                                    </div>
+                                    <div class="right-box" *ngIf="m==1">
+                                      <div class="bod-flg">
+                                        {{se.Destination.AirportCode}}
+                                      </div>
+                                      <div class="dt-tm">
+                                        {{se.ArrDateTime.substring(11,16)}}<br>{{se.ArrDateTime|date}}
+                                      </div>
+                                      <div class="airport-name">
+                                        <div>{{se.Destination.AirportName}}<br>Terminal-{{se.Destination.Terminal}}</div>
+                                      <div *ngIf="s.BaggageAllowance">Baggage Limit : {{s.BaggageAllowance}}</div>
+                                      <div *ngIf="!s.BaggageAllowance">No baggage covered</div>
+                                      </div>
+                                    </div>
+                                    <div class="right-box" *ngIf="m==2">
+                                      <div class="bod-flg">
+                                        {{se.Destination.AirportCode}}
+                                      </div>
+                                      <div class="dt-tm">
+                                        {{se.ArrDateTime.substring(11,16)}}<br>{{se.ArrDateTime|date}}
+                                      </div>
+                                      <div class="airport-name">
+                                        <div>{{se.Destination.AirportName}}<br>Terminal-{{se.Destination.Terminal}}</div>
+                                        <div *ngIf="s.BaggageAllowance">Baggage Limit : {{s.BaggageAllowance}}</div>
+                                        <div *ngIf="!s.BaggageAllowance">No baggage covered</div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  
+                                </div>
+                              </div>
+                            </div>
+                            <!---fare-deatils--->
+                            <div class="fare-details">
+                              <div class="fare-head">
+                                Fare Details
+                              </div>
+                              <div class="list-main">
+                                <div class="flt-left">
+                                  Base Fare (ADT * 1 )
+                                </div>
+                                <div class="flt-right">
+                                  {{masterrequest.Request.Currency}} {{FlightDetls[0].Fare.BaseFare}}
+                                </div>
+                              </div>
+                              <div class="list-main">
+                                <div class="flt-left">
+                                  Taxes(Fees & Surcharge)
+                                </div>
+                                <div class="flt-right">
+                                  {{masterrequest.Request.Currency}} {{FlightDetls[0].Fare.Tax|round}}
+                                </div>
+                              </div>
+                              <div class="list-main">
+                                <div class="flt-left">
+                                  Discount
+                                </div>
+                                <div class="flt-right">
+                                  {{masterrequest.Request.Currency}} {{FlightDetls[0].Price.Discount|round}}
+                                </div>
+                              </div>
+                              <!-- <div class="list-main">
+                                <div class="flt-left">
+                                  Net Fare
+                                </div>
+                                <div class="flt-right">
+                                  {{masterrequest.Request.Currency}} {{s.Fare.OfferedFare|round}}
+                                </div>
+                              </div> -->
+                              <div class="list-main">
+                                <div class="flt-left">
+                                  <b>Total</b>
+                                </div>
+                                <div class="flt-right">
+                                  <b>{{masterrequest.Request.Currency}} {{s.Fare.PublishedPrice|round}}</b>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                            <!--left-box--->
+
+                            
+            <!--oneway-end-->
+          
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<!---book-return-down-->
+
+
+

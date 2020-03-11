@@ -1,0 +1,74 @@
+<style>
+  .help-block {
+      color: red
+  }
+
+  .regist {
+      width: 100%;
+      max-width: 100%;
+      padding: 3em 3em 3em 3em;
+      margin: 0em auto;
+      background-color: #fff;
+      border-radius: 0px 0px 5px 5px;
+      box-shadow: 0px 3px 10px -2px rgba(0, 0, 0, 0.2);
+  }
+</style>
+<site-header></site-header>
+<div class="register-area">
+  <div class="container">
+      <div class="row">
+          <h3>Change Password</h3>
+      </div>
+      <form name="form" (ngSubmit)="f.form.valid && changepassword()" #f="ngForm" novalidate>
+          <div class="regist">
+              <p id="p" style="color:red"></p>
+              <div class="row">
+                  <div class="col-lg-4"></div>
+                  <div class="col-lg-4">
+                      <div class="row">
+                          <div class="col-lg-12">
+                              <label for="">Old Password</label>
+                              <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !OldPassword.valid }">
+                                  <input type="password" (change)="checkpsw()" class="form-control" placeholder="Enter old password" name="FromDate" [(ngModel)]="model.OldPassword"
+                                      #OldPassword="ngModel" required />
+                                  <div *ngIf="f.submitted && !OldPassword.valid" class="help-block">Old password is required</div>
+                                  <div *ngIf="wrong" class="help-block">You have entered wrong password !!!!</div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-lg-12">
+                              <label for="">New Password</label>
+                              <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !NewPassword.valid }">
+                                  <input type="password" class="form-control" placeholder="Enter New Password" name="NewPassword" [(ngModel)]="model.NewPassword"
+                                      #NewPassword="ngModel" required />
+                                  <div *ngIf="f.submitted && !NewPassword.valid" class="help-block">New Password is required</div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-lg-12">
+                              <label for="">Confirm Password</label>
+                              <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !ConfirmPassword.valid }">
+                                  <input type="password" class="form-control" placeholder="Enter Confirm Password" name="ConfirmPassword" [(ngModel)]="model.ConfirmPassword"
+                                      #ConfirmPassword="ngModel" required />
+                                  <div *ngIf="f.submitted && !ConfirmPassword.valid" class="help-block">Confirm Password is required</div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-lg-12" style="text-align: center">
+                              <div class="form-group">
+                                  <button type="submit" class="btn btn-md btn-info">Submit</button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-lg-4"></div>
+              </div>
+
+          </div>
+
+      </form>
+  </div>
+</div>

@@ -1,0 +1,327 @@
+
+<nav class="social">
+  <ul>
+      <li>
+          <a routerLink="/MyBookings" style="cursor:pointer">Home
+              <i class="fa fa-home" aria-hidden="true"></i>
+          </a>
+      </li>
+      <li>
+          <a (click)="printComponent('itinaryhtmlforemail')" style="cursor:pointer">Print
+              <i class="fa fa-print" aria-hidden="true"></i>
+          </a>
+      </li>
+      <li>
+          <a (click)="emaildialog()" style="cursor:pointer">Email
+              <i class="fa fa-envelope" aria-hidden="true"></i>
+          </a>
+      </li>
+  </ul>
+</nav>
+<div class="modal-dialog modal-dia-custom" role="document" *ngIf="maildialogue">
+  <div class="modal-content modal-custom">
+      <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Email
+          </h5>
+          <button type="button" (click)="closeemaildialog()"  class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+          </button>
+      </div>
+      <div class="modal-body">
+          <table style="text-align: left;width: 300px;">
+            <tr>
+              <td>
+                Email Id:
+              </td>
+              <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+              <td>
+                <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !txtEmail.valid }">
+                  <input type="email" class="form-control" id="txtEmail" name="txtEmail" placeholder="Ex--skysafar.com" [(ngModel)]="model.txtEmail"
+                    #txtEmail="ngModel" required/>
+                  <div *ngIf="f.submitted && !txtEmail.valid" class="help-block">Email Id is required</div>
+                </div>
+              </td>
+            </tr>
+          </table>
+      </div>
+      <div class="modal-footer">
+          <button type="button" (click)="sendemail()"  class="btn btn-secondary" data-dismiss="modal">Send Mail</button>
+      </div>
+  </div>
+</div>
+<form name="form" (ngSubmit)="f.form.valid && sendemail()" #f="ngForm" novalidate>
+<div class="container container_12" id="ticketholder" style="font-size:12px;width: 800px;
+padding: 7px 20px 20px 20px;
+margin: 30px auto;
+font-family: Helvetica, Arial, sans-serif;
+background-color: #ffffff;
+border: 2px solid #ccc;
+box-shadow: 2px 2px 2px 1px #ececec;">
+  <!-- Header -->
+  <div style="overflow:auto" class="grid_12">
+    <div style="width:40%;float:left;padding-top: 15px;" id="distaddress">
+      <img src="assets/images/travel-fare-img/ss-logo.png">
+    </div>
+    <div style="width:50%;float:right" id="main_agentaddress">
+      <table align="center" width="100%" class="flighttickethead" style="float:right">
+        <tbody>
+          <tr></tr>
+          <tr>
+            <td>
+              <b>Office Address </b>
+              <hr style="margin:0;">
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span _ngcontent-c5="" style="font-weight:bold;"> Xpenseco<br>126, 1 Floor, Kirti Shikhar Tower,<br>
+                Janakpuri,<br> New Delhi-58<br>info@xpenseco.com</span>
+            </td>
+          </tr>
+     
+          <tr>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+  <div style="width:50%;float:right;display:none;line-height: 14px;letter-spacing: 1px;" id="gstnumberinfo">
+    <p>GST Number : 05AAECT3505C1ZX </p>
+    <p>CIN : U74999UR2012PTC000377</p>
+  </div>
+  <!--<div class='grid_4' id='main_agentcontact'>
+    </div>-->
+  <div style="clear:both">
+  </div>
+  <div style="overflow:auto" class="grid_12">
+    <h3 id="hidemeforez1" style="text-align:left;margin: 10px 0 21px 0;">Invoice</h3>
+    <h3 style="text-align:center;display:none;" id="showmeforez1">Booking Confirmation</h3>
+    <div style="border:1px solid #ccc;padding-left:10px;width:40%;float:left">
+      To,
+      <br>
+      <span id="invoicegiventoid">
+        <table width="50%" class="flighttickethead">
+          <tbody>
+            <tr style="text-align:left">
+              <td style="text-align:left">
+                <span _ngcontent-c5="" style="font-weight:bold;"> Xpenseco<br>126, 1 Floor, Kirti Shikhar Tower,<br>
+                  Janakpuri,<br> New Delhi-58<br>info@xpenseco.com</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </span>
+      <span id="pax_addrTable"></span>
+      <br>
+      <span id="invoicegiventoaddress"></span>
+    </div>
+    <div style="border:1px solid #ccc;padding:10px;width:50%;float:right">
+      <table style="width:100%">
+        <tbody>
+          <tr style="background:#f4f4f4">
+            <td colspan="2">
+              <b style="padding:6px;">Air Order</b>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Confirmation No
+            </td>
+            <td id="td_invno" style="font-weight:bold">4940</td>
+          </tr>
+          <tr>
+            <td>
+              Amount
+            </td>
+            <td id="td_amount" style="font-weight:bold">Rs {{totAmount}}</td>
+          </tr>
+          <tr>
+            <td>
+              Booking Date
+            </td>
+            <td id="td_bookdate" style="font-weight:bold">{{ticket.BookingDate}}</td>
+          </tr>
+          <tr>
+            <td>
+              Reference Id
+            </td>
+            <td id="td_refid" style="font-weight:bold">{{ticket.BookingRef}}</td>
+          </tr>
+          <tr>
+            <td>
+              PG Charge
+            </td>
+            <td id="td_pgcharge" style="font-weight:bold">cashcard</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div style="clear:both;">
+  </div>
+  <hr style="margin-top:10px;">
+  <div id="overallfare" style="padding:10px">
+    <table class="grid flighticketprint faretable" border="1" style="width: 100%;
+
+    text-align: center;
+    
+    font-size: 11px;">
+      <tbody>
+        <tr>
+          <th>BookingDate</th>
+          <th>JourneyDate</th>
+          <th>Lead Passenger</th>
+          <th>PNR</th>
+          <th>Place</th>
+          <th>No.of Pax</th>
+          <th>Base Fare</th>
+          <th>Taxes and Fees</th>
+          <th>Total Amount</th>
+        </tr>
+        <tr>
+          <td>{{ticket.BookingDate}}</td>
+          <td>{{segmentDetails[0].DepDate}}</td>
+          <td>{{ticket.Name}}</td>
+          <td>{{ticket.BookingRef}}</td>
+          <td>{{ticket.Origin}}-{{ticket.Destination}}</td>
+          <td>{{segmentDetails[0].NoOfPass}}</td>
+          <td>{{ticket.AdultBaseFare}}</td>
+          <td>
+            <span id="taxfeesespan" style="border:0px">{{ticket.AdultTax}}</span>
+          </td>
+          <td style="font-weight:bold">{{totAmount}}</td>
+        </tr>
+        <!-- <tr style="border-top:1px solid #ccc;font-weight:bold">
+          <td colspan="8" style="text-align:center;font-weight:bold">TOTAL</td>
+          <td>{{ticket.AdtMrp}}</td>
+        </tr> -->
+        <tr style="border-top:1px solid #ccc;font-weight:bold">
+          <td colspan="8" style="text-align:center">Commission(-)</td>
+          <td>0</td>
+        </tr>
+        <tr style="border-top:1px solid #ccc;font-weight:bold" class="">
+          <td colspan="8" style="text-align:center;font-weight:bold">SSR Charges</td>
+          <td>0</td>
+        </tr>
+        <tr style="border-top:1px solid #ccc;font-weight:bold" class="showtdstr">
+          <td colspan="8" style="text-align:center">TDS</td>
+          <td>0</td>
+        </tr>
+        <tr style="border-top:1px solid #ccc;font-weight:bold" class="servicetaxshowvat">
+          <td colspan="8" style="text-align:center;font-weight:bold;">GST</td>
+          <td>0</td>
+        </tr>
+        <tr style="border-top:1px solid #ccc;font-weight:bold" class="">
+          <td colspan="8" style="text-align:center;font-weight:bold">K3</td>
+          <td>0</td>
+        </tr>
+        <tr style="border-top:1px solid #ccc;font-weight:bold">
+          <td colspan="8" style="text-align:center;font-weight:bold">Refund Amount(-)</td>
+          <td>0</td>
+        </tr>
+        <tr style="border-top:1px solid #ccc;font-weight:bold">
+          <td colspan="8" style="text-align:center;font-weight:bold">PG Charges</td>
+          <td>0</td>
+        </tr>
+        <tr style="border-top:1px solid #ccc;border-bottom:1px solid #ccc;font-weight:bold">
+          <td colspan="8" style="text-align:center;font-weight:bold">GRAND TOTAL</td>
+          <td>{{totAmount}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- <p style="font-weight:bold;text-align:center;text-transform: capitalize;">Amount Payable :
+      <i>twenty three thousand nine hundred ninety </i> INR only</p> -->
+  </div>
+
+
+  <h3 style="text-align: left;font-size: 18px;
+
+  margin: 10px 0 21px 0;">E-Ticket Details</h3>
+  <div id="ticket" class="grid_12">
+    <div id="topdetailsbox">
+      <table class="grid flighticketprint flighttickethead tickettype2table" style="border-collapse:collapse;width:100%;border:1px #ABC solid">
+        <tbody>
+          <tr>
+            <th class="" style="padding-left:20px">Airline PNR</th>
+            <td class="propertyvalue">AECAGI</td>
+            <th class="" style="padding-left:20px">Booking Date</th>
+            <td class="propertyvalue">{{ticket.BookingDate}}</td>
+            <th class="" style="padding-left:20px">Booking Id</th>
+            <td class="propertyvalue">{{ticket.BookingRef}}</td>
+            <th class="" style="padding-left:20px">Booking Status</th>
+            <td class="propertyvalue" style="text-transform: uppercase;">confirmed</td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+    <div class="module" id="onwardbookingqueuediv">
+      <table cellspacing="5" border="1" cellpadding="5" style="padding: 2px; border-collapse: collapse; font-size: 11px; text-align: center;width:100%"
+        class="flighticketprint">
+        <colgroup>
+          <col width="35%">
+          <col width="30%">
+          <col width="15%">
+          <col width="10%">
+          <col width="10%">
+        </colgroup>
+        <thead>
+          <tr style="text-align: center;">
+            <th style="text-align: center;">From - To</th>
+            <th style="text-align: center;">Flight</th>
+            <th style="text-align: center;">Departure Date</th>
+            <th style="text-align: center;">Departure</th>
+            <th style="text-align: center;">Arrival</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let te of segmentDetails let m=index;">
+          <tr>
+            <td>{{te.SCityName}} ( {{te.OriginCode}} ) --&gt; {{te.DCityName}} ( {{te.DestiCode}} ) </td>
+            <td>{{te.AirlineCode}} - {{te.AirlineNo}} ( Class - {{te.FareClass}}) </td>
+            <td>{{te.DepDate}} </td>
+            <td class="tickettime">{{te.DepTime}}</td>
+            <td class="tickettime">{{te.ArTime}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <table cellspacing="5" border="1" cellpadding="5" style="width:100%; padding: 2px; border-collapse:collapse; font-size: 11px; text-align: center;"
+        class="flighticketprint">
+        <thead>
+          <tr style="text-align: center;">
+            <th style="text-align: center;">Name</th>
+            <th style="text-align: center;">Pax Type</th>
+            <th style="text-align: center;">Flight TicketNumbers</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ticket.Name}}</td>
+            <td style="text-transform: uppercase;">Adult</td>
+            <td>072-5779147045,072-5779147045</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="module" id="returnbookingqueuediv"></div>
+    <div id="fareintticket"></div>
+    <br>
+    <p>
+      <b>Terms &amp; Conditions</b><br>Please pay the bill with in 7days from the date of invoice submitted
+      <br>In case if there is delay in payment will attract the 24% PA of interest on invoice amount
+      <br>In case any clarification towards invoice has to be informed within 7 days
+      <br>Since this is an Electronic generated invoice seal &amp; sign is not required
+      <br>IN CASE OF CANCELLATIONS APART FROM THE AIRLINES CANCELATIONS CHARGE,WE CHARGE A FECILITATION CHARGES
+      <br>WE OFFER THE BEST FARE AVAILABLE AT THE TIME OF BOOKING WHICH MAY DIFFER FROM ALL OTHERS</p>
+  </div>
+  <div class="grid_12">
+    <div style="display:none" id="pancardshowhide">PANCARD No. - AABCE5758R</div>
+    <div style="display:none" id="gst-info-block">
+      <strong>Note:</strong>&nbsp;&nbsp;It is a booking acknowledgement and no credit is available on the basis of this document.</div>
+  </div>
+
+  <br>
+
+</div>
+</form>
